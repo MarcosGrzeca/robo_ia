@@ -1,0 +1,125 @@
+<html>
+<head>
+	<meta charset="utf-8"></meta>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<!-- Latest compiled and minified CSS -->
+
+
+
+	<link rel="stylesheet" type="text/css" href="demo/jquery.tzineClock/jquery.tzineClock.css" />	
+	
+	<link rel="stylesheet" type="text/css" href="ajax-chat/js/jScrollPane/jScrollPane.css" />
+	<link rel="stylesheet" type="text/css" href="ajax-chat/css/page.css" />
+	<link rel="stylesheet" type="text/css" href="ajax-chat/css/chat.css" />
+	<link rel="stylesheet" href="bootstrap-3.1.1-dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="bootstrap-3.1.1-dist/css/bootstrap-theme.min.css">
+	
+	<link rel="stylesheet" href="estilo.css" type="text/css"/>
+	<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
+	<script type="text/javascript" src="js/logica.js"></script>
+	<script type="text/javascript" src="js/socket.js"></script>
+	<script type="text/javascript" src="demo/jquery.tzineClock/jquery.tzineClock.js"></script>
+
+	</head>
+<body>
+
+	<center>
+		<div id="telaInicial" class="centered alert alert-info">
+			<span style="  opacity: 1;">
+				<h2>Bem vindo ao Planejador</h2>
+				<div style="text-align:left !important">
+					Para executá-lo é necessário preencher as informações abaixo.
+					<br/>
+					<br/>
+					<div class="row">
+						<div class="col-md-8 form-group">
+							<label for="nome">Endereço do servidor</label>
+							<input type="text" placeholder="Endereço o IP do servidor" value="localhost" name="ipServidor" id="ipServidor" class="form-control">
+						</div>
+						<div class="col-md-4 form-group">
+							<label for="portaServidor">Porta</label>
+							<input type="text" name="portaServidor" id="portaServidor" class="form-control" placeholder="Informe o porta do servidor" value="8181">
+						</div>
+					</div>
+					<!--<div class="row">
+						<div class="col-md-12 form-group">
+							<button type="submit" class="btn btn-primary" onclick="conectar(); $(this).attr('disabled', true);" id="testarConexao">Testar conexão</button>
+						</div>
+					</div>
+
+					<br/>-->
+					<div class="row">
+						<div class="col-md-6 form-group">
+							<label for="tamanhoCidade">Tamanho da cidade</label>
+							<select id="tamanhoCidade" class="form-control">
+								<option value="P">Pequena</option>
+								<option value="M">Média</option>
+								<option value="G">Grande</option>
+							</select>
+						</div>
+						<div class="col-md-3 form-group">
+							<label for="nroAlagamentos">Nº alagamentos</label>
+							<select id="nroAlagamentos" class="form-control">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+							</select>
+						</div>
+						<div class="col-md-3 form-group">
+							<label for="nroEscombros">Nº de Escombros</label>
+							<select id="nroEscombros" class="form-control">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4 form-group">
+							<label for="nroRobosForca">Nº de robôs força-bruta</label>
+							<select id="nroRobosForca" class="form-control">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+							</select>
+						</div>
+						<div class="col-md-4 form-group">
+							<label for="nroRobosResgate">Nº de robôs resgate</label>
+							<select id="nroRobosResgate" class="form-control">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+							</select>
+						</div>
+					</div>
+					<br/>
+					<div class="row">
+						<div class="col-md-12 form-group">
+							<button type="submit" class="btn btn-success" onclick="iniciarPlanejamento(); $(this).attr('disabled', true);" id="iniciarPlanejamento">Efetuar planejamento</button>
+						</div>
+					</div>
+					<div id="erroConexao" class="alert bg-danger hide" style="color:#000"></div>
+				</div>
+			</span>
+		</div>
+	</center>
+	<div id="jogo" style="display:none">
+		<center>
+			<table class="tabela" id="tabuleiro">
+			</table>
+		</center>
+	</div>
+</body>
+<script type="text/javascript">
+	$(document).ready(function() {
+		inicializarVetor();
+		conexaoBemSucedida();
+		MontarTabuleiro();
+		montarProlog();
+	});
+</script>
+</html>
