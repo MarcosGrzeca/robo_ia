@@ -1,9 +1,10 @@
 var vetor = [];
 var nroLinhas = 7;
 var nroColunas = 9;
-var numeroRuas = 10;
+var numeroRuas = 9;
 var ruas = [];
 var texto;
+var ruas_sujas = [];
 
 function inicializarVetor() {
 	var i, j;
@@ -33,11 +34,11 @@ function inicializarVetor() {
 	ruas[6][7] = 1;
 	ruas[6][8] = 1;
 
-	ruas[1][2] = 2;
-	ruas[2][2] = 2;
-	ruas[3][2] = 2;
-	ruas[4][2] = 2;
-	ruas[5][2] = 2;
+	ruas[1][1] = 2;
+	ruas[2][1] = 2;
+	ruas[3][1] = 2;
+	ruas[4][1] = 2;
+	ruas[5][1] = 2;
 
 	ruas[0][3] = 3;	
 	ruas[1][3] = 3;
@@ -65,19 +66,19 @@ function inicializarVetor() {
 	ruas[4][6] = 6;
 	ruas[4][8] = 6;
 
-	ruas[6][1] = 7;
-	ruas[6][2] = 7;
-	ruas[6][3] = 7;
-	ruas[6][4] = 7;
-	ruas[6][5] = 7;
-	ruas[6][6] = 7;
-	ruas[6][7] = 7;
-	ruas[6][8] = 7;
+	ruas[1][1] = 7;
+	ruas[1][2] = 7;
+	ruas[1][3] = 7;
+	ruas[1][4] = 7;
+	ruas[1][5] = 7;
+	ruas[1][6] = 7;
+	ruas[1][7] = 7;
+	ruas[1][8] = 7;
 
 	ruas[0][0] = 8;
 	ruas[0][1] = 8;
 
-	ruas[3][3] = 9;
+	ruas[3][2] = 9;
 	ruas[3][3] = 9;
 
 	
@@ -91,7 +92,6 @@ function inicializarVetor() {
 	vetor[0][8] = "C"; 
 
 	vetor[1][0] = "AB";
-	vetor[1][1] = "E";
 	vetor[1][2] = "E";
 	
 	vetor[1][3] = "AL";
@@ -102,8 +102,7 @@ function inicializarVetor() {
 
 
 	vetor[2][0] = "AB";
-	vetor[2][1] = "AL";
-
+	vetor[2][1] = "E";
 	vetor[2][2] = "C";
 
 	vetor[2][4] = "H";
@@ -112,6 +111,8 @@ function inicializarVetor() {
 		
 
 	vetor[3][0] = "AB";
+	vetor[3][1] = "AL";
+	vetor[3][2] = "AL";
 	vetor[3][4] = "H";
 	vetor[3][6] = "C";
 	vetor[3][8] = "C";
@@ -119,18 +120,25 @@ function inicializarVetor() {
 	vetor[4][0] = "AB";
 	vetor[4][2] = "C";
 	vetor[4][4] = "H";
+	vetor[4][5] = "E";
+	vetor[4][6] = "E";
+	vetor[4][7] = "E";
 	
 	
 	vetor[5][0] = "AB";
+	vetor[5][2] = "E";
 	vetor[5][2] = "C";
+	vetor[5][3] = "E";	
 	vetor[5][4] = "H";
 	vetor[5][6] = "C";
+	vetor[5][7] = "AL";
 	vetor[5][8] = "I";
 
+	vetor[6][1] = "E";
 	vetor[6][2] = "AL";
 	vetor[6][3] = "AL";
-	vetor[6][4] = "AL";
-	vetor[6][5] = "AL";
+	vetor[6][4] = "E";
+	vetor[6][5] = "E";
 	vetor[6][6] = "AL";
 	vetor[6][7] = "AL";
 
@@ -233,12 +241,17 @@ function MontarTabuleiro(){
 function montarProlog() {
 	//vetor
 
+
 	texto = "";
+	ruas_sujas = [];
 
 	for (i=0; i<nroLinhas; i++){
 		for (j=0; j<nroColunas; j++){
 			if (vetor[i][j] == "E") {
-				adicionarTexto("given(tsunami,local(escombro, rua" + ruas[i][j] + ")).");
+				if ($.inArray(ruas[i][j], ruas_sujas) == -1) {
+					ruas_sujas.push(ruas[i][j]);
+				}
+				adicionarTexto("given(tsunami,local(escombro, rua" + ruas[i][j] + ")).", "S");
 			}
 
 		}
@@ -247,11 +260,31 @@ function montarProlog() {
 	for (i=0; i<nroLinhas; i++){
 		for (j=0; j<nroColunas; j++){
 			if (vetor[i][j] == "AL") {
-				adicionarTexto("given(tsunami,local(alagamento, rua" + ruas[i][j] + ")).");
+				if ($.inArray(ruas[i][j], ruas_sujas) == -1) {
+					ruas_sujas.push(ruas[i][j]);
+				}
+				adicionarTexto("given(tsunami,local(alagamento, rua" + ruas[i][j] + ")).", "S");
 			}
 
 		}
 	}
+
+
+	console.log(ruas_sujas);
+	var ruas_limpas = [];
+	for (i=1; i<=numeroRuas; i++){
+		if ($.inArray(i, ruas_sujas) == -1) {
+			console.info(i);
+			adicionarTexto("given(tsunami, rua_limpa(rua" + i  + ")).", "S");
+		}
+
+	}
+
+
+	adicionarTexto("given(tsunami,local(hospital, rua3)).", "S");
+	adicionarTexto("given(tsunami,local(abrigo, rua2)).", "S");
+	adicionarTexto("given(tsunami,local(iml, rua5)).", "S");
+	
 
 	/*for (i=0; i<nroLinhas; i++){
 		for (j=0; j<nroColunas; j++){
@@ -279,8 +312,9 @@ function montarProlog() {
 
 		}
 	}
-
-	var nroPessoas = 1; 
+*/
+	
+	/*var nroPessoas = 1; 
 	for (i=0; i<nroLinhas; i++){
 		for (j=0; j<nroColunas; j++){
 			if (vetor[i][j] == "VS") {
@@ -314,10 +348,10 @@ function montarProlog() {
 
 }
 
-function adicionarTexto(txt) {
+function adicionarTexto(txt, rua) {
  	var n = texto.indexOf(txt);
- 	console.log(n);
  	if (n == -1) {
-		texto += txt + "\n";
+ 		console.log(txt);
+ 		texto += txt + "\n";
 	}
 }
