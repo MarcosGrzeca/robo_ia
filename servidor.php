@@ -20,4 +20,5 @@ $cmd = '"C:/Program Files/swipl/bin/swipl.exe" -f "C:/wamp/trabalho_v3.pl" -g te
 $output = shell_exec($cmd);
 echo json_encode($output);
 
+unlink(@$nome);
 ?>
