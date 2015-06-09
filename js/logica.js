@@ -229,10 +229,10 @@ function MontarTabuleiro(){
 		if (key > 0) {
 			var t = "td_espaco_" + value.Y + "_" + value.X;
 			if (value.tipo == "R") {
-				$("#" + t).html("<img src='imagens/robos/robo_resgate.png'/>");
+				$("#" + t).html("<img class='img_robo' src='imagens/robos/robo_resgate.png'/>");
 			}
 			if (value.tipo == "F") {
-				$("#" + t).html("<img src='imagens/robos/robo_forca.png'/>");
+				$("#" + t).html("<img class='img_robo' src='imagens/robos/robo_forca.png'/>");
 			}
 			$("#" + t).addClass("robo_" + key);
 		}
@@ -243,13 +243,13 @@ function MontarTabuleiro(){
 			var t = "td_espaco_" + value.Y + "_" + value.X;
 			$("#" + t).addClass("pessoa_" + key);
 			if (value.tipo == "S") {
-				$("#" + t).html("<img src='imagens/pessoas/accept-female-user-icon.png'/>");
+				$("#" + t).html("<img class='img_pessoa' src='imagens/pessoas/accept-female-user-icon.png'/>");
 			}
 			if (value.tipo == "F") {
-				$("#" + t).html("<img src='imagens/pessoas/female-user-search-icon.png'/>");
+				$("#" + t).html("<img class='img_pessoa' src='imagens/pessoas/female-user-search-icon.png'/>");
 			}
 			if (value.tipo == "M") {
-				$("#" + t).html("<img src='imagens/pessoas/remove-female-user-icon.png'/>");
+				$("#" + t).html("<img class='img_pessoa' src='imagens/pessoas/remove-female-user-icon.png'/>");
 			}
 		}
 	});
@@ -532,6 +532,7 @@ function solucao(indice) {
 			if (value.indexOf("remover_escombro_alamento(") != -1) {
 				var str = value.replace("remover_escombro_alamento(", "");
 				str = str.replace(");", "");
+				str = str.replace(").", "");
 				var parametros = str.split(",");
 				var nroRua = parametros[1].replace("rua", "");
 				for (i = 0; i < numeroRuas; i++) {
@@ -546,6 +547,7 @@ function solucao(indice) {
 			} else if (value.indexOf("remover_escombro(") != -1) {
 				var str = value.replace("remover_escombro(", "");
 				str = str.replace(");", "");
+				str = str.replace(").", "");
 				var parametros = str.split(",");
 				var nroRua = parametros[1].replace("rua", "");
 				for (i = 0; i < numeroRuas; i++) {
@@ -559,6 +561,7 @@ function solucao(indice) {
 			} else if (value.indexOf("remover_alagamento(") != -1) {
 				var str = value.replace("remover_alagamento(", "");
 				str = str.replace(");", "");
+				str = str.replace(").", "");
 				var parametros = str.split(",");
 				var nroRua = parametros[1].replace("rua", "");
 				for (i = 0; i < numeroRuas; i++) {
@@ -569,6 +572,87 @@ function solucao(indice) {
 						}
 					}
 				}
+			} else if (value.indexOf("mover_robo_forca(") != -1) {
+				var str = value.replace("mover_robo_forca(", "");
+				str = str.replace(");", "");
+				str = str.replace(").", "");
+				var parametros = str.split(",");
+				var nroRobo = parametros[0].replace("robo", "");
+				var nroRua = parametros[1].replace("rua", "");
+
+				$(".robo_" + nroRobo + " > .img_robo").hide();
+				$(".robo_" + nroRobo).removeClass("robo_" + nroRobo);
+
+				var primeiro = true;
+				for (i = 0; i < numeroRuas; i++) {
+					for (j = 0; j < numeroRuas; j++) {
+						if (ruas[i][j] == nroRua) {
+							var t = "td_espaco_" + i + "_" + j;
+							if (primeiro) {
+								$("#" + t).html($("#" + t).html() + "<img class='img_robo' src='imagens/robos/robo_forca.png'/>");
+								$("#" + t).addClass("robo_" + nroRobo);
+								primeiro = false;
+							}
+						}
+					}
+				}
+			} else if (value.indexOf("mover_robo_resgate(") != -1) {
+				var str = value.replace("mover_robo_resgate(", "");
+				str = str.replace(");", "");
+				str = str.replace(").", "");
+				var parametros = str.split(",");
+				var nroRobo = parametros[0].replace("robo", "");
+				var nroRua = parametros[1].replace("rua", "");
+
+				$(".robo_" + nroRobo + " > .img_robo").hide();
+				$(".robo_" + nroRobo).removeClass("robo_" + nroRobo);
+
+				var primeiro = true;
+				for (i = 0; i < numeroRuas; i++) {
+					for (j = 0; j < numeroRuas; j++) {
+						if (ruas[i][j] == nroRua) {
+							var t = "td_espaco_" + i + "_" + j;
+							if (primeiro) {
+								$("#" + t).html($("#" + t).html() + "<img class='img_robo' src='imagens/robos/robo_resgate.png'/>");
+								$("#" + t).addClass("robo_" + nroRobo);
+								primeiro = false;
+							}
+						}
+					}
+				}
+			} else if (value.indexOf("salvar_vitima_saudavel(") != -1) {
+				var str = value.replace("salvar_vitima_saudavel(", "");
+				str = str.replace(");", "");
+				str = str.replace(").", "");
+				var parametros = str.split(",");
+				var nroPessoa = parametros[0].replace("pessoa", "");
+				var nroRobo = parametros[1].replace("robo", "");
+				var nroRua = parametros[2].replace("rua", "");
+
+				$(".pessoa_" + nroPessoa + " > .img_pessoa").hide();
+				$(".pessoa_" + nroPessoa).removeClass("pessoa_" + nroPessoa);
+			} else if (value.indexOf("salvar_vitima_morta(") != -1) {
+				var str = value.replace("salvar_vitima_morta(", "");
+				str = str.replace(");", "");
+				str = str.replace(").", "");
+				var parametros = str.split(",");
+				var nroPessoa = parametros[0].replace("pessoa", "");
+				var nroRobo = parametros[1].replace("robo", "");
+				var nroRua = parametros[2].replace("rua", "");
+
+				$(".pessoa_" + nroPessoa + " > .img_pessoa").hide();
+				$(".pessoa_" + nroPessoa).removeClass("pessoa_" + nroPessoa);
+			} else if (value.indexOf("salvar_vitima_ferida(") != -1) {
+				var str = value.replace("salvar_vitima_ferida(", "");
+				str = str.replace(");", "");
+				str = str.replace(").", "");
+				var parametros = str.split(",");
+				var nroPessoa = parametros[0].replace("pessoa", "");
+				var nroRobo = parametros[1].replace("robo", "");
+				var nroRua = parametros[2].replace("rua", "");
+
+				$(".pessoa_" + nroPessoa + " > .img_pessoa").hide();
+				$(".pessoa_" + nroPessoa).removeClass("pessoa_" + nroPessoa);
 			}
 		}
 	});
