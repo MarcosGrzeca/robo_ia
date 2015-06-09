@@ -94,6 +94,7 @@ function inicializarVetor() {
 	adicionarRobo("F", 6, 5);
 
 
+//	adicionarPessoa("F", 0, 0);
 	adicionarPessoa("S", 1, 2);
 	adicionarPessoa("M", 1, 6);
 	adicionarPessoa("F", 2, 3);
@@ -232,7 +233,7 @@ function MontarTabuleiro(){
 				$("#" + t).html("<img class='img_robo' src='imagens/robos/robo_resgate.png'/>");
 			}
 			if (value.tipo == "F") {
-				$("#" + t).html("<img class='img_robo' src='imagens/robos/robo_forca.png'/>");
+				$("#" + t).html("<img class='img_robo' src='imagens/robos/robo_bala.png'/>");
 			}
 			$("#" + t).addClass("robo_" + key);
 		}
@@ -495,7 +496,7 @@ function montarProlog() {
 
 //	given(tsunami,local(escombro, rua1)).
 */
-	//console.log(texto);
+	console.log(texto);
 
 }
 
@@ -516,6 +517,14 @@ function comunicarComServidor() {
 		posInicial = 0;
   		console.log("RETRONO");
   		//console.log(data);
+
+		$.each(solucaoProlog, function(key, value){
+			if ($.trim(value) != "" && value != "tsunami;" && value != '"') {
+				$("#tabelaAcoes").append("<tr id='res_tr_" + key + "'><td>" + value + "<input type='hidden' id='input_" + key + "' /> </td></tr>");
+			}
+		});
+	
+
   		solucao(0);
     }).fail(function() {
     	alert( "error" );
@@ -528,6 +537,9 @@ function solucao(indice) {
 			return null;
 		}
 		if ($.trim(value) != "" && value != "tsunami;" && value != '"') {
+			$(".active").removeClass("active");
+			$("#res_tr_" + key).addClass("active");
+			//$("#input_" + key).focus();
 			console.info(value);		
 			if (value.indexOf("remover_escombro_alamento(") != -1) {
 				var str = value.replace("remover_escombro_alamento(", "");
@@ -589,7 +601,7 @@ function solucao(indice) {
 						if (ruas[i][j] == nroRua) {
 							var t = "td_espaco_" + i + "_" + j;
 							if (primeiro) {
-								$("#" + t).html($("#" + t).html() + "<img class='img_robo' src='imagens/robos/robo_forca.png'/>");
+								$("#" + t).html($("#" + t).html() + "<img class='img_robo' src='imagens/robos/robo_bala.png'/>");
 								$("#" + t).addClass("robo_" + nroRobo);
 								primeiro = false;
 							}
@@ -657,7 +669,7 @@ function solucao(indice) {
 		}
 	});
 	indice += 1;
-	setTimeout(function(){ solucao(indice); }, 1000);
+	setTimeout(function(){ solucao(indice); },2000);
 
 	/*$.each(ruas, function(key, value) {
 		$.each(value, function(key2, value2) {

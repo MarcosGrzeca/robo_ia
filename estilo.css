@@ -74,9 +74,8 @@ body {
  
 .fechar{display:block; text-align:right;}
 
-
 tr {
-	height: 64px
+	height: 64px;
 }
 
 .casa {
@@ -108,4 +107,12 @@ tr {
 	/*background-color: #CCC;*/
 	background-size:100%; 
 	opacity:50%;	
+}
+
+.table_res tr {
+	height: 20px !important;
+}
+
+.active {
+	background-color: blue;
 }
