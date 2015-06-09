@@ -5,9 +5,16 @@ var numeroRuas = 9;
 var ruas = [];
 var texto;
 var ruas_sujas = [];
+var robos = [];
+var pessoas = [];
+var solucaoProlog = new Array();
+
 
 function inicializarVetor() {
 	var i, j;
+	robos[0] = {};
+	pessoas[0] = {};
+	
 	for (i = 0; i < nroLinhas; i++) {
 		vetor[i] = [];
 		for (j = 0; j < nroColunas; j++) {
@@ -53,7 +60,7 @@ function inicializarVetor() {
 	ruas[3][5] = 4;
 	ruas[4][5] = 4;
 	ruas[5][5] = 4;
-	ruas[6][5] = 4;
+	//ruas[6][5] = 4;
 
 	ruas[0][7] = 5;	
 	ruas[1][7] = 5;
@@ -61,7 +68,7 @@ function inicializarVetor() {
 	ruas[3][7] = 5;
 	ruas[4][7] = 5;
 	ruas[5][7] = 5;
-	ruas[6][7] = 5;
+	//ruas[6][7] = 5;
 
 	ruas[4][6] = 6;
 	ruas[4][8] = 6;
@@ -81,8 +88,18 @@ function inicializarVetor() {
 	ruas[3][2] = 9;
 	ruas[3][3] = 9;
 
-	
+	adicionarRobo("R", 0, 1);
+	adicionarRobo("F", 5, 1);
+	adicionarRobo("R", 3, 5);
+	adicionarRobo("F", 6, 5);
 
+
+	adicionarPessoa("S", 1, 2);
+	adicionarPessoa("M", 1, 6);
+	adicionarPessoa("F", 2, 3);
+	adicionarPessoa("S", 6, 2);
+	adicionarPessoa("M", 6, 6);
+	adicionarPessoa("F", 4, 8);
 
 
 	vetor[0][2] = "C";
@@ -143,32 +160,16 @@ function inicializarVetor() {
 	vetor[6][7] = "AL";
 
 	vetor[6][8] = "C";
+}
 
-	
-	
-	/*vetor[0][2] = "C"; 
-	vetor[0][3] = "C"; 
-	vetor[0][4] = "C"; 
-	vetor[0][5] = "C"; 
-	vetor[0][8] = "C"; 
-	
-	vetor[1][0] = "C"; 
-	vetor[3][0] = "C"; 
-	vetor[5][0] = "C"; 
+function adicionarPessoa(tipo, Y, X) {
+	var pessoa = {"tipo" : tipo, "Y" : Y, "X" : X};
+	pessoas.push(pessoa);
+}
 
-
-	vetor[5][5] = "I";
-	vetor[5][7] = "AB"; 
-
-	vetor[4][8] = "AL"; 
-	vetor[5][8] = "AL"; 
-*/
-
-	/*vetor[7][0] = "C"; 
-	vetor[8][0] = "C"; 
-	
-
-	vetor[8][8] = "H"; */
+function adicionarRobo(tipo, Y, X) {
+	var robo = {"tipo" : tipo, "Y" : Y, "X" : X};
+	robos.push(robo);
 }
 
 function iniciarPlanejamento() {
@@ -178,7 +179,6 @@ function iniciarPlanejamento() {
 function conexaoBemSucedida() {
 
 	$("#telaInicial").hide();
-	console.log("AQUIII");
 	$("#jogo").show();
 //	ws.send("ESTABELECIDA");
 }
@@ -225,17 +225,43 @@ function MontarTabuleiro(){
 		}
 	}
 
-	console.log(ruas);
+	$.each(robos, function(key, value) {
+		if (key > 0) {
+			var t = "td_espaco_" + value.Y + "_" + value.X;
+			if (value.tipo == "R") {
+				$("#" + t).html("<img src='imagens/robos/robo_resgate.png'/>");
+			}
+			if (value.tipo == "F") {
+				$("#" + t).html("<img src='imagens/robos/robo_forca.png'/>");
+			}
+			$("#" + t).addClass("robo_" + key);
+		}
+	});
 
-	$("#td_espaco_6_2").html("<img src='imagens/hospital/1433728142_0102-tombstone-rip-hallowee_64.png'/>")
+	$.each(pessoas, function(key, value) {
+		if (key > 0) {
+			var t = "td_espaco_" + value.Y + "_" + value.X;
+			$("#" + t).addClass("pessoa_" + key);
+			if (value.tipo == "S") {
+				$("#" + t).html("<img src='imagens/pessoas/accept-female-user-icon.png'/>");
+			}
+			if (value.tipo == "F") {
+				$("#" + t).html("<img src='imagens/pessoas/female-user-search-icon.png'/>");
+			}
+			if (value.tipo == "M") {
+				$("#" + t).html("<img src='imagens/pessoas/remove-female-user-icon.png'/>");
+			}
+		}
+	});
 
+//
+	
+	
 	var i, j, k;
 	for (i = 1; i <= numeroRuas; i++) {
 
 	}
 
-	console.log(vetor);
-	console.log(vetor[0]);
 }
 
 function montarProlog() {
@@ -270,22 +296,147 @@ function montarProlog() {
 	}
 
 
-	console.log(ruas_sujas);
 	var ruas_limpas = [];
 	for (i=1; i<=numeroRuas; i++){
 		if ($.inArray(i, ruas_sujas) == -1) {
-			console.info(i);
 			adicionarTexto("given(tsunami, rua_limpa(rua" + i  + ")).", "S");
 		}
-
 	}
 
 
 	adicionarTexto("given(tsunami,local(hospital, rua3)).", "S");
 	adicionarTexto("given(tsunami,local(abrigo, rua2)).", "S");
 	adicionarTexto("given(tsunami,local(iml, rua5)).", "S");
+
+
+	var ruas_com_vitimas = [];
+	$.each(pessoas, function(key, value) {
+		if (key > 0) {
+			ruas_com_vitimas.push(ruas[value.Y][value.X]);
+			var t = "td_espaco_" + value.Y + "_" + value.X;
+			adicionarTexto("given(tsunami,local(pessoa" + key + ",rua" + ruas[value.Y][value.X] + ")).", "S");
+				
+			if (value.tipo == "S") {
+				adicionarTexto("given(tsunami,vitima_saudavel(pessoa" + key + ")).", "S");
+			}
+			if (value.tipo == "F") {
+				adicionarTexto("given(tsunami,vitima_ferida(pessoa" + key + ")).", "S");
+			}
+			if (value.tipo == "M") {
+				adicionarTexto("given(tsunami,vitima_morta(pessoa" + key + ")).", "S");
+			}
+		}
+	});
+
+	for (i=1; i<=numeroRuas; i++){
+		if ($.inArray(i, ruas_com_vitimas) == -1) {
+			adicionarTexto("given(tsunami, sem_vitimas(rua" + i  + ")).", "S");
+		}
+	}	
+
+	$.each(robos, function(key, value) {
+		if (key > 0) {
+			adicionarTexto("given(tsunami,local(robo" + key + ",rua" + ruas[value.Y][value.X] + ")).", "S");
+		}
+	});
+
+	//Verdades
+
+	for (i=1; i<=numeroRuas; i++){
+			adicionarTexto("always(rua(rua" + i  + ")).", "S");
+	}
+
+
+	$.each(robos, function(key, value) {
+		if (key > 0) {
+			if (value.tipo == "F") {
+				adicionarTexto("always(robo_forca_bruta(robo" + key + ")).", "S");
+			} else {
+				adicionarTexto("always(robo_resgate_vida(robo" + key + ")).", "S");
+			}
+		}
+	});
+
+
+	adicionarTexto("always(edificio(hospital)).", "S");
+	adicionarTexto("always(edificio(abrigo)).", "S");
+	adicionarTexto("always(edificio(iml)).", "S");
+
+
+	texto += "imposs(local( X, Y )  &  local( X, Z )  &  notequal( Y, Z )  ).\n";
+	texto += "imposs(rua_limpa(X)  &  local(escombro, X)).\n";
+	texto += "imposs(rua_limpa(X)  &  local(alagamento, X)).\n";
+	texto += "imposs(local(Vit,Local) & local(Vit, Local2) & notequal(Local==Local2)).\n";
+	texto += "imposs(local(Robo, Local) & local(Robo, Local2) & notequal(Local==Local2)).\n";
+
+
+	texto += "can(remover_escombro_alamento(Robo, RU), local(Robo, RU) & robo_forca_bruta(Robo) & rua(RU) & local(escombro, RU) & local(alagamento, RU) ).\n";
+	texto += "can(remover_escombro(Robo, RU), local(Robo, RU) & robo_forca_bruta(Robo) & rua(RU)& local(escombro, RU)).\n";
+	texto += "can(remover_alagamento(Robo, RU), local(Robo, RU) & robo_forca_bruta(Robo) & rua(RU) & local(alagamento, RU)).\n";
+	texto += "can(salvar_vitima_morta(VIT, RO, RU), local(VIT, RU) & local(RO, RU) & robo_resgate_vida(RO) & rua(RU) & rua_limpa(RU) & vitima_morta(VIT)).\n";
+	texto += "can(salvar_vitima_ferida(VIT, RO, RU), local(VIT, RU) & local(RO, RU) & robo_resgate_vida(RO) & rua(RU) & rua_limpa(RU) & vitima_ferida(VIT)).\n";
+	texto += "can(salvar_vitima_saudavel(VIT, RO, RU), local(VIT, RU) & local(RO, RU) & robo_resgate_vida(RO) & rua(RU) & rua_limpa(RU) & vitima_saudavel(VIT)).\n";
+	texto += "can(mover_robo_resgate(RO, _), robo_resgate_vida(RO)).\n";
+	texto += "can(mover_robo_forca(RO, _), robo_forca_bruta(RO)).\n";
+
+
+
+	texto += "add(rua_limpa(RU), remover_escombro_alamento(_, RU)).\n";
+	texto += "add(rua_limpa(RU), remover_escombro(_, RU)).\n";
+	texto += "add(rua_limpa(RU), remover_alagamento(_, RU)).\n";
+	texto += "add(vitima_iml(VIT), salvar_vitima_morta(VIT, _, _)).\n";
+	texto += "add(sem_vitimas(RU), salvar_vitima_morta(_, _, RU)).\n";
+	texto += "add(vitima_hospital(VIT), salvar_vitima_ferida(VIT, _, _)).\n";
+	texto += "add(sem_vitimas(RU), salvar_vitima_ferida(_, _, RU)).\n";
+	texto += "add(vitima_abrigo(VIT), salvar_vitima_saudavel(VIT, _, _)).\n";
+	texto += "add(sem_vitimas(RU), salvar_vitima_saudavel(_, _, RU)).\n";
+	texto += "add(local(RO, Rua), mover_robo_resgate(RO, Rua)).\n";
+	texto += "add(local(RO, Rua), mover_robo_forca(RO, Rua)).\n";
+
+
+	texto += "del(local(alagamento, RU), remover_escombro_alamento(_, RU)).\n";
+	texto += "del(local(escombro, RU), remover_escombro_alamento(_, RU)).\n";
+	texto += "del(local(escombro, RU), remover_escombro(_, RU)).\n";
+	texto += "del(local(alagamento, RU), remover_alagamento(_, RU)).\n";
+	texto += "del(local(VIT, RU),  salvar_vitima_morta(VIT, _, RU)).\n";
+	texto += "del(vitima_morta(VIT), salvar_vitima_morta(VIT, _, _)).\n";
+	texto += "del(local(VIT, RU),  salvar_vitima_ferida(VIT, _, RU)).\n";
+	texto += "del(vitima_ferida(VIT), salvar_vitima_ferida(VIT, _, _)).\n";
+	texto += "del(local(VIT, RU),  salvar_vitima_saudavel(VIT, _, RU)).\n";
+	texto += "del(vitima_saudavel(VIT), salvar_vitima_saudavel(VIT, _, _)).\n";
+	texto += "del(local(RO,_), mover_robo_forca(RO,_)).\n";
+	texto += "del(local(RO,_), mover_robo_resgate(RO,_)).\n";
+
+
+	var testeFinal = "";
+	testeFinal = "testeFinal:- plans(";
+	for (i=1; i<=numeroRuas; i++){
+		if (i > 1) {
+			testeFinal += " & ";
+		}
+		testeFinal += "rua_limpa(rua" + i + ")";
+
+		$.each(pessoas, function(key, value) {
+			if (key > 0) {
+				if (ruas[value.Y][value.X] == i) {
+					if (value.tipo == "S") {
+						testeFinal += " & vitima_abrigo(pessoa" + key + ")";
+					}
+					if (value.tipo == "F") {
+						testeFinal += " & vitima_hospital(pessoa" + key + ")";
+					}
+					if (value.tipo == "M") {
+						testeFinal += " & vitima_iml(pessoa" + key + ")";
+					}
+				}
+			}
+		});
+
+
+	}
 	
 
+	texto += testeFinal + ",tsunami).";
 	/*for (i=0; i<nroLinhas; i++){
 		for (j=0; j<nroColunas; j++){
 			if (vetor[i][j] == "H") {
@@ -344,14 +495,99 @@ function montarProlog() {
 
 //	given(tsunami,local(escombro, rua1)).
 */
-	console.log(texto);
+	//console.log(texto);
 
 }
 
 function adicionarTexto(txt, rua) {
  	var n = texto.indexOf(txt);
  	if (n == -1) {
- 		console.log(txt);
  		texto += txt + "\n";
 	}
+}
+
+function comunicarComServidor() {
+	$.ajax({
+		method: "POST",
+  		data: { script: texto},
+	  	url: "servidor.php"
+	}).done(function( data ) {
+		solucaoProlog = data.split('\\n'); 
+		posInicial = 0;
+  		console.log("RETRONO");
+  		//console.log(data);
+  		solucao(0);
+    }).fail(function() {
+    	alert( "error" );
+  	});
+}
+
+function solucao(indice) {
+	$.each(solucaoProlog, function(key, value){
+		if (key != indice) {
+			return null;
+		}
+		if ($.trim(value) != "" && value != "tsunami;" && value != '"') {
+			console.info(value);		
+			if (value.indexOf("remover_escombro_alamento(") != -1) {
+				var str = value.replace("remover_escombro_alamento(", "");
+				str = str.replace(");", "");
+				var parametros = str.split(",");
+				var nroRua = parametros[1].replace("rua", "");
+				for (i = 0; i < numeroRuas; i++) {
+					for (j = 0; j < numeroRuas; j++) {
+						if (ruas[i][j] == nroRua) {
+							var t = "td_espaco_" + i + "_" + j;
+							$("#" + t).removeClass("alagamento");
+							$("#" + t).removeClass("escombro");
+						}
+					}
+				}
+			} else if (value.indexOf("remover_escombro(") != -1) {
+				var str = value.replace("remover_escombro(", "");
+				str = str.replace(");", "");
+				var parametros = str.split(",");
+				var nroRua = parametros[1].replace("rua", "");
+				for (i = 0; i < numeroRuas; i++) {
+					for (j = 0; j < numeroRuas; j++) {
+						if (ruas[i][j] == nroRua) {
+							var t = "td_espaco_" + i + "_" + j;
+							$("#" + t).removeClass("escombro");
+						}
+					}
+				}
+			} else if (value.indexOf("remover_alagamento(") != -1) {
+				var str = value.replace("remover_alagamento(", "");
+				str = str.replace(");", "");
+				var parametros = str.split(",");
+				var nroRua = parametros[1].replace("rua", "");
+				for (i = 0; i < numeroRuas; i++) {
+					for (j = 0; j < numeroRuas; j++) {
+						if (ruas[i][j] == nroRua) {
+							var t = "td_espaco_" + i + "_" + j;
+							$("#" + t).removeClass("alagamento");
+						}
+					}
+				}
+			}
+		}
+	});
+	indice += 1;
+	setTimeout(function(){ solucao(indice); }, 1000);
+
+	/*$.each(ruas, function(key, value) {
+		$.each(value, function(key2, value2) {
+				console.log(ruas[key][value2]);
+
+		});
+	});*/
+}
+
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
 }
