@@ -230,7 +230,7 @@ function MontarTabuleiro(){
 		if (key > 0) {
 			var t = "td_espaco_" + value.Y + "_" + value.X;
 			if (value.tipo == "R") {
-				$("#" + t).html("<img class='img_robo' src='imagens/robos/robo_resgate.png'/>");
+				$("#" + t).html("<img class='img_robo' src='imagens/robos/e-ric-icon.png'/>");
 			}
 			if (value.tipo == "F") {
 				$("#" + t).html("<img class='img_robo' src='imagens/robos/robo_bala.png'/>");
@@ -364,6 +364,20 @@ function montarProlog() {
 	adicionarTexto("always(edificio(iml)).", "S");
 
 
+	texto += "always(connects(rua1, rua2)).\n";
+	texto += "always(connects(rua1, rua3)).\n";
+	texto += "always(connects(rua1, rua4)).\n";
+	texto += "always(connects(rua1, rua5)).\n";
+	texto += "always(connects(rua2, rua7)).\n";
+	texto += "always(connects(rua2, rua8)).\n";
+	texto += "always(connects(rua2, rua9)).\n";
+	texto += "always(connects(rua3, rua7)).\n";
+	texto += "always(connects(rua3, rua9)).\n";
+	texto += "always(connects(rua4, rua6)).\n";
+	texto += "always(connects(rua4, rua7)).\n";
+	texto += "always(connects(rua5, rua6)).\n";
+	texto += "always(connects(rua5, rua7)).\n";
+	texto += "always(connects(rua7, rua8)).\n";
 	texto += "imposs(local( X, Y )  &  local( X, Z )  &  notequal( Y, Z )  ).\n";
 	texto += "imposs(rua_limpa(X)  &  local(escombro, X)).\n";
 	texto += "imposs(rua_limpa(X)  &  local(alagamento, X)).\n";
@@ -625,7 +639,7 @@ function solucao(indice) {
 						if (ruas[i][j] == nroRua) {
 							var t = "td_espaco_" + i + "_" + j;
 							if (primeiro) {
-								$("#" + t).html($("#" + t).html() + "<img class='img_robo' src='imagens/robos/robo_resgate.png'/>");
+								$("#" + t).html($("#" + t).html() + "<img class='img_robo' src='imagens/robos/e-ric-icon.png'/>");
 								$("#" + t).addClass("robo_" + nroRobo);
 								primeiro = false;
 							}

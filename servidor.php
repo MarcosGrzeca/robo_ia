@@ -2,6 +2,7 @@
 
 //echo json_encode(print_r($_REQUEST, true));
 
+
 $nome = "scripts/script_" . date("h") . date("i") . date("s") . ".pl";
 
 $planejador = file_get_contents("scripts/planejador.pl");
@@ -13,12 +14,12 @@ fwrite($myfile, "\n");
 fwrite($myfile, $_REQUEST["script"]);
 fclose($myfile);
 
-$cmd = '"C:/Program Files/swipl/bin/swipl.exe" -f "C:/wamp/trabalho_v3.pl" -g teste12,halt  2>&1';
+$cmd = '"C:/Program Files/swipl/bin/swipl.exe" -f "C:/wamp/www/robo_ia/' . $nome . '" -g testeFinal,halt  2>&1';
 //exec($cmd, $output);
 //echo json_encode($output);
 
 $output = shell_exec($cmd);
 echo json_encode($output);
 
-unlink(@$nome);
+//unlink(@$nome);
 ?>
