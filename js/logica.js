@@ -150,7 +150,7 @@ function inicializarVetor() {
 	vetor[5][4] = "H";
 	vetor[5][6] = "C";
 	vetor[5][7] = "AL";
-	vetor[5][8] = "I";
+//	vetor[5][8] = "I";
 
 	vetor[6][1] = "E";
 	vetor[6][2] = "AL";
@@ -158,9 +158,10 @@ function inicializarVetor() {
 	vetor[6][4] = "E";
 	vetor[6][5] = "E";
 	vetor[6][6] = "AL";
-	vetor[6][7] = "AL";
+//	vetor[6][7] = "AL";
 
-	vetor[6][8] = "C";
+	vetor[6][7] = "I1";
+	vetor[6][8] = "I2";
 }
 
 function adicionarPessoa(tipo, Y, X) {
@@ -216,8 +217,12 @@ function MontarTabuleiro(){
 				$("#" + t).addClass("hospital");
 			} else 	if (vetor[i][j] == "AB") {
 				$("#" + t).addClass("abrigo");
-			} else 	if (vetor[i][j] == "I") {
-				$("#" + t).addClass("iml");
+			} else 	if (vetor[i][j] == "I1") {
+				$("#" + t).addClass("iml_inicio");
+				$("#" + t).html("<img src='imagens/diogo2/iml/i1.png' />");
+			} else 	if (vetor[i][j] == "I2") {
+				$("#" + t).addClass("iml_fim");
+				$("#" + t).html("<img src='imagens/diogo2/iml/i2.png' />");
 			} else 	if (vetor[i][j] == "AL") {
 				$("#" + t).addClass("alagamento");
 			} else 	if (vetor[i][j] == "E") {

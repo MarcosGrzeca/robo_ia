@@ -90,12 +90,17 @@ tr {
 	background-image:url('imagens/hospital/1433727480_hospital2.jpg'); background-repeat:no-repeat;
 }
 
-.iml {
-	background-image:url('imagens/hospital/1433728142_0102-tombstone-rip-hallowee_64.png'); background-repeat:no-repeat;
+.iml_inicio {
+	background-image:url('imagens/grama.jpg'); background-repeat:no-repeat;
+}
+
+.iml_fim {
+	background-image:url('imagens/grama.jpg'); background-repeat:no-repeat;
 }
 
 .alagamento {
 	background-image:url('imagens/diogo/alagamento_6.png'); background-repeat:no-repeat;
+	/*background-image:url('imagens/alagamento35.png'); background-repeat:no-repeat;*/
 }
 
 .escombro {
