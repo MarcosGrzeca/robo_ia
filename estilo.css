@@ -79,15 +79,24 @@ tr {
 }
 
 .casa {
-	background-image:url('imagens/casas/1433722577_kfm_home2a.jpg'); background-repeat:no-repeat;
+/*	background-image:url('imagens/casas/1433722577_kfm_home2a.jpg'); background-repeat:no-repeat;*/
 }
 
-.hospital {
-	background-image:url('imagens/hospital/1433727472_hospital.png'); background-repeat:no-repeat;
+.grama {
+	background-image:url('imagens/grama.jpg'); background-repeat:no-repeat;
+}
+
+
+
+.grama {
+/*	background-image:url('imagens/grama7.png'); background-repeat:no-repeat;*/
 }
 
 .abrigo {
-	background-image:url('imagens/hospital/1433727480_hospital2.jpg'); background-repeat:no-repeat;
+/*	background-image:url('imagens/hospital/1433727480_hospital2.jpg'); background-repeat:no-repeat;*/
+
+	vertical-align:top;
+	text-align:left;
 }
 
 .iml_inicio {
@@ -105,6 +114,11 @@ tr {
 
 .escombro {
 	background-image:url('imagens/diogo/escombros2.png'); background-repeat:no-repeat;
+}
+
+.hospital {
+	vertical-align:top;
+	text-align:center;
 }
 
 #tabuleiro {

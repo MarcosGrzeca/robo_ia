@@ -8,6 +8,7 @@ var ruas_sujas = [];
 var robos = [];
 var pessoas = [];
 var solucaoProlog = new Array();
+var cidadeAtual = "P";
 
 
 function inicializarVetor() {
@@ -56,10 +57,10 @@ function inicializarVetor() {
 
 	ruas[0][5] = 4;	
 	ruas[1][5] = 4;
-	ruas[2][5] = 4;
-	ruas[3][5] = 4;
-	ruas[4][5] = 4;
-	ruas[5][5] = 4;
+//	ruas[2][5] = 4;
+//	ruas[3][5] = 4;
+//	ruas[4][5] = 4;
+	//ruas[5][5] = 4;
 	//ruas[6][5] = 4;
 
 	ruas[0][7] = 5;	
@@ -90,7 +91,7 @@ function inicializarVetor() {
 
 	adicionarRobo("R", 0, 1);
 	adicionarRobo("F", 5, 1);
-	adicionarRobo("R", 3, 5);
+	//adicionarRobo("R", 3, 5);
 	adicionarRobo("F", 6, 5);
 
 
@@ -119,35 +120,38 @@ function inicializarVetor() {
 
 
 
-	vetor[2][0] = "AB";
+	vetor[2][0] = "G";
 	vetor[2][1] = "E";
 	vetor[2][2] = "C";
 
 	vetor[2][4] = "H";
-	vetor[2][6] = "C";
+	vetor[2][5] = "G";
+	vetor[2][6] = "G";
 	vetor[2][8] = "C";
 		
 
-	vetor[3][0] = "AB";
+	vetor[3][0] = "G";
 	vetor[3][1] = "AL";
 	vetor[3][2] = "AL";
-	vetor[3][4] = "H";
-	vetor[3][6] = "C";
+	vetor[3][4] = "G";
+	vetor[3][5] = "G";
+	vetor[3][6] = "G";
 	vetor[3][8] = "C";
 
-	vetor[4][0] = "AB";
+	vetor[4][0] = "G";
 	vetor[4][2] = "C";
-	vetor[4][4] = "H";
-	vetor[4][5] = "E";
+//	vetor[4][4] = "G";
+//	vetor[4][5] = "G";
 	vetor[4][6] = "E";
 	vetor[4][7] = "E";
 	
 	
-	vetor[5][0] = "AB";
+	vetor[5][0] = "";
 	vetor[5][2] = "E";
 	vetor[5][2] = "C";
 	vetor[5][3] = "E";	
-	vetor[5][4] = "H";
+	vetor[5][4] = "C";
+	vetor[5][5] = "C";
 	vetor[5][6] = "C";
 	vetor[5][7] = "AL";
 //	vetor[5][8] = "I";
@@ -212,11 +216,40 @@ function MontarTabuleiro(){
 		for (j=0; j<nroColunas; j++){
 			var t = "td_espaco_" + i + "_" + j;
 			if (vetor[i][j] == "C") {
-				$("#" + t).addClass("casa");
+				$("#" + t).addClass("casa grama");
+
+				var img = 'imagens/casas/1433722577_kfm_home2a.jpg';
+
+
+				var random = Math.floor((Math.random() * 7) + 1);
+				if (random == 1) {
+					img = 'imagens/casas/2-Hot-Home-icon.png';					
+				} else if (random == 2) {
+					img = 'imagens/casas/1433722577_kfm_home2a.jpg';					
+				} else if (random == 3) {
+					img = 'imagens/casas/1433722596_home.png';					
+				} else if (random == 4) {
+					img = 'imagens/casas/1433722623_go-home.png';					
+				} else if (random == 5) {
+					img = 'imagens/casas/1433722652_Home.png';					
+				} else if (random == 6) {
+					img = 'imagens/casas/1433722635_property.png';					
+				} else if (random == 7) {
+					img = 'imagens/casas/House-icon.png';					
+				}
+				
+
+
+
+				$("#" + t).html("<img src='" + img + "'>");
+			} else 	if (vetor[i][j] == "G") {
+				$("#" + t).addClass("grama");
 			} else 	if (vetor[i][j] == "H") {
-				$("#" + t).addClass("hospital");
+				$("#" + t).addClass("grama hospital");
+				$("#" + t).html("<img src='imagens/hospital3.png' style='position: absolute ! important;'>");
 			} else 	if (vetor[i][j] == "AB") {
 				$("#" + t).addClass("abrigo");
+				$("#" + t).html("<img src='imagens/abrigo.png' style='position: absolute ! important;'>");
 			} else 	if (vetor[i][j] == "I1") {
 				$("#" + t).addClass("iml_inicio");
 				$("#" + t).html("<img src='imagens/diogo2/iml/i1.png' />");
