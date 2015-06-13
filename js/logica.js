@@ -798,6 +798,7 @@ function comunicarComServidor() {
 }
 
 function solucao(indice) {
+	var continua = true;
 	$.each(solucaoProlog, function(key, value){
 		if (key != indice) {
 			return null;
@@ -915,17 +916,13 @@ function solucao(indice) {
 				var nroPessoa = parametros[0].replace("pessoa", "");
 				var nroRobo = parametros[1].replace("robo", "");
 				var nroRua = parametros[2].replace("rua", "");
-
-				//$(".pessoa_" + nroPessoa + " > .img_pessoa").hide();
-
-
-				//$(".robo_" + nroRobo + " .robo_resgate").remove();
-				//$(".robo_" + nroRobo).removeClass("robo_" + nroRobo);
-
-
-				//$(".div_img_pessoa_" + nroPessoa).remove();
-				//$(".pessoa_" + nroPessoa).removeClass("pessoa_" + nroPessoa);
-				removerPessoa(nroPessoa);
+				removerRoboResgate(nroRobo);
+				var t = "td_espaco_" + pessoas[nroPessoa].Y + "_" + pessoas[nroPessoa].X;
+				$("#" + t).html($("#" + t).html() + getHtmlRoboResgate());
+				$("#" + t).addClass("robo_" + nroRobo);
+				continua = false;
+				var indice3 = indice + 1;
+				setTimeout(function(){ removerPessoa(nroPessoa); solucao(indice3); },2000);
 			} else if (value.indexOf("salvar_vitima_morta(") != -1) {
 				var str = value.replace("salvar_vitima_morta(", "");
 				str = str.replace(");", "");
@@ -934,11 +931,13 @@ function solucao(indice) {
 				var nroPessoa = parametros[0].replace("pessoa", "");
 				var nroRobo = parametros[1].replace("robo", "");
 				var nroRua = parametros[2].replace("rua", "");
-
-//				$(".pessoa_" + nroPessoa + " > .img_pessoa").hide();
-				//$(".pessoa_" + nroPessoa).removeClass("pessoa_" + nroPessoa);
-				//$(".div_img_pessoa_" + nroPessoa).remove();
-				removerPessoa(nroPessoa);
+				removerRoboResgate(nroRobo);
+				var t = "td_espaco_" + pessoas[nroPessoa].Y + "_" + pessoas[nroPessoa].X;
+				$("#" + t).html($("#" + t).html() + getHtmlRoboResgate());
+				$("#" + t).addClass("robo_" + nroRobo);
+				continua = false;
+				var indice3 = indice + 1;
+				setTimeout(function(){ removerPessoa(nroPessoa); solucao(indice3); },2000);
 			} else if (value.indexOf("salvar_vitima_ferida(") != -1) {
 				var str = value.replace("salvar_vitima_ferida(", "");
 				str = str.replace(");", "");
@@ -947,16 +946,20 @@ function solucao(indice) {
 				var nroPessoa = parametros[0].replace("pessoa", "");
 				var nroRobo = parametros[1].replace("robo", "");
 				var nroRua = parametros[2].replace("rua", "");
-
-				//$(".pessoa_" + nroPessoa + " > .img_pessoa").hide();
-//				$(".pessoa_" + nroPessoa).removeClass("pessoa_" + nroPessoa);
-//				$(".div_img_pessoa_" + nroPessoa).remove();
-				removerPessoa(nroPessoa);
+				removerRoboResgate(nroRobo);
+				var t = "td_espaco_" + pessoas[nroPessoa].Y + "_" + pessoas[nroPessoa].X;
+				$("#" + t).html($("#" + t).html() + getHtmlRoboResgate());
+				$("#" + t).addClass("robo_" + nroRobo);
+				continua = false;
+				var indice3 = indice + 1;
+				setTimeout(function(){ removerPessoa(nroPessoa); solucao(indice3); },2000);
 			}
 		}
 	});
-	indice += 1;
-	setTimeout(function(){ solucao(indice); },2000);
+	if (continua) {
+		indice += 1;
+		setTimeout(function(){ solucao(indice); },2000);
+	}
 }
 
 function sleep(milliseconds) {
