@@ -21,5 +21,5 @@ $cmd = '"C:/Program Files/swipl/bin/swipl.exe" -f "C:/wamp/www/robo_ia/' . $nome
 $output = shell_exec($cmd);
 echo json_encode($output);
 
-//unlink(@$nome);
+unlink(@$nome);
 ?>
