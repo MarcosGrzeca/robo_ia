@@ -309,6 +309,166 @@ function inicializarVetor() {
 		vetor[8][5] = "C";
 		vetor[8][7] = "C";
 
+	} else if (cidadeAtual == "M") {
+
+		nroLinhas = 9;
+		nroColunas = 13;
+		numeroRuas = 10;
+	
+
+		for (i = 0; i < nroLinhas; i++) {
+			vetor[i] = [];
+			for (j = 0; j < nroColunas; j++) {
+				vetor[i][j] = "R";
+			}	
+		}
+
+		for (i = 0; i < 20; i++) {
+			ruas[i] = [];
+			for (j = 0; j < 20; j++) {
+				ruas[i][j] = 0;
+			}
+		}
+
+
+		ruas[3][0] = 1;
+		ruas[3][1] = 1;
+		ruas[3][2] = 1;
+		ruas[3][3] = 1;
+		ruas[3][4] = 1;
+		ruas[3][5] = 1;
+		ruas[3][6] = 1;
+		ruas[3][7] = 1;
+		ruas[3][8] = 1;
+		ruas[3][9] = 1;
+		ruas[3][10] = 1;
+		ruas[3][11] = 1;
+		ruas[4][0] = 1;
+		ruas[5][0] = 1;
+		ruas[6][0] = 1;
+
+		ruas[7][0] = 2;
+		ruas[7][1] = 2;
+		ruas[7][2] = 2;
+		ruas[7][3] = 2;
+		ruas[7][4] = 2;
+		ruas[7][5] = 2;
+		ruas[7][6] = 2;
+		ruas[7][7] = 2;
+		ruas[7][8] = 2;
+		ruas[7][9] = 2;
+		ruas[7][10] = 2;
+		ruas[7][11] = 2;
+		ruas[7][12] = 2;
+		
+		ruas[0][0] = 3;
+		ruas[0][1] = 3;
+		ruas[0][2] = 3;
+		ruas[1][2] = 3;
+		ruas[2][2] = 3;
+		
+		ruas[4][2] = 4;
+		ruas[5][2] = 4;
+		ruas[6][2] = 4;
+		ruas[8][2] = 4;
+
+		ruas[0][5] = 5;
+		ruas[1][5] = 5;
+		ruas[2][5] = 5;
+		ruas[4][5] = 5;
+		ruas[5][5] = 5;
+		ruas[6][5] = 5;
+		ruas[8][5] = 5;
+
+		ruas[4][9] = 6;
+		ruas[5][9] = 6;
+		ruas[6][9] = 6;
+		ruas[4][10] = 6;
+		ruas[5][10] = 6;
+		ruas[6][10] = 6;
+
+		ruas[8][9] = 7;
+		ruas[8][10] = 7;
+		
+		ruas[0][6] = 8;
+		ruas[0][7] = 8;
+		ruas[0][8] = 8;
+		ruas[0][9] = 8;
+		ruas[0][10] = 8;
+		ruas[0][11] = 8;
+		ruas[0][12] = 8;
+
+		ruas[1][8] = 9;
+		ruas[2][8] = 9;
+
+		ruas[1][11] = 10;
+		ruas[2][11] = 10;
+
+
+		vetor[0][3] = "C";
+		vetor[0][4] = "C"; 
+		vetor[1][0] = "C"; 
+		vetor[1][1] = "C"; 
+		vetor[1][3] = "C";
+		vetor[1][4] = "C";
+		vetor[1][6] = "C";
+		vetor[1][7] = "C";
+		vetor[1][9] = "C";
+		vetor[1][10] = "C";
+		vetor[1][12] = "C";
+	
+		vetor[2][0] = "C";
+		vetor[2][1] = "C";
+		vetor[2][3] = "C";
+		vetor[2][4] = "C";
+		vetor[2][6] = "C";
+		vetor[2][7] = "C";
+		vetor[2][9] = "C";
+		vetor[2][10] = "C";
+		vetor[2][12] = "C";
+
+		vetor[3][12] = "C";
+
+
+		vetor[4][1] = "C";
+		vetor[4][3] = "C";
+		vetor[4][4] = "C";
+		vetor[4][6] = "H";
+		vetor[4][7] = "G";
+		vetor[4][8] = "G";
+		vetor[4][11] = "AB";
+		vetor[4][12] = "G";
+
+
+		vetor[5][1] = "C";
+		vetor[5][3] = "C";
+		vetor[5][4] = "C";
+		vetor[5][6] = "G";
+		vetor[5][7] = "G";
+		vetor[5][8] = "G";
+		vetor[5][11] = "G";
+		vetor[5][12] = "G";
+
+
+		vetor[6][1] = "C";
+		vetor[6][3] = "I1";
+		vetor[6][4] = "I2";
+		vetor[6][6] = "C";
+		vetor[6][7] = "C";
+		vetor[6][8] = "C";
+		vetor[6][11] = "C";
+		vetor[6][12] = "C";
+
+
+		vetor[8][0] = "C";
+		vetor[8][1] = "C";
+		vetor[8][3] = "C";
+		vetor[8][4] = "C";
+		vetor[8][6] = "C";
+		vetor[8][7] = "C";
+		vetor[8][8] = "C";
+		vetor[8][11] = "C";
+		vetor[8][12] = "C";
 	}
 
 	/*
