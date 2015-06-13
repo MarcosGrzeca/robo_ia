@@ -10,86 +10,310 @@ var pessoas = [];
 var solucaoProlog = new Array();
 var cidadeAtual = "P";
 
+function iniciarPlanejamento() {
+	cidadeAtual = $("#tamanhoCidade").val();
+	
+
+	inicializarVetor();
+	popularRobosPessoas();
+	montarTabuleiro();
+
+
+	$("#telaInicial").hide();
+	$("#jogo").show();
+
+	montarProlog();
+}
+
+function popularRobosPessoas() {
+	var nroTotalRForca = $("#nroRobosForca").val();
+	var nroTotalRResgate = $("#nroRobosResgate").val();
+	var nroTotalPFeridas = $("#nroPessoasFeridas").val();
+	var nroTotalPMortas = $("#nroPessoasMortas").val();
+	var nroTotalPSaudaveis = $("#nroPessoasSaudaveis").val();
+	var nroTotalAlagamentos = $("#nroAlagamentos").val();
+	var nroTotalEscombros = $("#nroEscombros").val();
+
+	var i = 1, linha, coluna;
+
+
+	for (i = 1; i <= nroTotalPSaudaveis; i++) {
+		var achou = false;
+		while (achou == false) {
+			linha = Math.floor((Math.random() * nroLinhas) + 1);
+			coluna = Math.floor((Math.random() * nroColunas) + 1);
+
+			if (ruas[linha][coluna] >0) {
+				var jaExiste = false;
+				$.each(pessoas, function(key, value) {
+					if (key > 0) {
+						if (linha == value.Y && coluna == value.X) {
+							jaExiste = true;
+						}
+					}
+				});
+				if (!jaExiste) {
+					adicionarPessoa("S", linha, coluna);
+	 				achou = true;
+	 			}
+			}
+		}
+	}
+
+
+	for (i = 1; i <= nroTotalAlagamentos; i++) {
+		var achou = false;
+		while (achou == false) {
+			linha = Math.floor((Math.random() * nroLinhas) + 1);
+			coluna = Math.floor((Math.random() * nroColunas) + 1);
+
+			if (ruas[linha][coluna] > 0) {
+	 			vetor[linha][coluna] = "AL";
+	 			achou = true;
+			}
+		}
+	}
+
+
+	for (i = 1; i <= nroTotalEscombros; i++) {
+		var achou = false;
+		while (achou == false) {
+			linha = Math.floor((Math.random() * nroLinhas) + 1);
+			coluna = Math.floor((Math.random() * nroColunas) + 1);
+
+			if (ruas[linha][coluna] >0) {
+				vetor[linha][coluna] = "E";
+	 			achou = true;
+			}
+		}
+	}
+
+	for (i = 1; i <= nroTotalRResgate; i++) {
+		var achou = false;
+		while (achou == false) {
+			linha = Math.floor((Math.random() * nroLinhas) + 1);
+			coluna = Math.floor((Math.random() * nroColunas) + 1);
+
+			if (ruas[linha][coluna] >0) {
+				var jaExiste = false;
+				$.each(robos, function(key, value) {
+					if (key > 0) {
+						if (linha == value.Y && coluna == value.X) {
+							jaExiste = true;
+						}
+					}
+				});
+				if (!jaExiste) {
+					adicionarRobo("R", linha, coluna);
+	 				achou = true;
+	 			}
+			}
+		}
+	}
+
+	for (i = 1; i <= nroTotalRForca; i++) {
+		var achou = false;
+		while (achou == false) {
+			linha = Math.floor((Math.random() * nroLinhas) + 1);
+			coluna = Math.floor((Math.random() * nroColunas) + 1);
+
+			if (ruas[linha][coluna] >0) {
+				var jaExiste = false;
+				$.each(robos, function(key, value) {
+					if (key > 0) {
+						if (linha == value.Y && coluna == value.X) {
+							jaExiste = true;
+						}
+					}
+				});
+				if (!jaExiste) {
+					adicionarRobo("F", linha, coluna);
+	 				achou = true;
+	 			}
+			}
+		}
+	}
+
+	for (i = 1; i <= nroTotalPMortas; i++) {
+		var achou = false;
+		while (achou == false) {
+			linha = Math.floor((Math.random() * nroLinhas) + 1);
+			coluna = Math.floor((Math.random() * nroColunas) + 1);
+
+			if (ruas[linha][coluna] >0) {
+				var jaExiste = false;
+				$.each(pessoas, function(key, value) {
+					if (key > 0) {
+						if (linha == value.Y && coluna == value.X) {
+							jaExiste = true;
+						}
+					}
+				});
+				if (!jaExiste) {
+					adicionarPessoa("M", linha, coluna);
+	 				achou = true;
+	 			}
+			}
+		}
+	}
+
+	for (i = 1; i <= nroTotalPFeridas; i++) {
+		var achou = false;
+		while (achou == false) {
+			linha = Math.floor((Math.random() * nroLinhas) + 1);
+			coluna = Math.floor((Math.random() * nroColunas) + 1);
+
+			if (ruas[linha][coluna] >0) {
+				var jaExiste = false;
+				$.each(pessoas, function(key, value) {
+					if (key > 0) {
+						if (linha == value.Y && coluna == value.X) {
+							jaExiste = true;
+						}
+					}
+				});
+				if (!jaExiste) {
+					adicionarPessoa("F", linha, coluna);
+	 				achou = true;
+	 			}
+			}
+		}
+	}
+}
 
 function inicializarVetor() {
 	var i, j;
 	robos[0] = {};
 	pessoas[0] = {};
 	
-	for (i = 0; i < nroLinhas; i++) {
+	/*for (i = 0; i < nroLinhas; i++) {
 		vetor[i] = [];
 		for (j = 0; j < nroColunas; j++) {
 			vetor[i][j] = "R";
 		}	
-	}
+	}*/
 
-	for (i = 0; i < numeroRuas; i++) {
-		ruas[i] = [];
-		for (j = 0; j < numeroRuas; j++) {
-			ruas[i][j] = 0;
-		}
-	}
-
+	
 	//Declarção ruas
 
-	ruas[6][0] = 1;
-	ruas[6][1] = 1;
-	ruas[6][2] = 1;
-	ruas[6][3] = 1;
-	ruas[6][4] = 1;
-	ruas[6][5] = 1;
-	ruas[6][6] = 1;
-	ruas[6][7] = 1;
-	ruas[6][8] = 1;
+	//Cidade pequena
 
-	ruas[1][1] = 2;
-	ruas[2][1] = 2;
-	ruas[3][1] = 2;
-	ruas[4][1] = 2;
-	ruas[5][1] = 2;
 
-	ruas[0][3] = 3;	
-	ruas[1][3] = 3;
-	ruas[2][3] = 3;
-	ruas[3][3] = 3;
-	ruas[4][3] = 3;
-	ruas[5][3] = 3;
 
-	ruas[0][5] = 4;	
-	ruas[1][5] = 4;
-//	ruas[2][5] = 4;
-//	ruas[3][5] = 4;
-//	ruas[4][5] = 4;
-	//ruas[5][5] = 4;
-	//ruas[6][5] = 4;
+	if (cidadeAtual == "P") {
 
-	ruas[0][7] = 5;	
-	ruas[1][7] = 5;
-	ruas[2][7] = 5;
-	ruas[3][7] = 5;
-	ruas[4][7] = 5;
-	ruas[5][7] = 5;
-	//ruas[6][7] = 5;
+		nroLinhas = 9;
+		nroColunas = 8;
+		numeroRuas = 6;
+	
 
-	ruas[4][6] = 6;
-	ruas[4][8] = 6;
+		for (i = 0; i < nroLinhas; i++) {
+			vetor[i] = [];
+			for (j = 0; j < nroColunas; j++) {
+				vetor[i][j] = "R";
+			}	
+		}
 
-	ruas[1][1] = 7;
-	ruas[1][2] = 7;
-	ruas[1][3] = 7;
-	ruas[1][4] = 7;
-	ruas[1][5] = 7;
-	ruas[1][6] = 7;
-	ruas[1][7] = 7;
-	ruas[1][8] = 7;
+		for (i = 0; i < 20; i++) {
+			ruas[i] = [];
+			for (j = 0; j < 20; j++) {
+				ruas[i][j] = 0;
+			}
+		}
 
-	ruas[0][0] = 8;
-	ruas[0][1] = 8;
 
-	ruas[3][2] = 9;
-	ruas[3][3] = 9;
+		ruas[1][2] = 1;
+		ruas[1][3] = 1;
+		ruas[1][4] = 1;
+		ruas[1][5] = 1;
+		ruas[1][6] = 1;
+		ruas[1][7] = 1;
+		
+		ruas[2][2] = 2;
+		ruas[3][2] = 2;
+		ruas[4][2] = 2;
+		ruas[5][2] = 2;
+		ruas[6][2] = 2;
+		ruas[7][2] = 2;
+		ruas[8][2] = 2;
 
-	adicionarRobo("R", 0, 1);
+		ruas[4][0] = 3;	
+		ruas[4][1] = 3;
+		ruas[4][3] = 3;
+		ruas[4][4] = 3;
+		ruas[4][5] = 3;
+		ruas[4][7] = 3;
+
+		ruas[7][0] = 4;	
+		ruas[7][1] = 4;
+		ruas[7][2] = 4;
+		ruas[7][3] = 4;
+		ruas[7][4] = 4;
+		ruas[7][5] = 4;
+		ruas[7][6] = 4;
+		ruas[7][7] = 4;
+
+		ruas[2][6] = 5;	
+		ruas[3][6] = 5;
+		ruas[4][6] = 5;
+		ruas[5][6] = 5;
+		ruas[6][6] = 5;
+		ruas[8][6] = 5;
+
+
+		vetor[0][0] = "AB";
+		vetor[0][1] = "G"; 
+		vetor[0][2] = "C"; 
+		vetor[0][3] = "C"; 
+		vetor[0][4] = "C"; 
+		vetor[0][5] = "C"; 
+		vetor[0][6] = "C"; 
+		vetor[0][7] = "C"; 
+
+		vetor[1][0] = "G";
+		vetor[1][1] = "G";
+		
+		vetor[2][0] = "C";
+		vetor[2][1] = "C";
+		vetor[2][3] = "C";
+		vetor[2][4] = "C";
+		vetor[2][5] = "C";
+		vetor[2][7] = "C";
+			
+
+		vetor[3][0] = "C";
+		vetor[3][1] = "C";
+		vetor[3][3] = "C";
+		vetor[3][4] = "C";
+		vetor[3][5] = "C";
+		vetor[3][7] = "C";
+
+		vetor[5][0] = "C";
+		vetor[5][1] = "C";
+		vetor[5][3] = "H";	
+		vetor[5][4] = "G";
+		vetor[5][5] = "G";
+		vetor[5][7] = "C";
+
+		vetor[6][0] = "C";
+		vetor[6][1] = "C";
+		vetor[6][3] = "G";
+		vetor[6][4] = "G";
+		vetor[6][5] = "G";
+		vetor[6][7] = "C";
+
+		vetor[8][0] = "I1";
+		vetor[8][1] = "I2";
+		vetor[8][3] = "C";
+		vetor[8][4] = "C";
+		vetor[8][5] = "C";
+		vetor[8][7] = "C";
+
+	}
+
+	/*
+
+	adicionarRobo("R", 6, 5);
 	adicionarRobo("F", 5, 1);
 	//adicionarRobo("R", 3, 5);
 	adicionarRobo("F", 6, 5);
@@ -165,7 +389,7 @@ function inicializarVetor() {
 //	vetor[6][7] = "AL";
 
 	vetor[6][7] = "I1";
-	vetor[6][8] = "I2";
+	vetor[6][8] = "I2";*/
 }
 
 function adicionarPessoa(tipo, Y, X) {
@@ -176,10 +400,6 @@ function adicionarPessoa(tipo, Y, X) {
 function adicionarRobo(tipo, Y, X) {
 	var robo = {"tipo" : tipo, "Y" : Y, "X" : X};
 	robos.push(robo);
-}
-
-function iniciarPlanejamento() {
-	conectar();
 }
 
 function conexaoBemSucedida() {
@@ -193,7 +413,7 @@ function erroConexao(erro) {
 	alert(erro);
 }
 
-function MontarTabuleiro(){	
+function montarTabuleiro(){	
 	var i;
 	for (i=0; i<nroLinhas; i++){
 		$("#tabuleiro").append("<tr id='espaco_" + i + "'></tr>");
@@ -201,14 +421,7 @@ function MontarTabuleiro(){
 		var tmp = i + " = " + j;
 			var t = "td_espaco_" + i + "_" + j;
 			var img = "imagens/casas/1433722577_kfm_home2a.jpg";
-			$("#espaco_" + i).append("<td id='" + t+ "' class='espaco' onclick='adicionarPeca(\"" + i + "\", \"" + j + "\")' ><center class='center'></center></td>");
-			/*if (i % 2 == 0 && j % 2 == 0) {
-				$("#" + t).addClass("casa");
-				
-				vetor[i][j] = "C";
-			} else {
-
-			}*/
+			$("#espaco_" + i).append("<td id='" + t+ "' class='tab_tds espaco' ></td>");
 		}
 	}
 
@@ -218,7 +431,7 @@ function MontarTabuleiro(){
 			if (vetor[i][j] == "C") {
 				$("#" + t).addClass("casa grama");
 
-				var img = 'imagens/casas/1433722577_kfm_home2a.jpg';
+				var img = 'imagens/casas/House-icon.png';
 
 
 				var random = Math.floor((Math.random() * 7) + 1);
@@ -235,21 +448,35 @@ function MontarTabuleiro(){
 				} else if (random == 6) {
 					img = 'imagens/casas/1433722635_property.png';					
 				} else if (random == 7) {
-					img = 'imagens/casas/House-icon.png';					
+					img = 'imagens/casas/House-icon.png';
 				}
-				
-
-
-
-				$("#" + t).html("<img src='" + img + "'>");
+				$("#" + t).html("<img src='" + img + "'/>");
 			} else 	if (vetor[i][j] == "G") {
 				$("#" + t).addClass("grama");
 			} else 	if (vetor[i][j] == "H") {
 				$("#" + t).addClass("grama hospital");
+				$("#" + t).removeClass("tab_tds");
 				$("#" + t).html("<img src='imagens/hospital3.png' style='position: absolute ! important;'>");
+
+				var t1 = "td_espaco_" + i + "_" + (j + 1);
+				$("#" + t1).removeClass("tab_tds");
+				t1 = "td_espaco_" + i + "_" + (j + 2);
+				$("#" + t1).removeClass("tab_tds");
+				t1 = "td_espaco_" + (i + 1) + "_" + (j + 1);
+				$("#" + t1).removeClass("tab_tds");
+				t1 = "td_espaco_" + (i + 1) + "_" + (j);
+				$("#" + t1).removeClass("tab_tds");
+				t1 = "td_espaco_" + (i + 1) + "_" + (j + 2);
+				$("#" + t1).removeClass("tab_tds");
 			} else 	if (vetor[i][j] == "AB") {
-				$("#" + t).addClass("abrigo");
+				$("#" + t).addClass("abrigo grama");
 				$("#" + t).html("<img src='imagens/abrigo.png' style='position: absolute ! important;'>");
+				var t1 = "td_espaco_" + i + "_" + (j + 1);
+				$("#" + t1).removeClass("tab_tds");
+				t1 = "td_espaco_" + (i + 1) + "_" + (j);
+				$("#" + t1).removeClass("tab_tds");
+				t1 = "td_espaco_" + (i + 1) + "_" + (j + 1);
+				$("#" + t1).removeClass("tab_tds");
 			} else 	if (vetor[i][j] == "I1") {
 				$("#" + t).addClass("iml_inicio");
 				$("#" + t).html("<img src='imagens/diogo2/iml/i1.png' />");
@@ -257,9 +484,9 @@ function MontarTabuleiro(){
 				$("#" + t).addClass("iml_fim");
 				$("#" + t).html("<img src='imagens/diogo2/iml/i2.png' />");
 			} else 	if (vetor[i][j] == "AL") {
-				$("#" + t).addClass("alagamento");
+				$("#" + t).html("<div class='objetos alagamento'><img src='imagens/diogo/alagamento_6.png'></div>");
 			} else 	if (vetor[i][j] == "E") {
-				$("#" + t).addClass("escombro");
+				$("#" + t).html("<div class='objetos escombro'><img src='imagens/diogo/escombros2.png'></div>");
 			}
 		}
 	}
@@ -268,10 +495,10 @@ function MontarTabuleiro(){
 		if (key > 0) {
 			var t = "td_espaco_" + value.Y + "_" + value.X;
 			if (value.tipo == "R") {
-				$("#" + t).html("<img class='img_robo' src='imagens/robos/e-ric-icon.png'/>");
+				$("#" + t).html($("#" + t).html() + getHtmlRoboResgate());
 			}
 			if (value.tipo == "F") {
-				$("#" + t).html("<img class='img_robo' src='imagens/robos/robo_bala.png'/>");
+				$("#" + t).html($("#" + t).html() + getHtmlRoboForca());
 			}
 			$("#" + t).addClass("robo_" + key);
 		}
@@ -282,31 +509,19 @@ function MontarTabuleiro(){
 			var t = "td_espaco_" + value.Y + "_" + value.X;
 			$("#" + t).addClass("pessoa_" + key);
 			if (value.tipo == "S") {
-				$("#" + t).html("<img class='img_pessoa' src='imagens/pessoas/accept-female-user-icon.png'/>");
+				$("#" + t).html($("#" + t).html() + "<div class='objetos pessoas div_img_pessoa_" + key + "'><img class='img_pessoa' src='imagens/pessoas/accept-female-user-icon.png'/></div>");
 			}
 			if (value.tipo == "F") {
-				$("#" + t).html("<img class='img_pessoa' src='imagens/pessoas/female-user-search-icon.png'/>");
+				$("#" + t).html($("#" + t).html() + "<div class='objetos pessoas div_img_pessoa_" + key + "'><img class='img_pessoa' src='imagens/pessoas/female-user-search-icon.png'/></div>");
 			}
 			if (value.tipo == "M") {
-				$("#" + t).html("<img class='img_pessoa' src='imagens/pessoas/remove-female-user-icon.png'/>");
+				$("#" + t).html($("#" + t).html() + "<div class='objetos pessoas div_img_pessoa_" + key + "'><img class='img_pessoa' src='imagens/pessoas/remove-female-user-icon.png'/></div>");
 			}
 		}
 	});
-
-//
-	
-	
-	var i, j, k;
-	for (i = 1; i <= numeroRuas; i++) {
-
-	}
-
 }
 
 function montarProlog() {
-	//vetor
-
-
 	texto = "";
 	ruas_sujas = [];
 
@@ -548,8 +763,7 @@ function montarProlog() {
 
 //	given(tsunami,local(escombro, rua1)).
 */
-	console.log(texto);
-
+	console.info(texto);
 }
 
 function adicionarTexto(txt, rua) {
@@ -599,12 +813,12 @@ function solucao(indice) {
 				str = str.replace(").", "");
 				var parametros = str.split(",");
 				var nroRua = parametros[1].replace("rua", "");
-				for (i = 0; i < numeroRuas; i++) {
-					for (j = 0; j < numeroRuas; j++) {
+				for (i = 0; i < nroLinhas; i++) {
+					for (j = 0; j < nroColunas; j++) {
 						if (ruas[i][j] == nroRua) {
 							var t = "td_espaco_" + i + "_" + j;
-							$("#" + t).removeClass("alagamento");
-							$("#" + t).removeClass("escombro");
+							$("#" + t + " .alagamento").remove();
+							$("#" + t + " .escombro").remove();
 						}
 					}
 				}
@@ -614,11 +828,12 @@ function solucao(indice) {
 				str = str.replace(").", "");
 				var parametros = str.split(",");
 				var nroRua = parametros[1].replace("rua", "");
-				for (i = 0; i < numeroRuas; i++) {
-					for (j = 0; j < numeroRuas; j++) {
+				for (i = 0; i < nroLinhas; i++) {
+					for (j = 0; j < nroColunas; j++) {
 						if (ruas[i][j] == nroRua) {
 							var t = "td_espaco_" + i + "_" + j;
-							$("#" + t).removeClass("escombro");
+						//	$("#" + t).removeClass("escombro");
+							$("#" + t + " .escombro").remove();
 						}
 					}
 				}
@@ -628,11 +843,12 @@ function solucao(indice) {
 				str = str.replace(").", "");
 				var parametros = str.split(",");
 				var nroRua = parametros[1].replace("rua", "");
-				for (i = 0; i < numeroRuas; i++) {
-					for (j = 0; j < numeroRuas; j++) {
+				for (i = 0; i < nroLinhas; i++) {
+					for (j = 0; j < nroColunas; j++) {
 						if (ruas[i][j] == nroRua) {
 							var t = "td_espaco_" + i + "_" + j;
-							$("#" + t).removeClass("alagamento");
+							//$("#" + t).removeClass("alagamento");
+							$("#" + t + " .alagamento").remove();
 						}
 					}
 				}
@@ -644,16 +860,18 @@ function solucao(indice) {
 				var nroRobo = parametros[0].replace("robo", "");
 				var nroRua = parametros[1].replace("rua", "");
 
-				$(".robo_" + nroRobo + " > .img_robo").hide();
-				$(".robo_" + nroRobo).removeClass("robo_" + nroRobo);
+				//$(".robo_" + nroRobo + " > .img_robo").hide();
+				//$(".robo_" + nroRobo + " .robo_forca").remove();
+				//$(".robo_" + nroRobo).removeClass("robo_" + nroRobo);
+				removerRoboForca(nroRobo);
 
 				var primeiro = true;
-				for (i = 0; i < numeroRuas; i++) {
-					for (j = 0; j < numeroRuas; j++) {
+				for (i = 0; i < nroLinhas; i++) {
+					for (j = 0; j < nroColunas; j++) {
 						if (ruas[i][j] == nroRua) {
 							var t = "td_espaco_" + i + "_" + j;
 							if (primeiro) {
-								$("#" + t).html($("#" + t).html() + "<img class='img_robo' src='imagens/robos/robo_bala.png'/>");
+								$("#" + t).html($("#" + t).html() + getHtmlRoboForca());
 								$("#" + t).addClass("robo_" + nroRobo);
 								primeiro = false;
 							}
@@ -668,16 +886,21 @@ function solucao(indice) {
 				var nroRobo = parametros[0].replace("robo", "");
 				var nroRua = parametros[1].replace("rua", "");
 
-				$(".robo_" + nroRobo + " > .img_robo").hide();
-				$(".robo_" + nroRobo).removeClass("robo_" + nroRobo);
 
+//				$(".robo_" + nroRobo + " > .img_robo").hide();
+//				$(".robo_" + nroRobo + " .robo_resgate").remove();
+//				$(".robo_" + nroRobo).removeClass("robo_" + nroRobo);
+				
+				console.log(nroRua);
+				console.log(nroRobo);
+				removerRoboResgate(nroRobo);
 				var primeiro = true;
-				for (i = 0; i < numeroRuas; i++) {
-					for (j = 0; j < numeroRuas; j++) {
+				for (i = 0; i < nroLinhas; i++) {
+					for (j = 0; j < nroColunas; j++) {
 						if (ruas[i][j] == nroRua) {
 							var t = "td_espaco_" + i + "_" + j;
 							if (primeiro) {
-								$("#" + t).html($("#" + t).html() + "<img class='img_robo' src='imagens/robos/e-ric-icon.png'/>");
+								$("#" + t).html($("#" + t).html() + getHtmlRoboResgate());
 								$("#" + t).addClass("robo_" + nroRobo);
 								primeiro = false;
 							}
@@ -693,8 +916,16 @@ function solucao(indice) {
 				var nroRobo = parametros[1].replace("robo", "");
 				var nroRua = parametros[2].replace("rua", "");
 
-				$(".pessoa_" + nroPessoa + " > .img_pessoa").hide();
-				$(".pessoa_" + nroPessoa).removeClass("pessoa_" + nroPessoa);
+				//$(".pessoa_" + nroPessoa + " > .img_pessoa").hide();
+
+
+				//$(".robo_" + nroRobo + " .robo_resgate").remove();
+				//$(".robo_" + nroRobo).removeClass("robo_" + nroRobo);
+
+
+				//$(".div_img_pessoa_" + nroPessoa).remove();
+				//$(".pessoa_" + nroPessoa).removeClass("pessoa_" + nroPessoa);
+				removerPessoa(nroPessoa);
 			} else if (value.indexOf("salvar_vitima_morta(") != -1) {
 				var str = value.replace("salvar_vitima_morta(", "");
 				str = str.replace(");", "");
@@ -704,8 +935,10 @@ function solucao(indice) {
 				var nroRobo = parametros[1].replace("robo", "");
 				var nroRua = parametros[2].replace("rua", "");
 
-				$(".pessoa_" + nroPessoa + " > .img_pessoa").hide();
-				$(".pessoa_" + nroPessoa).removeClass("pessoa_" + nroPessoa);
+//				$(".pessoa_" + nroPessoa + " > .img_pessoa").hide();
+				//$(".pessoa_" + nroPessoa).removeClass("pessoa_" + nroPessoa);
+				//$(".div_img_pessoa_" + nroPessoa).remove();
+				removerPessoa(nroPessoa);
 			} else if (value.indexOf("salvar_vitima_ferida(") != -1) {
 				var str = value.replace("salvar_vitima_ferida(", "");
 				str = str.replace(");", "");
@@ -715,20 +948,15 @@ function solucao(indice) {
 				var nroRobo = parametros[1].replace("robo", "");
 				var nroRua = parametros[2].replace("rua", "");
 
-				$(".pessoa_" + nroPessoa + " > .img_pessoa").hide();
-				$(".pessoa_" + nroPessoa).removeClass("pessoa_" + nroPessoa);
+				//$(".pessoa_" + nroPessoa + " > .img_pessoa").hide();
+//				$(".pessoa_" + nroPessoa).removeClass("pessoa_" + nroPessoa);
+//				$(".div_img_pessoa_" + nroPessoa).remove();
+				removerPessoa(nroPessoa);
 			}
 		}
 	});
 	indice += 1;
 	setTimeout(function(){ solucao(indice); },2000);
-
-	/*$.each(ruas, function(key, value) {
-		$.each(value, function(key2, value2) {
-				console.log(ruas[key][value2]);
-
-		});
-	});*/
 }
 
 function sleep(milliseconds) {
@@ -738,4 +966,27 @@ function sleep(milliseconds) {
       break;
     }
   }
+}
+
+function getHtmlRoboResgate() {
+	return "<div class='objetos robos robo_resgate'><img class='img_robo' src='imagens/robos/e-ric-icon.png'/></div>";
+}
+
+function getHtmlRoboForca() {
+	return "<div class='objetos robos robo_forca'><img class='img_robo' src='imagens/robos/robo_bala.png'/></div>";
+}
+
+function removerPessoa(nroPessoa) {
+	$(".pessoa_" + nroPessoa).removeClass("pessoa_" + nroPessoa);
+	$(".div_img_pessoa_" + nroPessoa).remove();
+}
+
+function removerRoboResgate(nroRobo) {
+	$(".robo_" + nroRobo + " .robo_resgate").remove();
+	$(".robo_" + nroRobo).removeClass("robo_" + nroRobo);
+}
+
+function removerRoboForca(nroRobo) {
+	$(".robo_" + nroRobo + " .robo_forca").remove();
+	$(".robo_" + nroRobo).removeClass("robo_" + nroRobo);
 }

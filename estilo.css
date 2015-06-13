@@ -108,7 +108,7 @@ tr {
 }
 
 .alagamento {
-	background-image:url('imagens/diogo/alagamento_6.png'); background-repeat:no-repeat;
+	/*background-image:url('imagens/diogo/alagamento_6.png'); background-repeat:no-repeat;*/
 	/*background-image:url('imagens/alagamento35.png'); background-repeat:no-repeat;*/
 }
 
@@ -134,4 +134,18 @@ tr {
 
 .active {
 	background-color: blue;
+}
+
+.tab_tds {
+	 position: relative !important;
+	 width: 64px !important;
+	 height: 64px !important;
+}
+
+.objetos {
+	position: absolute; 
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
 }

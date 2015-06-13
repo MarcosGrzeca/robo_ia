@@ -32,23 +32,6 @@
 					<br/>
 					<br/>
 					<div class="row">
-						<div class="col-md-8 form-group">
-							<label for="nome">Endereço do servidor</label>
-							<input type="text" placeholder="Endereço o IP do servidor" value="localhost" name="ipServidor" id="ipServidor" class="form-control">
-						</div>
-						<div class="col-md-4 form-group">
-							<label for="portaServidor">Porta</label>
-							<input type="text" name="portaServidor" id="portaServidor" class="form-control" placeholder="Informe o porta do servidor" value="8181">
-						</div>
-					</div>
-					<!--<div class="row">
-						<div class="col-md-12 form-group">
-							<button type="submit" class="btn btn-primary" onclick="conectar(); $(this).attr('disabled', true);" id="testarConexao">Testar conexão</button>
-						</div>
-					</div>
-
-					<br/>-->
-					<div class="row">
 						<div class="col-md-6 form-group">
 							<label for="tamanhoCidade">Tamanho da cidade</label>
 							<select id="tamanhoCidade" class="form-control">
@@ -64,6 +47,8 @@
 								<option value="2">2</option>
 								<option value="3">3</option>
 								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
 							</select>
 						</div>
 						<div class="col-md-3 form-group">
@@ -73,6 +58,8 @@
 								<option value="2">2</option>
 								<option value="3">3</option>
 								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
 							</select>
 						</div>
 					</div>
@@ -96,10 +83,39 @@
 							</select>
 						</div>
 					</div>
+					<div class="row">
+						<div class="col-md-4 form-group">
+							<label for="nroPessoasMortas">Nº de pessoas mortas</label>
+							<select id="nroPessoasMortas" class="form-control">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+							</select>
+						</div>
+						<div class="col-md-4 form-group">
+							<label for="nroPessoasFeridas">Nº de pessoas feridas</label>
+							<select id="nroPessoasFeridas" class="form-control">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+							</select>
+						</div>
+						<div class="col-md-4 form-group">
+							<label for="nroPessoasSaudaveis">Nº de pessoas saudáveis</label>
+							<select id="nroPessoasSaudaveis" class="form-control">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+							</select>
+						</div>
+					</div>
 					<br/>
 					<div class="row">
 						<div class="col-md-12 form-group">
-							<button type="submit" class="btn btn-success" onclick="iniciarPlanejamento(); $(this).attr('disabled', true);" id="iniciarPlanejamento">Efetuar planejamento</button>
+							<button type="submit" class="btn btn-success" onclick="iniciarPlanejamento();" id="iniciarPlanejamento">Efetuar planejamento</button>
 						</div>
 					</div>
 					<div id="erroConexao" class="alert bg-danger hide" style="color:#000"></div>
@@ -125,10 +141,10 @@
 </body>
 <script type="text/javascript">
 	$(document).ready(function() {
-		inicializarVetor();
+/*		inicializarVetor();
 		conexaoBemSucedida();
 		MontarTabuleiro();
-		montarProlog();
+		montarProlog();*/
 	});
 </script>
 </html>
