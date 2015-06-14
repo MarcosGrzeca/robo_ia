@@ -68,8 +68,10 @@ function popularRobosPessoas() {
 			coluna = Math.floor((Math.random() * nroColunas) + 1);
 
 			if (ruas[linha][coluna] > 0) {
-	 			vetor[linha][coluna] = "AL";
-	 			achou = true;
+				if (vetor[linha][coluna] != "AL") {
+	 	 			vetor[linha][coluna] = "AL";
+		 			achou = true;
+		 		}
 			}
 		}
 	}
@@ -82,8 +84,10 @@ function popularRobosPessoas() {
 			coluna = Math.floor((Math.random() * nroColunas) + 1);
 
 			if (ruas[linha][coluna] >0) {
-				vetor[linha][coluna] = "E";
-	 			achou = true;
+				if (vetor[linha][coluna] != "E") {
+					vetor[linha][coluna] = "E";
+		 			achou = true;
+		 		}
 			}
 		}
 	}
@@ -469,6 +473,211 @@ function inicializarVetor() {
 		vetor[8][8] = "C";
 		vetor[8][11] = "C";
 		vetor[8][12] = "C";
+	} else if (cidadeAtual == "G") {
+
+		nroLinhas = 10;
+		nroColunas = 15;
+		numeroRuas = 11
+	
+
+		for (i = 0; i < nroLinhas; i++) {
+			vetor[i] = [];
+			for (j = 0; j < nroColunas; j++) {
+				vetor[i][j] = "R";
+			}	
+		}
+
+		for (i = 0; i < 20; i++) {
+			ruas[i] = [];
+			for (j = 0; j < 20; j++) {
+				ruas[i][j] = 0;
+			}
+		}
+
+
+		ruas[2][0] = 1;
+		ruas[2][1] = 1;
+		ruas[2][2] = 1;
+		ruas[2][3] = 1;
+		ruas[2][4] = 1;
+		ruas[2][5] = 1;
+		ruas[2][6] = 1;
+		ruas[2][7] = 1;
+		ruas[2][8] = 1;
+		ruas[2][9] = 1;
+		ruas[2][10] = 1;
+		ruas[2][11] = 1;
+		ruas[2][12] = 1;
+		ruas[2][13] = 1;
+		ruas[2][14] = 1;
+
+		
+		ruas[5][0] = 2;
+		ruas[5][1] = 2;
+		ruas[5][2] = 2;
+		ruas[5][3] = 2;
+		ruas[5][4] = 2;
+		ruas[5][5] = 2;
+		ruas[5][6] = 2;
+		ruas[5][7] = 2;
+		ruas[5][8] = 2;
+		ruas[5][9] = 2;
+		ruas[5][10] = 2;
+		ruas[5][11] = 2;
+		ruas[5][12] = 2;
+		ruas[5][13] = 2;
+
+
+		ruas[9][0] = 3;
+		ruas[9][1] = 3;
+		ruas[9][2] = 3;
+		ruas[9][3] = 3;
+		ruas[9][4] = 3;
+		ruas[9][5] = 3;
+		ruas[9][6] = 3;
+		ruas[9][7] = 3;
+
+
+		ruas[6][7] = 4;
+		ruas[7][7] = 4;
+		ruas[8][7] = 4;
+
+		ruas[7][8] = 5;
+		ruas[7][9] = 5;
+		ruas[7][10] = 5;
+		ruas[7][11] = 5;
+		ruas[7][12] = 5;
+		ruas[7][13] = 5;
+		ruas[7][14] = 5;
+
+		ruas[0][3] = 6;
+		ruas[1][3] = 6;
+		ruas[3][3] = 6;
+		ruas[4][3] = 6;
+		ruas[6][3] = 6;
+		ruas[7][3] = 6;
+		ruas[8][3] = 6;
+
+		ruas[6][1] = 7;
+		ruas[7][1] = 7;
+		ruas[8][1] = 7;
+
+
+		ruas[0][6] = 8;
+		ruas[1][6] = 8;
+		ruas[3][6] = 8;
+		ruas[4][6] = 8;
+
+
+		ruas[3][9] = 9;
+		ruas[4][9] = 9;
+
+		ruas[6][12] = 10;
+		ruas[8][12] = 10;
+		ruas[9][12] = 10;
+		ruas[9][13] = 10;
+		ruas[9][14] = 10;
+
+		ruas[0][9] = 11;
+		ruas[0][10] = 11;
+		ruas[0][11] = 11;
+		ruas[0][12] = 11;
+		ruas[1][12] = 11;
+		ruas[3][12] = 11;
+		ruas[4][12] = 11;
+
+		vetor[0][0] = "H";
+		vetor[0][1] = "G";
+		vetor[0][2] = "G";
+		vetor[0][4] = "C";
+		vetor[0][5] = "C";
+		vetor[0][7] = "C";
+		vetor[0][8] = "C";
+		vetor[0][13] = "C";
+		vetor[0][14] = "C";
+
+		vetor[1][0] = "G";
+		vetor[1][1] = "G";
+		vetor[1][2] = "G";
+		vetor[1][4] = "C";
+		vetor[1][5] = "C";
+		vetor[1][7] = "C";
+		vetor[1][8] = "C";
+		vetor[1][9] = "C";
+		vetor[1][10] = "C";
+		vetor[1][11] = "C";
+		vetor[1][13] = "C";
+		vetor[1][14] = "C";
+
+
+		vetor[3][0] = "AB";
+		vetor[3][1] = "G";
+		vetor[3][2] = "C";
+		vetor[3][4] = "C";
+		vetor[3][5] = "C";
+		vetor[3][7] = "C";
+		vetor[3][8] = "C";
+		vetor[3][10] = "C";
+		vetor[3][11] = "C";
+		vetor[3][13] = "C";
+		vetor[3][14] = "C";
+
+
+		vetor[4][0] = "G";
+		vetor[4][1] = "G";
+		vetor[4][2] = "C";
+		vetor[4][4] = "C";
+		vetor[4][5] = "C";
+		vetor[4][7] = "C";
+		vetor[4][8] = "C";
+		vetor[4][10] = "C";
+		vetor[4][11] = "C";
+		vetor[4][13] = "C";
+		vetor[4][14] = "C";
+
+		vetor[5][14] = "C";
+
+
+		vetor[6][0] = "C";
+		vetor[6][2] = "C";
+		vetor[6][4] = "C";
+		vetor[6][5] = "C";
+		vetor[6][6] = "C";
+		vetor[6][8] = "I1";
+		vetor[6][9] = "I2";
+		vetor[6][10] = "C";
+		vetor[6][11] = "C";
+		vetor[6][13] = "C";
+		vetor[6][14] = "C";
+
+
+
+		vetor[7][0] = "C";
+		vetor[7][2] = "C";
+		vetor[7][4] = "C";
+		vetor[7][5] = "C";
+		vetor[7][6] = "C";
+		
+
+		vetor[8][0] = "C";
+		vetor[8][2] = "C";
+		vetor[8][4] = "C";
+		vetor[8][5] = "C";
+		vetor[8][6] = "C";
+		vetor[8][8] = "C";
+		vetor[8][9] = "C";
+		vetor[8][10] = "C";
+		vetor[8][11] = "C";
+		vetor[8][13] = "C";
+		vetor[8][14] = "C";
+
+		vetor[9][8] = "C";
+		vetor[9][9] = "C";
+		vetor[9][10] = "C";
+		vetor[9][11] = "C";
+		
+
+
 	}
 
 	/*
@@ -644,9 +853,9 @@ function montarTabuleiro(){
 				$("#" + t).addClass("iml_fim");
 				$("#" + t).html("<img src='imagens/diogo2/iml/i2.png' />");
 			} else 	if (vetor[i][j] == "AL") {
-				$("#" + t).html("<div class='objetos alagamento'><img src='imagens/diogo/alagamento_6.png'></div>");
+				$("#" + t).html($("#" + t).html() + "<div class='objetos alagamento'><img src='imagens/diogo/alagamento_6.png'></div>");
 			} else 	if (vetor[i][j] == "E") {
-				$("#" + t).html("<div class='objetos escombro'><img src='imagens/diogo/escombros2.png'></div>");
+				$("#" + t).html($("#" + t).html() + "<div class='objetos escombro'><img src='imagens/diogo/escombros2.png'></div>");
 			}
 		}
 	}
