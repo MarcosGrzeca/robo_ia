@@ -156,6 +156,7 @@
 					<div class="row">
 						<div class="col-md-12 form-group">
 							<button type="submit" class="btn btn-success" onclick="iniciarPlanejamento();" id="iniciarPlanejamento">Efetuar planejamento</button>
+							<button type="submit" class="btn btn-default" onclick="importarCidade();">Importar cidade</button>
 						</div>
 					</div>
 					<div id="erroConexao" class="alert bg-danger hide" style="color:#000"></div>
@@ -179,8 +180,9 @@
 			<div class="panel panel-success">
 				<div class="panel-heading" style="text-align:center;">Ações e planejamento</div>
 				<div class="panel-body">
-					<button type="button" class="btn btn-primary" onclick="salvarPlanejamento()">Salvar planejamento</button>
+					<button type="button" class="btn btn-primary" onclick="salvarPlanejamento()">Salvar cidade</button>
 					<button type="button" class="btn btn-default" onclick="exibirCodigoProlog()">Exibir código Prolog</button>
+					<button type="button" class="btn btn-default" onclick="voltarParaConfiguracoes()">Voltar</button>
 					<br/><br/>
 					<div style="overflow:auto; padding:0px;" id="div_resultado">
 					    <table style="vertical-align:top; font-size:12px;" id="tabelaAcoes" class="table_res table table-condensed table-bordered table-striped">
@@ -225,6 +227,9 @@
 	    </div><!-- /.modal-content -->
 	  </div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
+	<form target="_blank" method="post" action="salvar.cidade.php" name="FormAction" id="FormAction">
+		<input type="hidden" value="" name="script" id="script">
+	</form>
 </body>
 <script type="text/javascript">
 	$(document).ready(function() {

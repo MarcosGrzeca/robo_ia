@@ -204,6 +204,8 @@ function inicializarVetor() {
 	//Cidade pequena
 
 
+	$("#div_resultado").css("height", "453px");
+
 
 	if (cidadeAtual == "P") {
 
@@ -226,7 +228,6 @@ function inicializarVetor() {
 			}
 		}
 
-		$("#div_resultado").css("height", "453px");
 	
 
 		ruas[1][2] = 1;
@@ -1380,13 +1381,19 @@ function salvarPlanejamento() {
 	dados.robos = robos;
 	dados.cidade = cidadeAtual;
 
+
 	$.ajax({
 		method: "POST",
   		data: { script: dados},
 	  	url: "salvar.cidade.php"
 	}).done(function( data ) {
+		console.info(data);
+		window.open(data);
 		
   	});
+	/*$("#script").val("{ script: " + dados + "}");
+	$("#FormAction").attr("action", "salvar.cidade.php?script=" +  JSON.stringify(dados));
+	$("#FormAction").submit();*/
 }
 
 function exibirCodigoProlog() {
