@@ -13,7 +13,6 @@ var cidadeAtual = "P";
 function iniciarPlanejamento() {
 	cidadeAtual = $("#tamanhoCidade").val();
 	
-
 	inicializarVetor();
 	popularRobosPessoas();
 	montarTabuleiro();
@@ -23,7 +22,7 @@ function iniciarPlanejamento() {
 	$("#jogo").show();
 
 	montarProlog();
-	comunicarComServidor();	
+	comunicarComServidor();
 }
 
 function popularRobosPessoas() {
@@ -792,6 +791,7 @@ function erroConexao(erro) {
 
 function montarTabuleiro(){	
 	var i;
+	$("#tabuleiro").html("");
 	for (i=0; i<nroLinhas; i++){
 		$("#tabuleiro").append("<tr id='espaco_" + i + "'></tr>");
 		for (j=0; j<nroColunas; j++){
@@ -1434,4 +1434,26 @@ function importarCidade(data) {
 			montarProlog();
 			comunicarComServidor();	
   	});
+}
+
+function exibirFuncaoImportar() {
+	$(".configuracao").hide();
+	$(".espacoUpload").show();
+}
+
+function voltarParaConfiguracoes() {
+	$(".configuracao").show();
+	$(".espacoUpload").hide();
+}
+
+function voltarParaTelaInicial() {
+	vetor = [];
+	ruas = [];
+	texto = "";
+	ruas_sujas = [];
+	robos = [];
+	pessoas = [];
+	solucaoProlog = new Array();
+	$("#telaInicial").show();
+	$("#jogo").hide();
 }
