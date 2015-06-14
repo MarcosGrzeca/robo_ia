@@ -482,6 +482,7 @@ function inicializarVetor() {
 		$("#div_resultado").css("height", "515px");
 
 
+
 		nroLinhas = 10;
 		nroColunas = 15;
 		numeroRuas = 11
@@ -1389,14 +1390,48 @@ function salvarPlanejamento() {
 	}).done(function( data ) {
 		console.info(data);
 		window.open(data);
-		
   	});
-	/*$("#script").val("{ script: " + dados + "}");
-	$("#FormAction").attr("action", "salvar.cidade.php?script=" +  JSON.stringify(dados));
-	$("#FormAction").submit();*/
 }
 
 function exibirCodigoProlog() {
 	$("#codigoProlog").html(texto);
 	$('#modal_codigo').modal('show');
+}
+
+function importarCidade(data) {
+	var nomeArquivo = data.replace('"]', "");
+	nomeArquivo = nomeArquivo.replace('["', "");
+	console.log(nomeArquivo);
+	$.ajax({
+		method: "POST",
+  		data: { arquivo: nomeArquivo},
+	  	url: "processar.cidade.php"
+	}).done(function( data ) {
+		console.info(data);
+			var data = JSON.parse(data);
+			ruas = data.ruas;
+			pessoas = data.pessoas;
+			robos = data.robos;
+			cidadeAtual = data.cidade;
+
+			if (cidadeAtual == "P") {
+				nroLinhas = 9;
+				nroColunas = 8;
+				numeroRuas = 6;
+			} else if (cidadeAtual == "M") {
+				nroLinhas = 9;
+				nroColunas = 13;
+				numeroRuas = 10;
+			} else if (cidadeAtual == "G") {
+				nroLinhas = 10;
+				nroColunas = 15;
+				numeroRuas = 11
+			}
+			inicializarVetor();
+			montarTabuleiro();
+			$("#telaInicial").hide();
+			$("#jogo").show();
+			montarProlog();
+			comunicarComServidor();	
+  	});
 }

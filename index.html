@@ -6,6 +6,7 @@
 
 
 
+	<link href="http://hayageek.github.io/jQuery-Upload-File/uploadfile.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="demo/jquery.tzineClock/jquery.tzineClock.css" />	
 	
 	<link rel="stylesheet" type="text/css" href="ajax-chat/js/jScrollPane/jScrollPane.css" />
@@ -19,6 +20,9 @@
 	<script type="text/javascript" src="js/logica.js"></script>
 	<script type="text/javascript" src="js/socket.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+
+
+	<script src="http://hayageek.github.io/jQuery-Upload-File/jquery.uploadfile.min.js"></script>
 
 	</head>
 <body>
@@ -153,6 +157,7 @@
 						</div>
 					</div>
 					<br/>
+					<div id="fileuploader">Upload</div>
 					<div class="row">
 						<div class="col-md-12 form-group">
 							<button type="submit" class="btn btn-success" onclick="iniciarPlanejamento();" id="iniciarPlanejamento">Efetuar planejamento</button>
@@ -164,7 +169,7 @@
 			</span>
 		</div>
 	</center>
-	<div id="jogo" style="display:none;" class="row">
+	<div id="jogo" style="display:none; margin-left:0px" class="row">
 		<div class="col-md-8 form-group well" style="padding:0px">
 			<table class="tabela" id="tabuleiro">
 			</table>
@@ -237,7 +242,20 @@
 		conexaoBemSucedida();
 		MontarTabuleiro();
 		montarProlog();*/
+
+		$("#fileuploader").uploadFile({
+			url:"upload.php",
+			fileName:"myfile",
+			allowedTypes: "marcos",
+		 	onSuccess:function(files,data,xhr)
+		    {
+		       /*console.log(files);
+		       console.log(data);
+		       console.log(xhr.responseText);
+		       console.log(JSON.stringify(data));*/
+		       importarCidade(data);
+		    }
+		});
 	});
 </script>
 </html>
-	
