@@ -1,7 +1,7 @@
 body {
 	margin:0px !important;
 	padding: 0px !important;
-	background-image:url('imagens/images2.jpg');
+/*	background-image:url('imagens/images2.jpg');*/
 	background-size:100%;
 }
 
@@ -13,11 +13,6 @@ body {
 	height: 100%;
 	border:0px;
 	padding:0px;
-}
-
-
-body {
-	background-color: #CCC !important;
 }
 
 .selecionado{
@@ -46,7 +41,7 @@ body {
 	margin-top:50px;
 	padding:10px;
   border: 2px solid;
-  width: 600px;
+  width: 700px;
   height: 500px;
   border-radius:10px;
 }

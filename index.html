@@ -18,7 +18,7 @@
 	<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
 	<script type="text/javascript" src="js/logica.js"></script>
 	<script type="text/javascript" src="js/socket.js"></script>
-	<script type="text/javascript" src="demo/jquery.tzineClock/jquery.tzineClock.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 
 	</head>
 <body>
@@ -32,7 +32,7 @@
 					<br/>
 					<br/>
 					<div class="row">
-						<div class="col-md-6 form-group">
+						<div class="col-md-4 form-group">
 							<label for="tamanhoCidade">Tamanho da cidade</label>
 							<select id="tamanhoCidade" class="form-control">
 								<option value="P">Pequena</option>
@@ -40,7 +40,9 @@
 								<option value="G">Grande</option>
 							</select>
 						</div>
-						<div class="col-md-3 form-group">
+					</div>
+					<div class="row">
+						<div class="col-md-4 form-group">
 							<label for="nroAlagamentos">Nº alagamentos</label>
 							<select id="nroAlagamentos" class="form-control">
 								<option value="1">1</option>
@@ -49,10 +51,14 @@
 								<option value="4">4</option>
 								<option value="5">5</option>
 								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
 							</select>
 						</div>
-						<div class="col-md-3 form-group">
-							<label for="nroEscombros">Nº de Escombros</label>
+						<div class="col-md-4 form-group">
+							<label for="nroEscombros">Nº de escombros</label>
 							<select id="nroEscombros" class="form-control">
 								<option value="1">1</option>
 								<option value="2">2</option>
@@ -60,6 +66,10 @@
 								<option value="4">4</option>
 								<option value="5">5</option>
 								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
 							</select>
 						</div>
 					</div>
@@ -71,6 +81,12 @@
 								<option value="2">2</option>
 								<option value="3">3</option>
 								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
 							</select>
 						</div>
 						<div class="col-md-4 form-group">
@@ -80,35 +96,59 @@
 								<option value="2">2</option>
 								<option value="3">3</option>
 								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
 							</select>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-4 form-group">
-							<label for="nroPessoasMortas">Nº de pessoas mortas</label>
+							<label for="nroPessoasMortas">Nº de vítimas mortas</label>
 							<select id="nroPessoasMortas" class="form-control">
 								<option value="1">1</option>
 								<option value="2">2</option>
 								<option value="3">3</option>
 								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
 							</select>
 						</div>
 						<div class="col-md-4 form-group">
-							<label for="nroPessoasFeridas">Nº de pessoas feridas</label>
+							<label for="nroPessoasFeridas">Nº de vítimas feridas</label>
 							<select id="nroPessoasFeridas" class="form-control">
 								<option value="1">1</option>
 								<option value="2">2</option>
 								<option value="3">3</option>
 								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
 							</select>
 						</div>
 						<div class="col-md-4 form-group">
-							<label for="nroPessoasSaudaveis">Nº de pessoas saudáveis</label>
+							<label for="nroPessoasSaudaveis">Nº de vítimas desabrigadas</label>
 							<select id="nroPessoasSaudaveis" class="form-control">
 								<option value="1">1</option>
 								<option value="2">2</option>
 								<option value="3">3</option>
 								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
 							</select>
 						</div>
 					</div>
@@ -123,21 +163,47 @@
 			</span>
 		</div>
 	</center>
-	<div id="jogo" style="display:none">
-		<center>
-			<div style="float:left">
-				<table class="tabela" id="tabuleiro">
-				</table>
-			</div>
-			<div style="float:left; width:300px; max-height:450px; overflow:auto;">
-				<table style="width:100%; vertical-align:top; background-color:#DDD; font-size:12px;" id="tabelaAcoes" class="table_res">
+	<div id="jogo" style="display:none;" class="row">
+		<div class="col-md-8 form-group well" style="padding:0px">
+			<table class="tabela" id="tabuleiro">
+			</table>
+		</div>
+		<div class="col-md-4 form-group">
+			<!--<div style="overflow:auto; height:576px; padding:0px;" id="div_resultado">
+				<table style="vertical-align:top; font-size:12px;" id="tabelaAcoes" class="table_res table table-condensed table-bordered table-striped">
 					<tr id="trTabelaAcoes">
-						<th>Ações</th>
+						<th colspan="2" style="text-align:center;">Ações planejadas</th>
 					</tr>
 				</table>
+			</div>-->
+			<div class="panel panel-success">
+				<div class="panel-heading" style="text-align:center;">Ações e planejamento</div>
+				<div class="panel-body">
+					<button type="button" class="btn btn-primary">Salvar planejamento</button>
+					<br/><br/>
+					<div style="overflow:auto; padding:0px;" id="div_resultado">
+					    <table style="vertical-align:top; font-size:12px;" id="tabelaAcoes" class="table_res table table-condensed table-bordered table-striped">
+							<tr id="trTabelaAcoes">
+								<th colspan="2" style="text-align:center;">Ações planejadas</th>
+							</tr>
+						</table>
+					</div>
+			  	</div>
 			</div>
-		</center>
+		</div>
 	</div>
+	<div class="modal fade" id="modal_calculando">
+	  <div class="modal-dialog modal-sm">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h4 class="modal-title">Efetuando planejamento</h4>
+	      </div>
+	      <div class="modal-body">
+	        <p>Por favor aguarde.</p>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
 </body>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -148,3 +214,4 @@
 	});
 </script>
 </html>
+	

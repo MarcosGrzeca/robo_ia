@@ -23,6 +23,7 @@ function iniciarPlanejamento() {
 	$("#jogo").show();
 
 	montarProlog();
+	comunicarComServidor();	
 }
 
 function popularRobosPessoas() {
@@ -225,6 +226,8 @@ function inicializarVetor() {
 			}
 		}
 
+		$("#div_resultado").css("height", "453px");
+	
 
 		ruas[1][2] = 1;
 		ruas[1][3] = 1;
@@ -474,6 +477,9 @@ function inicializarVetor() {
 		vetor[8][11] = "C";
 		vetor[8][12] = "C";
 	} else if (cidadeAtual == "G") {
+
+		$("#div_resultado").css("height", "515px");
+
 
 		nroLinhas = 10;
 		nroColunas = 15;
@@ -1132,7 +1138,7 @@ function montarProlog() {
 
 //	given(tsunami,local(escombro, rua1)).
 */
-	console.info(texto);
+//	console.info(texto);
 }
 
 function adicionarTexto(txt, rua) {
@@ -1143,6 +1149,8 @@ function adicionarTexto(txt, rua) {
 }
 
 function comunicarComServidor() {
+	$('#modal_calculando').modal('show');
+
 	$.ajax({
 		method: "POST",
   		data: { script: texto},
@@ -1150,16 +1158,19 @@ function comunicarComServidor() {
 	}).done(function( data ) {
 		solucaoProlog = data.split('\\n'); 
 		posInicial = 0;
-  		console.log("RETRONO");
-  		//console.log(data);
+  		
 
+
+  		var indice = 1;
 		$.each(solucaoProlog, function(key, value){
 			if ($.trim(value) != "" && value != "tsunami;" && value != '"') {
-				$("#tabelaAcoes").append("<tr id='res_tr_" + key + "'><td>" + value + "<input type='hidden' id='input_" + key + "' /> </td></tr>");
+				$("#tabelaAcoes").append("<tr id='res_tr_" + key + "'><td>" + indice + "</td><td>" + value + "<input type='hidden' id='input_" + key + "' /> </td></tr>");
+					indice++;
 			}
 		});
 	
-
+	$('#modal_calculando').modal('hide');
+	
   		solucao(0);
     }).fail(function() {
     	alert( "error" );
@@ -1173,8 +1184,8 @@ function solucao(indice) {
 			return null;
 		}
 		if ($.trim(value) != "" && value != "tsunami;" && value != '"') {
-			$(".active").removeClass("active");
-			$("#res_tr_" + key).addClass("active");
+			$(".info").removeClass("info");
+			$("#res_tr_" + key).addClass("info");
 			//$("#input_" + key).focus();
 			console.info(value);		
 			if (value.indexOf("remover_escombro_alamento(") != -1) {
