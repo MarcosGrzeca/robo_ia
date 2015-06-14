@@ -1158,8 +1158,7 @@ function comunicarComServidor() {
 	}).done(function( data ) {
 		solucaoProlog = data.split('\\n'); 
 		posInicial = 0;
-  		
-
+  	
 
   		var indice = 1;
 		$.each(solucaoProlog, function(key, value){
@@ -1372,4 +1371,25 @@ function removerRoboResgate(nroRobo) {
 function removerRoboForca(nroRobo) {
 	$(".robo_" + nroRobo + " .robo_forca").remove();
 	$(".robo_" + nroRobo).removeClass("robo_" + nroRobo);
+}
+
+function salvarPlanejamento() {
+	var dados = {};
+	dados.ruas = ruas;
+	dados.pessoas = pessoas;
+	dados.robos = robos;
+	dados.cidade = cidadeAtual;
+
+	$.ajax({
+		method: "POST",
+  		data: { script: dados},
+	  	url: "salvar.cidade.php"
+	}).done(function( data ) {
+		
+  	});
+}
+
+function exibirCodigoProlog() {
+	$("#codigoProlog").html(texto);
+	$('#modal_codigo').modal('show');
 }
