@@ -799,6 +799,9 @@ function montarTabuleiro(){
 			var t = "td_espaco_" + i + "_" + j;
 			var img = "imagens/casas/1433722577_kfm_home2a.jpg";
 			$("#espaco_" + i).append("<td id='" + t+ "' class='tab_tds espaco' ></td>");
+			if (ruas[i][j] > 0) {
+				$("#" + t).addClass("rua_" + ruas[i][j]);
+			}
 		}
 	}
 
@@ -1015,7 +1018,7 @@ function montarProlog() {
 	texto += "imposs(local(Robo, Local) & local(Robo, Local2) & notequal(Local==Local2)).\n";
 
 
-	texto += "can(remover_escombro_alamento(Robo, RU), local(Robo, RU) & robo_forca_bruta(Robo) & rua(RU) & local(escombro, RU) & local(alagamento, RU) ).\n";
+	texto += "can(remover_escombro_alagamento(Robo, RU), local(Robo, RU) & robo_forca_bruta(Robo) & rua(RU) & local(escombro, RU) & local(alagamento, RU) ).\n";
 	texto += "can(remover_escombro(Robo, RU), local(Robo, RU) & robo_forca_bruta(Robo) & rua(RU)& local(escombro, RU)).\n";
 	texto += "can(remover_alagamento(Robo, RU), local(Robo, RU) & robo_forca_bruta(Robo) & rua(RU) & local(alagamento, RU)).\n";
 	texto += "can(salvar_vitima_morta(VIT, RO, RU), local(VIT, RU) & local(RO, RU) & robo_resgate_vida(RO) & rua(RU) & rua_limpa(RU) & vitima_morta(VIT)).\n";
@@ -1026,7 +1029,7 @@ function montarProlog() {
 
 
 
-	texto += "add(rua_limpa(RU), remover_escombro_alamento(_, RU)).\n";
+	texto += "add(rua_limpa(RU), remover_escombro_alagamento(_, RU)).\n";
 	texto += "add(rua_limpa(RU), remover_escombro(_, RU)).\n";
 	texto += "add(rua_limpa(RU), remover_alagamento(_, RU)).\n";
 	texto += "add(vitima_iml(VIT), salvar_vitima_morta(VIT, _, _)).\n";
@@ -1039,8 +1042,8 @@ function montarProlog() {
 	texto += "add(local(RO, Rua), mover_robo_forca(RO, Rua)).\n";
 
 
-	texto += "del(local(alagamento, RU), remover_escombro_alamento(_, RU)).\n";
-	texto += "del(local(escombro, RU), remover_escombro_alamento(_, RU)).\n";
+	texto += "del(local(alagamento, RU), remover_escombro_alagamento(_, RU)).\n";
+	texto += "del(local(escombro, RU), remover_escombro_alagamento(_, RU)).\n";
 	texto += "del(local(escombro, RU), remover_escombro(_, RU)).\n";
 	texto += "del(local(alagamento, RU), remover_alagamento(_, RU)).\n";
 	texto += "del(local(VIT, RU),  salvar_vitima_morta(VIT, _, RU)).\n";
@@ -1189,12 +1192,15 @@ function solucao(indice) {
 			$("#res_tr_" + key).addClass("info");
 			//$("#input_" + key).focus();
 			console.info(value);		
-			if (value.indexOf("remover_escombro_alamento(") != -1) {
-				var str = value.replace("remover_escombro_alamento(", "");
+			if (value.indexOf("remover_escombro_alagamento(") != -1) {
+				var str = value.replace("remover_escombro_alagamento(", "");
 				str = str.replace(");", "");
 				str = str.replace(").", "");
 				var parametros = str.split(",");
 				var nroRua = parametros[1].replace("rua", "");
+
+				//$(".highlight").addClass("highlight");
+				//$(".rua_" + nroRua).addClass("highlight");
 				for (i = 0; i < nroLinhas; i++) {
 					for (j = 0; j < nroColunas; j++) {
 						if (ruas[i][j] == nroRua) {

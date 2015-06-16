@@ -143,4 +143,11 @@ tr {
 	left: 0;
 	right: 0;
 	bottom: 0;
+    opacity: 1;
+}
+
+.highlight {
+    background: rgba(255,0,0,1);
+    color:white;
+    opacity: 0.1;
 }
