@@ -147,7 +147,5 @@ tr {
 }
 
 .highlight {
-    background: rgba(255,0,0,1);
-    color:white;
-    opacity: 0.1;
+    background: rgba(255,0,0,0.2);
 }
