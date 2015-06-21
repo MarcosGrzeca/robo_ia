@@ -483,7 +483,7 @@ function inicializarVetor() {
 
 
 		nroLinhas = 10;
-		nroColunas = 15;
+		nroColunas = 14;
 		numeroRuas = 11
 	
 
@@ -516,7 +516,6 @@ function inicializarVetor() {
 		ruas[2][11] = 1;
 		ruas[2][12] = 1;
 		ruas[2][13] = 1;
-		ruas[2][14] = 1;
 
 		
 		ruas[5][0] = 2;
@@ -555,7 +554,6 @@ function inicializarVetor() {
 		ruas[7][11] = 5;
 		ruas[7][12] = 5;
 		ruas[7][13] = 5;
-		ruas[7][14] = 5;
 
 		ruas[0][3] = 6;
 		ruas[1][3] = 6;
@@ -583,7 +581,6 @@ function inicializarVetor() {
 		ruas[8][12] = 10;
 		ruas[9][12] = 10;
 		ruas[9][13] = 10;
-		ruas[9][14] = 10;
 
 		ruas[0][9] = 11;
 		ruas[0][10] = 11;
@@ -601,7 +598,6 @@ function inicializarVetor() {
 		vetor[0][7] = "C";
 		vetor[0][8] = "C";
 		vetor[0][13] = "C";
-		vetor[0][14] = "C";
 
 		vetor[1][0] = "G";
 		vetor[1][1] = "G";
@@ -614,7 +610,6 @@ function inicializarVetor() {
 		vetor[1][10] = "C";
 		vetor[1][11] = "C";
 		vetor[1][13] = "C";
-		vetor[1][14] = "C";
 
 
 		vetor[3][0] = "AB";
@@ -627,7 +622,6 @@ function inicializarVetor() {
 		vetor[3][10] = "C";
 		vetor[3][11] = "C";
 		vetor[3][13] = "C";
-		vetor[3][14] = "C";
 
 
 		vetor[4][0] = "G";
@@ -640,9 +634,8 @@ function inicializarVetor() {
 		vetor[4][10] = "C";
 		vetor[4][11] = "C";
 		vetor[4][13] = "C";
-		vetor[4][14] = "C";
-
-		vetor[5][14] = "C";
+		
+		//vetor[5][14] = "C";
 
 
 		vetor[6][0] = "C";
@@ -655,7 +648,6 @@ function inicializarVetor() {
 		vetor[6][10] = "C";
 		vetor[6][11] = "C";
 		vetor[6][13] = "C";
-		vetor[6][14] = "C";
 
 
 
@@ -676,7 +668,6 @@ function inicializarVetor() {
 		vetor[8][10] = "C";
 		vetor[8][11] = "C";
 		vetor[8][13] = "C";
-		vetor[8][14] = "C";
 
 		vetor[9][8] = "C";
 		vetor[9][9] = "C";
@@ -1199,8 +1190,8 @@ function solucao(indice) {
 				var parametros = str.split(",");
 				var nroRua = parametros[1].replace("rua", "");
 
-				//$(".highlight").addClass("highlight");
-				//$(".rua_" + nroRua).addClass("highlight");
+				$(".highlight").removeClass("highlight");
+				$(".rua_" + nroRua).addClass("highlight");
 				for (i = 0; i < nroLinhas; i++) {
 					for (j = 0; j < nroColunas; j++) {
 						if (ruas[i][j] == nroRua) {
@@ -1216,6 +1207,8 @@ function solucao(indice) {
 				str = str.replace(").", "");
 				var parametros = str.split(",");
 				var nroRua = parametros[1].replace("rua", "");
+				$(".highlight").removeClass("highlight");
+				$(".rua_" + nroRua).addClass("highlight");
 				for (i = 0; i < nroLinhas; i++) {
 					for (j = 0; j < nroColunas; j++) {
 						if (ruas[i][j] == nroRua) {
@@ -1231,6 +1224,8 @@ function solucao(indice) {
 				str = str.replace(").", "");
 				var parametros = str.split(",");
 				var nroRua = parametros[1].replace("rua", "");
+				$(".highlight").removeClass("highlight");
+				$(".rua_" + nroRua).addClass("highlight");
 				for (i = 0; i < nroLinhas; i++) {
 					for (j = 0; j < nroColunas; j++) {
 						if (ruas[i][j] == nroRua) {
@@ -1247,6 +1242,10 @@ function solucao(indice) {
 				var parametros = str.split(",");
 				var nroRobo = parametros[0].replace("robo", "");
 				var nroRua = parametros[1].replace("rua", "");
+
+				$(".highlight").removeClass("highlight");
+				$(".rua_" + nroRua).addClass("highlight");
+				
 
 				//$(".robo_" + nroRobo + " > .img_robo").hide();
 				//$(".robo_" + nroRobo + " .robo_forca").remove();
@@ -1274,7 +1273,9 @@ function solucao(indice) {
 				var nroRobo = parametros[0].replace("robo", "");
 				var nroRua = parametros[1].replace("rua", "");
 
-
+				$(".highlight").removeClass("highlight");
+				$(".rua_" + nroRua).addClass("highlight");
+				
 //				$(".robo_" + nroRobo + " > .img_robo").hide();
 //				$(".robo_" + nroRobo + " .robo_resgate").remove();
 //				$(".robo_" + nroRobo).removeClass("robo_" + nroRobo);
@@ -1303,6 +1304,10 @@ function solucao(indice) {
 				var nroPessoa = parametros[0].replace("pessoa", "");
 				var nroRobo = parametros[1].replace("robo", "");
 				var nroRua = parametros[2].replace("rua", "");
+
+				$(".highlight").removeClass("highlight");
+				$(".rua_" + nroRua).addClass("highlight");
+				
 				removerRoboResgate(nroRobo);
 				var t = "td_espaco_" + pessoas[nroPessoa].Y + "_" + pessoas[nroPessoa].X;
 				$("#" + t).html($("#" + t).html() + getHtmlRoboResgate());
@@ -1318,6 +1323,9 @@ function solucao(indice) {
 				var nroPessoa = parametros[0].replace("pessoa", "");
 				var nroRobo = parametros[1].replace("robo", "");
 				var nroRua = parametros[2].replace("rua", "");
+				$(".highlight").removeClass("highlight");
+				$(".rua_" + nroRua).addClass("highlight");
+				
 				removerRoboResgate(nroRobo);
 				var t = "td_espaco_" + pessoas[nroPessoa].Y + "_" + pessoas[nroPessoa].X;
 				$("#" + t).html($("#" + t).html() + getHtmlRoboResgate());
@@ -1333,6 +1341,9 @@ function solucao(indice) {
 				var nroPessoa = parametros[0].replace("pessoa", "");
 				var nroRobo = parametros[1].replace("robo", "");
 				var nroRua = parametros[2].replace("rua", "");
+				$(".highlight").removeClass("highlight");
+				$(".rua_" + nroRua).addClass("highlight");
+				
 				removerRoboResgate(nroRobo);
 				var t = "td_espaco_" + pessoas[nroPessoa].Y + "_" + pessoas[nroPessoa].X;
 				$("#" + t).html($("#" + t).html() + getHtmlRoboResgate());
