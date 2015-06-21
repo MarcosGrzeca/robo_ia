@@ -36,31 +36,6 @@ function popularRobosPessoas() {
 
 	var i = 1, linha, coluna;
 
-
-	for (i = 1; i <= nroTotalPSaudaveis; i++) {
-		var achou = false;
-		while (achou == false) {
-			linha = Math.floor((Math.random() * nroLinhas) + 1);
-			coluna = Math.floor((Math.random() * nroColunas) + 1);
-
-			if (ruas[linha][coluna] >0) {
-				var jaExiste = false;
-				$.each(pessoas, function(key, value) {
-					if (key > 0) {
-						if (linha == value.Y && coluna == value.X) {
-							jaExiste = true;
-						}
-					}
-				});
-				if (!jaExiste) {
-					adicionarPessoa("S", linha, coluna);
-	 				achou = true;
-	 			}
-			}
-		}
-	}
-
-
 	for (i = 1; i <= nroTotalAlagamentos; i++) {
 		var achou = false;
 		while (achou == false) {
@@ -138,29 +113,6 @@ function popularRobosPessoas() {
 		}
 	}
 
-	for (i = 1; i <= nroTotalPMortas; i++) {
-		var achou = false;
-		while (achou == false) {
-			linha = Math.floor((Math.random() * nroLinhas) + 1);
-			coluna = Math.floor((Math.random() * nroColunas) + 1);
-
-			if (ruas[linha][coluna] >0) {
-				var jaExiste = false;
-				$.each(pessoas, function(key, value) {
-					if (key > 0) {
-						if (linha == value.Y && coluna == value.X) {
-							jaExiste = true;
-						}
-					}
-				});
-				if (!jaExiste) {
-					adicionarPessoa("M", linha, coluna);
-	 				achou = true;
-	 			}
-			}
-		}
-	}
-
 	for (i = 1; i <= nroTotalPFeridas; i++) {
 		var achou = false;
 		while (achou == false) {
@@ -178,6 +130,52 @@ function popularRobosPessoas() {
 				});
 				if (!jaExiste) {
 					adicionarPessoa("F", linha, coluna);
+	 				achou = true;
+	 			}
+			}
+		}
+	}
+
+	for (i = 1; i <= nroTotalPSaudaveis; i++) {
+		var achou = false;
+		while (achou == false) {
+			linha = Math.floor((Math.random() * nroLinhas) + 1);
+			coluna = Math.floor((Math.random() * nroColunas) + 1);
+
+			if (ruas[linha][coluna] >0) {
+				var jaExiste = false;
+				$.each(pessoas, function(key, value) {
+					if (key > 0) {
+						if (linha == value.Y && coluna == value.X) {
+							jaExiste = true;
+						}
+					}
+				});
+				if (!jaExiste) {
+					adicionarPessoa("S", linha, coluna);
+	 				achou = true;
+	 			}
+			}
+		}
+	}
+
+	for (i = 1; i <= nroTotalPMortas; i++) {
+		var achou = false;
+		while (achou == false) {
+			linha = Math.floor((Math.random() * nroLinhas) + 1);
+			coluna = Math.floor((Math.random() * nroColunas) + 1);
+
+			if (ruas[linha][coluna] >0) {
+				var jaExiste = false;
+				$.each(pessoas, function(key, value) {
+					if (key > 0) {
+						if (linha == value.Y && coluna == value.X) {
+							jaExiste = true;
+						}
+					}
+				});
+				if (!jaExiste) {
+					adicionarPessoa("M", linha, coluna);
 	 				achou = true;
 	 			}
 			}
