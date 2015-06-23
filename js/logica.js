@@ -116,9 +116,9 @@ function popularRobosPessoas() {
 		}
 	}
 
-	/*adicionarRobo("F", 4, 4);
-	vetor[1][5] = "E";
-	adicionarRobo("R", 2, 2);
+//	adicionarRobo("F", 3, 6);
+//	vetor[7][4] = "E";
+	/*adicionarRobo("R", 2, 2);
 	adicionarPessoa("F", 1, 7);
 	nroTotalPFeridas = 0;
 	*/
@@ -1648,74 +1648,234 @@ function moverRobo(ini, meio, fim, nroRobo, tipoRobo)  {
 
 	if (ini != meio) {
 
-		if (ini == 1 && meio == 2) {
-			var linhaIntersecao = 1;
-			var colunaIntersecao = 2;
-			var linhaRua = 2;
-			var linhaColuna = 2;
-		} else if (ini == 1 && meio == 5) {
-			var linhaIntersecao = 1;
-			var colunaIntersecao = 6;
-			var linhaRua = 2;
-			var linhaColuna = 6;
-		} else if (ini == 2 && meio == 1) {
-			var linhaIntersecao = 2;
-			var colunaIntersecao = 2;
-			var linhaRua = 1;
-			var linhaColuna = 2;
-		} else if (ini == 2 && meio == 3) {
-			var linhaIntersecao = 4;
-			var colunaIntersecao = 2;
-			var linhaRua = 4;
-			var linhaColuna = 3;
-		} else if (ini == 2 && meio == 4) {
-			var linhaIntersecao = 6;
-			var colunaIntersecao = 2;
-			var linhaRua = 7;
-			var linhaColuna = 2;
-		} else if (ini == 3 && meio == 2) {
-			var linhaIntersecao = 4;
-			var colunaIntersecao = 3;
-			var linhaRua = 4;
-			var linhaColuna = 2;
-		} else if (ini == 3 && meio == 5) {
-			var linhaIntersecao = 4;
-			var colunaIntersecao = 5;
-			var linhaRua = 4;
-			var linhaColuna = 6;
-		} else if (ini == 4 && meio == 2) {
-			var linhaIntersecao = 7;
-			var colunaIntersecao = 3;
-			var linhaRua = 7;
-			var linhaColuna = 2;
-		} else if (ini == 4 && meio == 5) {
-			var linhaIntersecao = 7;
-			var colunaIntersecao = 6;
-			var linhaRua = 6;
-			var linhaColuna = 6;
-		} else if (ini == 5 && meio == 1) {
-			var linhaIntersecao = 2;
-			var colunaIntersecao = 6;
-			var linhaRua = 1;
-			var linhaColuna = 6;
-		} else if (ini == 5 && meio == 3) {
-			var linhaIntersecao = 4;
-			var colunaIntersecao = 6;
-			var linhaRua = 4;
-			var linhaColuna = 5;
-		} else if (ini == 5 && meio == 4) {
-			var linhaIntersecao = 6;
-			var colunaIntersecao = 6;
-			var linhaRua = 7;
-			var linhaColuna = 6;
+		if (cidadeAtual == "P") {
+			if (ini == 1 && meio == 2) {
+				var linhaIntersecao = 1;
+				var colunaIntersecao = 2;
+				var linhaRua = 2;
+				var linhaColuna = 2;
+			} else if (ini == 1 && meio == 5) {
+				var linhaIntersecao = 1;
+				var colunaIntersecao = 6;
+				var linhaRua = 2;
+				var linhaColuna = 6;
+			} else if (ini == 2 && meio == 1) {
+				var linhaIntersecao = 2;
+				var colunaIntersecao = 2;
+				var linhaRua = 1;
+				var linhaColuna = 2;
+			} else if (ini == 2 && meio == 3) {
+				var linhaIntersecao = 4;
+				var colunaIntersecao = 2;
+				var linhaRua = 4;
+				var linhaColuna = 3;
+			} else if (ini == 2 && meio == 4) {
+				var linhaIntersecao = 6;
+				var colunaIntersecao = 2;
+				var linhaRua = 7;
+				var linhaColuna = 2;
+			} else if (ini == 3 && meio == 2) {
+				var linhaIntersecao = 4;
+				var colunaIntersecao = 3;
+				var linhaRua = 4;
+				var linhaColuna = 2;
+			} else if (ini == 3 && meio == 5) {
+				var linhaIntersecao = 4;
+				var colunaIntersecao = 5;
+				var linhaRua = 4;
+				var linhaColuna = 6;
+			} else if (ini == 4 && meio == 2) {
+				var linhaIntersecao = 7;
+				var colunaIntersecao = 3;
+				var linhaRua = 7;
+				var linhaColuna = 2;
+			} else if (ini == 4 && meio == 5) {
+				var linhaIntersecao = 7;
+				var colunaIntersecao = 6;
+				var linhaRua = 6;
+				var linhaColuna = 6;
+			} else if (ini == 5 && meio == 1) {
+				var linhaIntersecao = 2;
+				var colunaIntersecao = 6;
+				var linhaRua = 1;
+				var linhaColuna = 6;
+			} else if (ini == 5 && meio == 3) {
+				var linhaIntersecao = 4;
+				var colunaIntersecao = 6;
+				var linhaRua = 4;
+				var linhaColuna = 5;
+			} else if (ini == 5 && meio == 4) {
+				var linhaIntersecao = 6;
+				var colunaIntersecao = 6;
+				var linhaRua = 7;
+				var linhaColuna = 6;
+			}
+		} else {
+			if (ini == 1 && meio == 2) {
+				var linhaIntersecao = 6;
+				var colunaIntersecao = 0;
+				var linhaRua = 7;
+				var linhaColuna = 0;
+			} else if (ini == 1 && meio == 3) {
+				var linhaIntersecao = 3;
+				var colunaIntersecao = 2;
+				var linhaRua = 2;
+				var linhaColuna = 2;
+			} else if (ini == 1 && meio == 4) {
+				var linhaIntersecao = 3;
+				var colunaIntersecao = 2;
+				var linhaRua = 4;
+				var linhaColuna = 2;
+			} else if (ini == 1 && meio == 5 && fim == 8) {
+				var linhaIntersecao = 3;
+				var colunaIntersecao = 5;
+				var linhaRua = 2;
+				var linhaColuna = 5;
+			} else if (ini == 1 && meio == 5) {
+				var linhaIntersecao = 3;
+				var colunaIntersecao = 5;
+				var linhaRua = 4;
+				var linhaColuna = 5;
+			} else if (ini == 1 && meio == 6) {
+				var linhaIntersecao = 3;
+				var colunaIntersecao = 9;
+				var linhaRua = 4;
+				var linhaColuna = 9;
+			} else if (ini == 1 && meio == 9) {
+				var linhaIntersecao = 3;
+				var colunaIntersecao = 8;
+				var linhaRua = 2;
+				var linhaColuna = 8;
+			} else if (ini == 1 && meio == 10) {
+				var linhaIntersecao = 3;
+				var colunaIntersecao = 11;
+				var linhaRua = 2;
+				var linhaColuna = 11;
+			} else if (ini == 2 && meio == 1) {
+				var linhaIntersecao = 7;
+				var colunaIntersecao = 0;
+				var linhaRua = 6;
+				var linhaColuna = 0;
+			} else if (ini == 2 && meio == 4) {
+				var linhaIntersecao = 7;
+				var colunaIntersecao = 2;
+				var linhaRua = 6;
+				var linhaColuna = 2;
+			} else if (ini == 2 && meio == 5) {
+				var linhaIntersecao = 7;
+				var colunaIntersecao = 5;
+				var linhaRua = 6;
+				var linhaColuna = 5;
+			} else if (ini == 2 && meio == 6) {
+				var linhaIntersecao = 7;
+				var colunaIntersecao = 9;
+				var linhaRua = 6;
+				var linhaColuna = 9;
+			} else if (ini == 2 && meio == 7) {
+				var linhaIntersecao = 7;
+				var colunaIntersecao = 9;
+				var linhaRua = 7;
+				var linhaColuna = 10;
+			} else if (ini == 3 && meio == 1) {
+				var linhaIntersecao = 2;
+				var colunaIntersecao = 2;
+				var linhaRua = 3;
+				var linhaColuna = 2;
+			} else if (ini == 4 && meio == 1) {
+				var linhaIntersecao = 4;
+				var colunaIntersecao = 2;
+				var linhaRua = 3;
+				var linhaColuna = 2;
+			} else if (ini == 4 && meio == 2) {
+				var linhaIntersecao = 6;
+				var colunaIntersecao = 2;
+				var linhaRua = 7;
+				var linhaColuna = 2;
+			} else if (ini == 5 && meio == 1) {
+				var linhaIntersecao = 2;
+				var colunaIntersecao = 5;
+				var linhaRua = 3;
+				var linhaColuna = 5;
+			} else if (ini == 5 && meio == 2) {
+				var linhaIntersecao = 6;
+				var colunaIntersecao = 5;
+				var linhaRua = 7;
+				var linhaColuna = 5;
+			} else if (ini == 5 && meio == 8) {
+				var linhaIntersecao = 0;
+				var colunaIntersecao = 5;
+				var linhaRua = 0;
+				var linhaColuna = 6;
+			} else if (ini == 5 && meio == 9) {
+				var linhaIntersecao = 0;
+				var colunaIntersecao = 8;
+				var linhaRua = 1;
+				var linhaColuna = 8;
+			} else if (ini == 5 && meio == 10) {
+				var linhaIntersecao = 0;
+				var colunaIntersecao = 11;
+				var linhaRua = 1;
+				var linhaColuna = 11;
+			} else if (ini == 6 && meio == 1) {
+				var linhaIntersecao = 4;
+				var colunaIntersecao = 9;
+				var linhaRua = 3;
+				var linhaColuna = 9;
+			} else if (ini == 6 && meio == 2) {
+				var linhaIntersecao = 6;
+				var colunaIntersecao = 9;
+				var linhaRua = 7;
+				var linhaColuna = 9;
+			} else if (ini == 7 && meio == 2) {
+				var linhaIntersecao = 8;
+				var colunaIntersecao = 9;
+				var linhaRua = 7;
+				var linhaColuna = 9;
+			} else if (ini == 8 && meio == 5) {
+				var linhaIntersecao = 0;
+				var colunaIntersecao = 6;
+				var linhaRua = 0;
+				var linhaColuna = 5;
+			} else if (ini == 8 && meio == 9) {
+				var linhaIntersecao = 0;
+				var colunaIntersecao = 8;
+				var linhaRua = 2;
+				var linhaColuna = 8;
+			} else if (ini == 8 && meio == 10) {
+				var linhaIntersecao = 0;
+				var colunaIntersecao = 11;
+				var linhaRua = 1;
+				var linhaColuna = 11;
+			} else if (ini == 9 && meio == 1) {
+				var linhaIntersecao = 2;
+				var colunaIntersecao = 8;
+				var linhaRua = 3;
+				var linhaColuna = 8;
+			} else if (ini == 9 && meio == 8) {
+				var linhaIntersecao = 1;
+				var colunaIntersecao = 8;
+				var linhaRua = 0;
+				var linhaColuna = 8;
+			} else if (ini == 10 && meio == 1) {
+				var linhaIntersecao = 2;
+				var colunaIntersecao = 11;
+				var linhaRua = 3;
+				var linhaColuna = 11;
+			} else if (ini == 10 && meio == 8) {
+				var linhaIntersecao = 1;
+				var colunaIntersecao = 11;
+				var linhaRua = 0;
+				var linhaColuna = 11;
+			}
 		}
 
+		console.log("LINHA ATURAL " + linhaAtual + " LINHa INTERS " + linhaIntersecao);
 		if (linhaAtual < linhaIntersecao) {
 			var continua = true;
 			while (continua) {
 				continua = false;
 				ultimaLinha = ultimaLinha + 1;
-				if (ultimaLinha < 20) {
+				if (ultimaLinha >= 0 && ultimaLinha < 20) {
 					if (ruas[ultimaLinha][ultimaColuna] == ini) {
 						caminho.push(ultimaLinha + "_" + ultimaColuna);
 						continua = true;
@@ -1733,7 +1893,7 @@ function moverRobo(ini, meio, fim, nroRobo, tipoRobo)  {
 			while (continua) {
 				continua = false;
 				ultimaLinha = ultimaLinha - 1;
-				if (ultimaLinha > 0) {
+				if (ultimaLinha >= 0) {
 					if (ruas[ultimaLinha][ultimaColuna] == ini) {
 						caminho.push(ultimaLinha + "_" + ultimaColuna);
 						continua = true;
@@ -1743,7 +1903,7 @@ function moverRobo(ini, meio, fim, nroRobo, tipoRobo)  {
 					}			
 				}
 				if (!continua) {
-					ultimaLinha = ultimaLinha - 1;
+					ultimaLinha = ultimaLinha + 1;
 				}
 			}
 		}
@@ -1753,7 +1913,7 @@ function moverRobo(ini, meio, fim, nroRobo, tipoRobo)  {
 			while (continua) {
 				continua = false;
 				ultimaColuna = ultimaColuna + 1;
-				if (ultimaColuna < 20) {
+				if (ultimaColuna >= 0 && ultimaColuna < 20) {
 					if (ruas[ultimaLinha][ultimaColuna] == ini) {
 						caminho.push(ultimaLinha + "_" + ultimaColuna);
 						continua = true;
@@ -1771,7 +1931,66 @@ function moverRobo(ini, meio, fim, nroRobo, tipoRobo)  {
 			while (continua) {
 				continua = false;
 				ultimaColuna = ultimaColuna - 1;
-				if (ultimaColuna > 0) {
+				if (ultimaColuna >= 0) {
+					if (ruas[ultimaLinha][ultimaColuna] == ini) {
+						caminho.push(ultimaLinha + "_" + ultimaColuna);
+						continua = true;
+						if (ultimaLinha == linhaIntersecao && ultimaColuna == colunaIntersecao) {
+							break;
+						}
+					}			
+				}
+				if (!continua) {
+					ultimaColuna = ultimaColuna + 1;
+				}
+			}
+		}
+
+
+		if (ultimaLinha < linhaIntersecao) {
+		var continua = true;
+		while (continua) {
+			continua = false;
+			ultimaLinha = ultimaLinha + 1;
+			if (ultimaLinha >= 0 && ultimaLinha < 20) {
+				if (ruas[ultimaLinha][ultimaColuna] == ini) {
+					caminho.push(ultimaLinha + "_" + ultimaColuna);
+					continua = true;
+					if (ultimaLinha == linhaIntersecao && ultimaColuna == colunaIntersecao) {
+						break;
+					}
+				}			
+			}
+			if (!continua) {
+				ultimaLinha = ultimaLinha - 1;
+			}
+		}
+	} else if (ultimaLinha > linhaIntersecao) {
+		var continua = true;
+		while (continua) {
+			continua = false;
+			ultimaLinha = ultimaLinha - 1;
+			if (ultimaLinha >= 0) {
+				if (ruas[ultimaLinha][ultimaColuna] == ini) {
+					caminho.push(ultimaLinha + "_" + ultimaColuna);
+					continua = true;
+					if (ultimaLinha == linhaIntersecao && ultimaColuna == colunaIntersecao) {
+						break;
+					}
+				}			
+			}
+			if (!continua) {
+				ultimaLinha = ultimaLinha + 1;
+			}
+		}
+	}
+
+		if (ultimaColuna < colunaIntersecao) {
+			var continua = true;
+			while (continua) {
+				continua = false;
+				ultimaColuna = ultimaColuna + 1;
+				if (ultimaColuna >= 0 && ultimaColuna < 20) {
 					if (ruas[ultimaLinha][ultimaColuna] == ini) {
 						caminho.push(ultimaLinha + "_" + ultimaColuna);
 						continua = true;
@@ -1784,6 +2003,24 @@ function moverRobo(ini, meio, fim, nroRobo, tipoRobo)  {
 					ultimaColuna = ultimaColuna - 1;
 				}
 			}
+		} else if (ultimaColuna > colunaIntersecao) {
+			var continua = true;
+			while (continua) {
+				continua = false;
+				ultimaColuna = ultimaColuna - 1;
+				if (ultimaColuna >= 0) {
+					if (ruas[ultimaLinha][ultimaColuna] == ini) {
+						caminho.push(ultimaLinha + "_" + ultimaColuna);
+						continua = true;
+						if (ultimaLinha == linhaIntersecao && ultimaColuna == colunaIntersecao) {
+							break;
+						}
+					}			
+				}
+				if (!continua) {
+					ultimaColuna = ultimaColuna + 1;
+				}
+			}
 		}
 		caminho.push(linhaRua + "_" + linhaColuna);
 		ultimaLinha  = linhaRua;
@@ -1794,66 +2031,220 @@ function moverRobo(ini, meio, fim, nroRobo, tipoRobo)  {
 		console.log(caminho);
 	}
 
-	if (ini == 1 && fim == 2) {
-		var linhaIntersecao = 1;
-		var colunaIntersecao = 2;
-		var linhaRua = 2;
-		var linhaColuna = 2;
-	} else if (ini == 1 && fim == 5) {
-		var linhaIntersecao = 1;
-		var colunaIntersecao = 6;
-		var linhaRua = 2;
-		var linhaColuna = 6;
-	} else if (ini == 2 && fim == 1) {
-		var linhaIntersecao = 2;
-		var colunaIntersecao = 2;
-		var linhaRua = 1;
-		var linhaColuna = 2;
-	} else if (ini == 2 && fim == 3) {
-		var linhaIntersecao = 4;
-		var colunaIntersecao = 2;
-		var linhaRua = 4;
-		var linhaColuna = 3;
-	} else if (ini == 2 && fim == 4) {
-		var linhaIntersecao = 6;
-		var colunaIntersecao = 2;
-		var linhaRua = 7;
-		var linhaColuna = 2;
-	} else if (ini == 3 && fim == 2) {
-		var linhaIntersecao = 4;
-		var colunaIntersecao = 3;
-		var linhaRua = 4;
-		var linhaColuna = 2;
-	} else if (ini == 3 && fim == 5) {
-		var linhaIntersecao = 4;
-		var colunaIntersecao = 5;
-		var linhaRua = 4;
-		var linhaColuna = 6;
-	} else if (ini == 4 && fim == 2) {
-		var linhaIntersecao = 7;
-		var colunaIntersecao = 3;
-		var linhaRua = 7;
-		var linhaColuna = 2;
-	} else if (ini == 4 && fim == 5) {
-		var linhaIntersecao = 7;
-		var colunaIntersecao = 6;
-		var linhaRua = 6;
-		var linhaColuna = 6;
-	} else if (ini == 5 && fim == 1) {
-		var linhaIntersecao = 2;
-		var colunaIntersecao = 6;
-		var linhaRua = 1;
-		var linhaColuna = 6;
-	} else if (ini == 5 && fim == 3) {
-		var linhaIntersecao = 4;
-		var colunaIntersecao = 6;
-		var linhaRua = 4;
-		var linhaColuna = 5;
-	} else if (ini == 5 && fim == 4) {
-		var linhaIntersecao = 6;
-		var colunaIntersecao = 6;
-		var linhaRua = 7;
-		var linhaColuna = 6;
+	if (cidadeAtual == "P") {
+		if (ini == 1 && fim == 2) {
+			var linhaIntersecao = 1;
+			var colunaIntersecao = 2;
+			var linhaRua = 2;
+			var linhaColuna = 2;
+		} else if (ini == 1 && fim == 5) {
+			var linhaIntersecao = 1;
+			var colunaIntersecao = 6;
+			var linhaRua = 2;
+			var linhaColuna = 6;
+		} else if (ini == 2 && fim == 1) {
+			var linhaIntersecao = 2;
+			var colunaIntersecao = 2;
+			var linhaRua = 1;
+			var linhaColuna = 2;
+		} else if (ini == 2 && fim == 3) {
+			var linhaIntersecao = 4;
+			var colunaIntersecao = 2;
+			var linhaRua = 4;
+			var linhaColuna = 3;
+		} else if (ini == 2 && fim == 4) {
+			var linhaIntersecao = 6;
+			var colunaIntersecao = 2;
+			var linhaRua = 7;
+			var linhaColuna = 2;
+		} else if (ini == 3 && fim == 2) {
+			var linhaIntersecao = 4;
+			var colunaIntersecao = 3;
+			var linhaRua = 4;
+			var linhaColuna = 2;
+		} else if (ini == 3 && fim == 5) {
+			var linhaIntersecao = 4;
+			var colunaIntersecao = 5;
+			var linhaRua = 4;
+			var linhaColuna = 6;
+		} else if (ini == 4 && fim == 2) {
+			var linhaIntersecao = 7;
+			var colunaIntersecao = 3;
+			var linhaRua = 7;
+			var linhaColuna = 2;
+		} else if (ini == 4 && fim == 5) {
+			var linhaIntersecao = 7;
+			var colunaIntersecao = 6;
+			var linhaRua = 6;
+			var linhaColuna = 6;
+		} else if (ini == 5 && fim == 1) {
+			var linhaIntersecao = 2;
+			var colunaIntersecao = 6;
+			var linhaRua = 1;
+			var linhaColuna = 6;
+		} else if (ini == 5 && fim == 3) {
+			var linhaIntersecao = 4;
+			var colunaIntersecao = 6;
+			var linhaRua = 4;
+			var linhaColuna = 5;
+		} else if (ini == 5 && fim == 4) {
+			var linhaIntersecao = 6;
+			var colunaIntersecao = 6;
+			var linhaRua = 7;
+			var linhaColuna = 6;
+		}
+	} else {
+		if (ini == 1 && fim == 2) {
+			var linhaIntersecao = 6;
+			var colunaIntersecao = 0;
+			var linhaRua = 7;
+			var linhaColuna = 0;
+		} else if (ini == 1 && fim == 3) {
+			var linhaIntersecao = 3;
+			var colunaIntersecao = 2;
+			var linhaRua = 2;
+			var linhaColuna = 2;
+		} else if (ini == 1 && fim == 4) {
+			var linhaIntersecao = 3;
+			var colunaIntersecao = 2;
+			var linhaRua = 4;
+			var linhaColuna = 2;
+		} else if (ini == 1 && fim == 5) {
+			var linhaIntersecao = 3;
+			var colunaIntersecao = 5;
+			var linhaRua = 4;
+			var linhaColuna = 5;
+		} else if (ini == 1 && fim == 6) {
+			var linhaIntersecao = 3;
+			var colunaIntersecao = 9;
+			var linhaRua = 4;
+			var linhaColuna = 9;
+		} else if (ini == 1 && fim == 9) {
+			var linhaIntersecao = 3;
+			var colunaIntersecao = 8;
+			var linhaRua = 2;
+			var linhaColuna = 8;
+		} else if (ini == 1 && fim == 10) {
+			var linhaIntersecao = 3;
+			var colunaIntersecao = 11;
+			var linhaRua = 2;
+			var linhaColuna = 11;
+		} else if (ini == 2 && fim == 1) {
+			var linhaIntersecao = 7;
+			var colunaIntersecao = 0;
+			var linhaRua = 6;
+			var linhaColuna = 0;
+		} else if (ini == 2 && fim == 4) {
+			var linhaIntersecao = 7;
+			var colunaIntersecao = 2;
+			var linhaRua = 6;
+			var linhaColuna = 2;
+		} else if (ini == 2 && fim == 5) {
+			var linhaIntersecao = 7;
+			var colunaIntersecao = 5;
+			var linhaRua = 6;
+			var linhaColuna = 5;
+		} else if (ini == 2 && fim == 6) {
+			var linhaIntersecao = 7;
+			var colunaIntersecao = 9;
+			var linhaRua = 6;
+			var linhaColuna = 9;
+		} else if (ini == 2 && fim == 7) {
+			var linhaIntersecao = 7;
+			var colunaIntersecao = 9;
+			var linhaRua = 7;
+			var linhaColuna = 10;
+		} else if (ini == 3 && fim == 1) {
+			var linhaIntersecao = 2;
+			var colunaIntersecao = 2;
+			var linhaRua = 3;
+			var linhaColuna = 2;
+		} else if (ini == 4 && fim == 1) {
+			var linhaIntersecao = 4;
+			var colunaIntersecao = 2;
+			var linhaRua = 3;
+			var linhaColuna = 2;
+		} else if (ini == 4 && fim == 2) {
+			var linhaIntersecao = 6;
+			var colunaIntersecao = 2;
+			var linhaRua = 7;
+			var linhaColuna = 2;
+		} else if (ini == 5 && fim == 1) {
+			var linhaIntersecao = 2;
+			var colunaIntersecao = 5;
+			var linhaRua = 3;
+			var linhaColuna = 5;
+		} else if (ini == 5 && fim == 2) {
+			var linhaIntersecao = 6;
+			var colunaIntersecao = 5;
+			var linhaRua = 7;
+			var linhaColuna = 5;
+		} else if (ini == 5 && fim == 8) {
+			var linhaIntersecao = 0;
+			var colunaIntersecao = 5;
+			var linhaRua = 0;
+			var linhaColuna = 6;
+		} else if (ini == 5 && fim == 9) {
+			var linhaIntersecao = 0;
+			var colunaIntersecao = 8;
+			var linhaRua = 1;
+			var linhaColuna = 8;
+		} else if (ini == 5 && fim == 10) {
+			var linhaIntersecao = 0;
+			var colunaIntersecao = 11;
+			var linhaRua = 1;
+			var linhaColuna = 11;
+		} else if (ini == 6 && fim == 1) {
+			var linhaIntersecao = 4;
+			var colunaIntersecao = 9;
+			var linhaRua = 3;
+			var linhaColuna = 9;
+		} else if (ini == 6 && fim == 2) {
+			var linhaIntersecao = 6;
+			var colunaIntersecao = 9;
+			var linhaRua = 7;
+			var linhaColuna = 9;
+		} else if (ini == 7 && fim == 2) {
+			var linhaIntersecao = 8;
+			var colunaIntersecao = 9;
+			var linhaRua = 7;
+			var linhaColuna = 9;
+		} else if (ini == 8 && fim == 5) {
+			var linhaIntersecao = 0;
+			var colunaIntersecao = 6;
+			var linhaRua = 0;
+			var linhaColuna = 5;
+		} else if (ini == 8 && fim == 9) {
+			var linhaIntersecao = 0;
+			var colunaIntersecao = 8;
+			var linhaRua = 2;
+			var linhaColuna = 8;
+		} else if (ini == 8 && fim == 10) {
+			var linhaIntersecao = 0;
+			var colunaIntersecao = 11;
+			var linhaRua = 1;
+			var linhaColuna = 11;
+		} else if (ini == 9 && fim == 1) {
+			var linhaIntersecao = 2;
+			var colunaIntersecao = 8;
+			var linhaRua = 3;
+			var linhaColuna = 8;
+		} else if (ini == 9 && fim == 8) {
+			var linhaIntersecao = 1;
+			var colunaIntersecao = 8;
+			var linhaRua = 0;
+			var linhaColuna = 8;
+		} else if (ini == 10 && fim == 1) {
+			var linhaIntersecao = 2;
+			var colunaIntersecao = 11;
+			var linhaRua = 3;
+			var linhaColuna = 11;
+		} else if (ini == 10 && fim == 8) {
+			var linhaIntersecao = 1;
+			var colunaIntersecao = 11;
+			var linhaRua = 0;
+			var linhaColuna = 11;
+		}
 	}
 
 	linhaAtual = ultimaLinha;
@@ -1861,12 +2252,13 @@ function moverRobo(ini, meio, fim, nroRobo, tipoRobo)  {
 	
 	console.info("INI " + ini + " FIM" + fim);
 	console.log("LINHA ATU " + linhaAtual + "  COL ATU  " + colunaAtual);	
+	console.log("LINHA IN " + linhaIntersecao + "  COL IN  " + colunaIntersecao);	
 	if (linhaAtual < linhaIntersecao) {
 		var continua = true;
 		while (continua) {
 			continua = false;
 			ultimaLinha = ultimaLinha + 1;
-			if (ultimaLinha < 20) {
+			if (ultimaLinha >= 0 &&  ultimaLinha < 20) {
 				if (ruas[ultimaLinha][ultimaColuna] == ini) {
 					caminho.push(ultimaLinha + "_" + ultimaColuna);
 					continua = true;
@@ -1884,7 +2276,7 @@ function moverRobo(ini, meio, fim, nroRobo, tipoRobo)  {
 		while (continua) {
 			continua = false;
 			ultimaLinha = ultimaLinha - 1;
-			if (ultimaLinha > 0) {
+			if (ultimaLinha >= 0) {
 				if (ruas[ultimaLinha][ultimaColuna] == ini) {
 					caminho.push(ultimaLinha + "_" + ultimaColuna);
 					continua = true;
@@ -1892,9 +2284,11 @@ function moverRobo(ini, meio, fim, nroRobo, tipoRobo)  {
 						break;
 					}
 				}			
+			} else {
+
 			}
 			if (!continua) {
-				ultimaLinha = ultimaLinha - 1;
+				ultimaLinha = ultimaLinha + 1;
 			}
 		}
 	}
@@ -1904,7 +2298,7 @@ function moverRobo(ini, meio, fim, nroRobo, tipoRobo)  {
 		while (continua) {
 			continua = false;
 			ultimaColuna = ultimaColuna + 1;
-			if (ultimaColuna < 20) {
+			if (ultimaColuna >=0 && ultimaColuna < 20) {
 				if (ruas[ultimaLinha][ultimaColuna] == ini) {
 					caminho.push(ultimaLinha + "_" + ultimaColuna);
 					continua = true;
@@ -1922,7 +2316,68 @@ function moverRobo(ini, meio, fim, nroRobo, tipoRobo)  {
 		while (continua) {
 			continua = false;
 			ultimaColuna = ultimaColuna - 1;
-			if (ultimaColuna > 0) {
+			if (ultimaColuna >= 0) {
+				if (ruas[ultimaLinha][ultimaColuna] == ini) {
+					caminho.push(ultimaLinha + "_" + ultimaColuna);
+					continua = true;
+					if (ultimaLinha == linhaIntersecao && ultimaColuna == colunaIntersecao) {
+						break;
+					}
+				}			
+			}
+			if (!continua) {
+				ultimaColuna = ultimaColuna + 1;
+			}
+		}
+	}
+	console.log("CAMINHO ATUUUU");
+	console.dir(caminho);
+	console.info("ULT LINHA " + ultimaLinha + "   LINHA I " + linhaIntersecao);
+	console.info("ULT col " + ultimaColuna + "   Coluna I " + colunaIntersecao);
+	if (ultimaLinha < linhaIntersecao) {
+		var continua = true;
+		while (continua) {
+			continua = false;
+			ultimaLinha = ultimaLinha + 1;
+			if (ultimaLinha >= 0 && ultimaLinha < 20) {
+				if (ruas[ultimaLinha][ultimaColuna] == ini) {
+					caminho.push(ultimaLinha + "_" + ultimaColuna);
+					continua = true;
+					if (ultimaLinha == linhaIntersecao && ultimaColuna == colunaIntersecao) {
+						break;
+					}
+				}			
+			}
+			if (!continua) {
+				ultimaLinha = ultimaLinha - 1;
+			}
+		}
+	} else if (ultimaLinha > linhaIntersecao) {
+		var continua = true;
+		while (continua) {
+			continua = false;
+			ultimaLinha = ultimaLinha - 1;
+			if (ultimaLinha >= 0) {
+				if (ruas[ultimaLinha][ultimaColuna] == ini) {
+					caminho.push(ultimaLinha + "_" + ultimaColuna);
+					continua = true;
+					if (ultimaLinha == linhaIntersecao && ultimaColuna == colunaIntersecao) {
+						break;
+					}
+				}			
+			}
+			if (!continua) {
+				ultimaLinha = ultimaLinha + 1;
+			}
+		}
+	}
+
+	if (ultimaColuna < colunaIntersecao) {
+		var continua = true;
+		while (continua) {
+			continua = false;
+			ultimaColuna = ultimaColuna + 1;
+			if (ultimaColuna >= 0 && ultimaColuna < 20) {
 				if (ruas[ultimaLinha][ultimaColuna] == ini) {
 					caminho.push(ultimaLinha + "_" + ultimaColuna);
 					continua = true;
@@ -1933,6 +2388,24 @@ function moverRobo(ini, meio, fim, nroRobo, tipoRobo)  {
 			}
 			if (!continua) {
 				ultimaColuna = ultimaColuna - 1;
+			}
+		}
+	} else if (ultimaColuna > colunaIntersecao) {
+		var continua = true;
+		while (continua) {
+			continua = false;
+			ultimaColuna = ultimaColuna - 1;
+			if (ultimaColuna >= 0) {
+				if (ruas[ultimaLinha][ultimaColuna] == ini) {
+					caminho.push(ultimaLinha + "_" + ultimaColuna);
+					continua = true;
+					if (ultimaLinha == linhaIntersecao && ultimaColuna == colunaIntersecao) {
+						break;
+					}
+				}			
+			}
+			if (!continua) {
+				ultimaColuna = ultimaColuna + 1;
 			}
 		}
 	}
@@ -2004,7 +2477,7 @@ function moverRoboParaRemoverPessoa(nroRobo, nroPessoa, nroRua, indice) {
 		while (continua) {
 			continua = false;
 			ultimaLinha = ultimaLinha + 1;
-			if (ultimaLinha < 20) {
+			if (ultimaLinha >= 0 && ultimaLinha < 20) {
 				if (ruas[ultimaLinha][ultimaColuna] == nroRua) {
 					caminho.push(ultimaLinha + "_" + ultimaColuna);
 					continua = true;
@@ -2022,7 +2495,7 @@ function moverRoboParaRemoverPessoa(nroRobo, nroPessoa, nroRua, indice) {
 		while (continua) {
 			continua = false;
 			ultimaLinha = ultimaLinha - 1;
-			if (ultimaLinha > 0) {
+			if (ultimaLinha >= 0) {
 				if (ruas[ultimaLinha][ultimaColuna] == nroRua) {
 					caminho.push(ultimaLinha + "_" + ultimaColuna);
 					continua = true;
@@ -2032,7 +2505,7 @@ function moverRoboParaRemoverPessoa(nroRobo, nroPessoa, nroRua, indice) {
 				}			
 			}
 			if (!continua) {
-				ultimaLinha = ultimaLinha - 1;
+				ultimaLinha = ultimaLinha + 1;
 			}
 		}
 	}
@@ -2043,8 +2516,7 @@ function moverRoboParaRemoverPessoa(nroRobo, nroPessoa, nroRua, indice) {
 			continua = false;
 			ultimaColuna = ultimaColuna + 1;
 			console.log(ultimaColuna);
-			if (ultimaColuna < 20) {
-				console.log("AAA " + ruas[ultimaLinha][ultimaColuna] + " --- " + nroRua);
+			if (ultimaColuna >= 0 && ultimaColuna < 20) {
 				if (ruas[ultimaLinha][ultimaColuna] == nroRua) {
 					caminho.push(ultimaLinha + "_" + ultimaColuna);
 					continua = true;
@@ -2063,8 +2535,66 @@ function moverRoboParaRemoverPessoa(nroRobo, nroPessoa, nroRua, indice) {
 			continua = false;
 			console.log(ultimaColuna);
 			ultimaColuna = ultimaColuna - 1;
-			if (ultimaColuna > 0) {
-				console.log("BBB " + ruas[ultimaLinha][ultimaColuna] + " --- " + nroRua);
+			if (ultimaColuna >= 0) {
+				if (ruas[ultimaLinha][ultimaColuna] == nroRua) {
+					caminho.push(ultimaLinha + "_" + ultimaColuna);
+					continua = true;
+					if (ultimaLinha == linhaAtualPessoa && ultimaColuna == colunaAtualPessoa) {
+						break;
+					}
+				}			
+			}
+			if (!continua) {
+				ultimaColuna = ultimaColuna + 1;
+			}
+		}
+	}
+
+	if (ultimaLinha < linhaAtualPessoa) {
+		var continua = true;
+		while (continua) {
+			continua = false;
+			ultimaLinha = ultimaLinha + 1;
+			if (ultimaLinha >= 0 && ultimaLinha < 20) {
+				if (ruas[ultimaLinha][ultimaColuna] == nroRua) {
+					caminho.push(ultimaLinha + "_" + ultimaColuna);
+					continua = true;
+					if (ultimaLinha == linhaAtualPessoa && ultimaColuna == colunaAtualPessoa) {
+						break;
+					}
+				}			
+			}
+			if (!continua) {
+				ultimaLinha = ultimaLinha - 1;
+			}
+		}
+	} else if (ultimaLinha > linhaAtualPessoa) {
+		var continua = true;
+		while (continua) {
+			continua = false;
+			ultimaLinha = ultimaLinha - 1;
+			if (ultimaLinha >= 0) {
+				if (ruas[ultimaLinha][ultimaColuna] == nroRua) {
+					caminho.push(ultimaLinha + "_" + ultimaColuna);
+					continua = true;
+					if (ultimaLinha == linhaAtualPessoa && ultimaColuna == colunaAtualPessoa) {
+						break;
+					}
+				}			
+			}
+			if (!continua) {
+				ultimaLinha = ultimaLinha + 1;
+			}
+		}
+	}
+
+	if (ultimaColuna < colunaAtualPessoa) {
+		var continua = true;
+		while (continua) {
+			continua = false;
+			ultimaColuna = ultimaColuna + 1;
+			console.log(ultimaColuna);
+			if (ultimaColuna >= 0 && ultimaColuna < 20) {
 				if (ruas[ultimaLinha][ultimaColuna] == nroRua) {
 					caminho.push(ultimaLinha + "_" + ultimaColuna);
 					continua = true;
@@ -2075,6 +2605,25 @@ function moverRoboParaRemoverPessoa(nroRobo, nroPessoa, nroRua, indice) {
 			}
 			if (!continua) {
 				ultimaColuna = ultimaColuna - 1;
+			}
+		}
+	} else if (ultimaColuna > colunaAtualPessoa) {
+		var continua = true;
+		while (continua) {
+			continua = false;
+			console.log(ultimaColuna);
+			ultimaColuna = ultimaColuna - 1;
+			if (ultimaColuna >= 0) {
+				if (ruas[ultimaLinha][ultimaColuna] == nroRua) {
+					caminho.push(ultimaLinha + "_" + ultimaColuna);
+					continua = true;
+					if (ultimaLinha == linhaAtualPessoa && ultimaColuna == colunaAtualPessoa) {
+						break;
+					}
+				}			
+			}
+			if (!continua) {
+				ultimaColuna = ultimaColuna + 1;
 			}
 		}
 	}
