@@ -9,6 +9,9 @@ var robos = [];
 var pessoas = [];
 var solucaoProlog = new Array();
 var cidadeAtual = "P";
+var camihoRoboTeste;
+var ultimoKey;
+var pessoaRemover;
 
 function iniciarPlanejamento() {
 	cidadeAtual = $("#tamanhoCidade").val();
@@ -39,8 +42,8 @@ function popularRobosPessoas() {
 	for (i = 1; i <= nroTotalAlagamentos; i++) {
 		var achou = false;
 		while (achou == false) {
-			linha = Math.floor((Math.random() * nroLinhas) + 1);
-			coluna = Math.floor((Math.random() * nroColunas) + 1);
+			linha = Math.floor((Math.random() * nroLinhas) + 0);
+			coluna = Math.floor((Math.random() * nroColunas) + 0);
 
 			if (ruas[linha][coluna] > 0) {
 				if (vetor[linha][coluna] != "AL") {
@@ -55,8 +58,8 @@ function popularRobosPessoas() {
 	for (i = 1; i <= nroTotalEscombros; i++) {
 		var achou = false;
 		while (achou == false) {
-			linha = Math.floor((Math.random() * nroLinhas) + 1);
-			coluna = Math.floor((Math.random() * nroColunas) + 1);
+			linha = Math.floor((Math.random() * nroLinhas) + 0);
+			coluna = Math.floor((Math.random() * nroColunas) + 0);
 
 			if (ruas[linha][coluna] >0) {
 				if (vetor[linha][coluna] != "E") {
@@ -70,8 +73,8 @@ function popularRobosPessoas() {
 	for (i = 1; i <= nroTotalRResgate; i++) {
 		var achou = false;
 		while (achou == false) {
-			linha = Math.floor((Math.random() * nroLinhas) + 1);
-			coluna = Math.floor((Math.random() * nroColunas) + 1);
+			linha = Math.floor((Math.random() * nroLinhas) + 0);
+			coluna = Math.floor((Math.random() * nroColunas) + 0);
 
 			if (ruas[linha][coluna] >0) {
 				var jaExiste = false;
@@ -93,8 +96,8 @@ function popularRobosPessoas() {
 	for (i = 1; i <= nroTotalRForca; i++) {
 		var achou = false;
 		while (achou == false) {
-			linha = Math.floor((Math.random() * nroLinhas) + 1);
-			coluna = Math.floor((Math.random() * nroColunas) + 1);
+			linha = Math.floor((Math.random() * nroLinhas) + 0);
+			coluna = Math.floor((Math.random() * nroColunas) + 0);
 
 			if (ruas[linha][coluna] >0) {
 				var jaExiste = false;
@@ -113,11 +116,17 @@ function popularRobosPessoas() {
 		}
 	}
 
+	/*adicionarRobo("F", 4, 4);
+	vetor[1][5] = "E";
+	adicionarRobo("R", 2, 2);
+	adicionarPessoa("F", 1, 7);
+	nroTotalPFeridas = 0;
+	*/
 	for (i = 1; i <= nroTotalPFeridas; i++) {
 		var achou = false;
 		while (achou == false) {
-			linha = Math.floor((Math.random() * nroLinhas) + 1);
-			coluna = Math.floor((Math.random() * nroColunas) + 1);
+			linha = Math.floor((Math.random() * nroLinhas) + 0);
+			coluna = Math.floor((Math.random() * nroColunas) + 0);
 
 			if (ruas[linha][coluna] >0) {
 				var jaExiste = false;
@@ -139,8 +148,8 @@ function popularRobosPessoas() {
 	for (i = 1; i <= nroTotalPSaudaveis; i++) {
 		var achou = false;
 		while (achou == false) {
-			linha = Math.floor((Math.random() * nroLinhas) + 1);
-			coluna = Math.floor((Math.random() * nroColunas) + 1);
+			linha = Math.floor((Math.random() * nroLinhas) + 0);
+			coluna = Math.floor((Math.random() * nroColunas) + 0);
 
 			if (ruas[linha][coluna] >0) {
 				var jaExiste = false;
@@ -162,8 +171,8 @@ function popularRobosPessoas() {
 	for (i = 1; i <= nroTotalPMortas; i++) {
 		var achou = false;
 		while (achou == false) {
-			linha = Math.floor((Math.random() * nroLinhas) + 1);
-			coluna = Math.floor((Math.random() * nroColunas) + 1);
+			linha = Math.floor((Math.random() * nroLinhas) + 0);
+			coluna = Math.floor((Math.random() * nroColunas) + 0);
 
 			if (ruas[linha][coluna] >0) {
 				var jaExiste = false;
@@ -986,36 +995,127 @@ function montarProlog() {
 	adicionarTexto("always(edificio(iml)).", "S");
 
 
-	texto += "always(connects(rua1, rua2)).\n";
-	texto += "always(connects(rua1, rua3)).\n";
-	texto += "always(connects(rua1, rua4)).\n";
-	texto += "always(connects(rua1, rua5)).\n";
-	texto += "always(connects(rua2, rua7)).\n";
-	texto += "always(connects(rua2, rua8)).\n";
-	texto += "always(connects(rua2, rua9)).\n";
-	texto += "always(connects(rua3, rua7)).\n";
-	texto += "always(connects(rua3, rua9)).\n";
-	texto += "always(connects(rua4, rua6)).\n";
-	texto += "always(connects(rua4, rua7)).\n";
-	texto += "always(connects(rua5, rua6)).\n";
-	texto += "always(connects(rua5, rua7)).\n";
-	texto += "always(connects(rua7, rua8)).\n";
+	if (cidadeAtual == "P") {
+		texto += "always(connects(rua1, rua1)).\n";
+		texto += "always(connects(rua1, rua2)).\n";
+		texto += "always(connects(rua1, rua5)).\n";
+
+		texto += "always(connects(rua2, rua2)).\n";
+		texto += "always(connects(rua2, rua1)).\n";
+		texto += "always(connects(rua2, rua3)).\n";
+		texto += "always(connects(rua2, rua4)).\n";
+
+		texto += "always(connects(rua3, rua3)).\n";
+		texto += "always(connects(rua3, rua2)).\n";
+		texto += "always(connects(rua3, rua5)).\n";
+
+		texto += "always(connects(rua4, rua4)).\n";
+		texto += "always(connects(rua4, rua2)).\n";
+		texto += "always(connects(rua4, rua5)).\n";
+
+		texto += "always(connects(rua5, rua5)).\n";
+		texto += "always(connects(rua5, rua1)).\n";
+		texto += "always(connects(rua5, rua3)).\n";
+		texto += "always(connects(rua5, rua4)).\n";
+
+ 	} else if (cidadeAtual == "M") {
+		texto += "always(connects(rua1, rua1)).\n";
+		texto += "always(connects(rua1, rua2)).\n";
+		texto += "always(connects(rua1, rua3)).\n";
+		texto += "always(connects(rua1, rua4)).\n";
+		texto += "always(connects(rua1, rua5)).\n";
+		texto += "always(connects(rua1, rua6)).\n";
+		texto += "always(connects(rua1, rua9)).\n";
+		texto += "always(connects(rua1, rua10)).\n";
+
+		texto += "always(connects(rua2, rua1)).\n";
+		texto += "always(connects(rua2, rua2)).\n";
+		texto += "always(connects(rua2, rua4)).\n";
+		texto += "always(connects(rua2, rua5)).\n";
+		texto += "always(connects(rua2, rua6)).\n";
+		texto += "always(connects(rua2, rua7)).\n";
+		
+		texto += "always(connects(rua3, rua1)).\n";
+		texto += "always(connects(rua3, rua3)).\n";
+
+		texto += "always(connects(rua4, rua1)).\n";
+		texto += "always(connects(rua4, rua2)).\n";
+		texto += "always(connects(rua4, rua4)).\n";
+
+		texto += "always(connects(rua5, rua1)).\n";
+		texto += "always(connects(rua5, rua2)).\n";
+		texto += "always(connects(rua5, rua5)).\n";
+		texto += "always(connects(rua5, rua8)).\n";
+
+		texto += "always(connects(rua6, rua1)).\n";
+		texto += "always(connects(rua6, rua2)).\n";
+		texto += "always(connects(rua6, rua6)).\n";
+		
+		texto += "always(connects(rua7, rua2)).\n";
+		texto += "always(connects(rua7, rua7)).\n";
+		
+		texto += "always(connects(rua8, rua5)).\n";
+		texto += "always(connects(rua8, rua8)).\n";
+		texto += "always(connects(rua8, rua9)).\n";
+		texto += "always(connects(rua8, rua10)).\n";
+
+		texto += "always(connects(rua9, rua1)).\n";
+		texto += "always(connects(rua9, rua8)).\n";
+		texto += "always(connects(rua9, rua9)).\n";
+		
+		texto += "always(connects(rua10, rua1)).\n";
+		texto += "always(connects(rua10, rua8)).\n";
+		texto += "always(connects(rua10, rua10)).\n";
+	
+		
+	} else {
+		texto += "always(connects(rua1, rua2)).\n";
+		texto += "always(connects(rua1, rua3)).\n";
+		texto += "always(connects(rua1, rua4)).\n";
+		texto += "always(connects(rua1, rua5)).\n";
+		texto += "always(connects(rua2, rua7)).\n";
+		texto += "always(connects(rua2, rua8)).\n";
+		texto += "always(connects(rua2, rua9)).\n";
+		texto += "always(connects(rua3, rua7)).\n";
+		texto += "always(connects(rua3, rua9)).\n";
+		texto += "always(connects(rua4, rua6)).\n";
+		texto += "always(connects(rua4, rua7)).\n";
+		texto += "always(connects(rua5, rua6)).\n";
+		texto += "always(connects(rua5, rua7)).\n";
+		texto += "always(connects(rua7, rua8)).\n";
+	}
 	texto += "imposs(local( X, Y )  &  local( X, Z )  &  notequal( Y, Z )  ).\n";
 	texto += "imposs(rua_limpa(X)  &  local(escombro, X)).\n";
 	texto += "imposs(rua_limpa(X)  &  local(alagamento, X)).\n";
-	texto += "imposs(local(Vit,Local) & local(Vit, Local2) & notequal(Local==Local2)).\n";
-	texto += "imposs(local(Robo, Local) & local(Robo, Local2) & notequal(Local==Local2)).\n";
+	
+	//texto += "imposs(local(Vit,Local) & local(Vit, Local2) & notequal(Local==Local2)).\n";
+	//texto += "imposs(local(Robo, Local) & local(Robo, Local2) & notequal(Local==Local2)).\n";
 
+	if (cidadeAtual == "P" || cidadeAtual == "M") {
+		texto += "can(remover_escombro_alagamento(Robo, RU), robo_forca_bruta(Robo) & rua(RU) & local(escombro, RU) & local(alagamento, RU) & local(Robo, RU)).\n";
+		texto += "can(remover_escombro(Robo, RU),  robo_forca_bruta(Robo) & rua(RU)& local(escombro, RU) & local(Robo, RU)).\n";
+		texto += "can(remover_alagamento(Robo, RU), robo_forca_bruta(Robo) & rua(RU) & local(alagamento, RU) & local(Robo, RU)).\n";
+		texto += "can(salvar_vitima_morta(VIT, RO, RU),    robo_resgate_vida(RO) & vitima_morta(VIT)    & local(VIT, RU) & rua(RU) & rua_limpa(RU) & local(RO, RU)).\n";
+		texto += "can(salvar_vitima_ferida(VIT, RO, RU),   robo_resgate_vida(RO) & vitima_ferida(VIT)   & local(VIT, RU) & rua(RU) & rua_limpa(RU) & local(RO, RU)).\n";
+		texto += "can(salvar_vitima_saudavel(VIT, RO, RU), robo_resgate_vida(RO) & vitima_saudavel(VIT) & local(VIT, RU) & rua(RU) & rua_limpa(RU) & local(RO, RU)).\n";
 
-	texto += "can(remover_escombro_alagamento(Robo, RU), local(Robo, RU) & robo_forca_bruta(Robo) & rua(RU) & local(escombro, RU) & local(alagamento, RU) ).\n";
-	texto += "can(remover_escombro(Robo, RU), local(Robo, RU) & robo_forca_bruta(Robo) & rua(RU)& local(escombro, RU)).\n";
-	texto += "can(remover_alagamento(Robo, RU), local(Robo, RU) & robo_forca_bruta(Robo) & rua(RU) & local(alagamento, RU)).\n";
-	texto += "can(salvar_vitima_morta(VIT, RO, RU), local(VIT, RU) & local(RO, RU) & robo_resgate_vida(RO) & rua(RU) & rua_limpa(RU) & vitima_morta(VIT)).\n";
-	texto += "can(salvar_vitima_ferida(VIT, RO, RU), local(VIT, RU) & local(RO, RU) & robo_resgate_vida(RO) & rua(RU) & rua_limpa(RU) & vitima_ferida(VIT)).\n";
-	texto += "can(salvar_vitima_saudavel(VIT, RO, RU), local(VIT, RU) & local(RO, RU) & robo_resgate_vida(RO) & rua(RU) & rua_limpa(RU) & vitima_saudavel(VIT)).\n";
-	texto += "can(mover_robo_resgate(RO, _), robo_resgate_vida(RO)).\n";
-	texto += "can(mover_robo_forca(RO, _), robo_forca_bruta(RO)).\n";
+		texto += "can(mover_robo_forca(Robo, W, Y, V), robo_forca_bruta(Robo) & local(Robo,V) & connects(V,Y) & connects(Y,W)).\n";
+		texto += "can(mover_robo_resgate(Robo, W, Y, V), robo_resgate_vida(Robo) & local(Robo,V) & connects(V,Y) & connects(Y,W)).\n";
 
+		texto += "can(mover(Robo, W), robo_forca_bruta(Robo) & local(Robo,V) & ! & connects(V,W)).\n";
+		texto += "can(mover(Robo, W), robo_resgate_vida(Robo) & local(Robo,V) & ! & connects(V,W)).\n";
+
+	} else {
+		texto += "can(remover_escombro_alagamento(Robo, RU), local(Robo, RU) & robo_forca_bruta(Robo) & rua(RU) & local(escombro, RU) & local(alagamento, RU) ).\n";
+		texto += "can(remover_escombro(Robo, RU), local(Robo, RU) & robo_forca_bruta(Robo) & rua(RU)& local(escombro, RU)).\n";
+		texto += "can(remover_alagamento(Robo, RU), local(Robo, RU) & robo_forca_bruta(Robo) & rua(RU) & local(alagamento, RU)).\n";
+		texto += "can(salvar_vitima_morta(VIT, RO, RU), local(VIT, RU) & local(RO, RU) & robo_resgate_vida(RO) & rua(RU) & rua_limpa(RU) & vitima_morta(VIT)).\n";
+		texto += "can(salvar_vitima_ferida(VIT, RO, RU), local(VIT, RU) & local(RO, RU) & robo_resgate_vida(RO) & rua(RU) & rua_limpa(RU) & vitima_ferida(VIT)).\n";
+		texto += "can(salvar_vitima_saudavel(VIT, RO, RU), local(VIT, RU) & local(RO, RU) & robo_resgate_vida(RO) & rua(RU) & rua_limpa(RU) & vitima_saudavel(VIT)).\n";
+		
+		texto += "can(mover_robo_resgate(RO, _), robo_resgate_vida(RO)).\n";
+		texto += "can(mover_robo_forca(RO, _), robo_forca_bruta(RO)).\n";
+	}
 
 
 	texto += "add(rua_limpa(RU), remover_escombro_alagamento(_, RU)).\n";
@@ -1027,8 +1127,18 @@ function montarProlog() {
 	texto += "add(sem_vitimas(RU), salvar_vitima_ferida(_, _, RU)).\n";
 	texto += "add(vitima_abrigo(VIT), salvar_vitima_saudavel(VIT, _, _)).\n";
 	texto += "add(sem_vitimas(RU), salvar_vitima_saudavel(_, _, RU)).\n";
-	texto += "add(local(RO, Rua), mover_robo_resgate(RO, Rua)).\n";
-	texto += "add(local(RO, Rua), mover_robo_forca(RO, Rua)).\n";
+
+	if (cidadeAtual == "P" || cidadeAtual == "M") {
+		texto += "add(local(Robo,W), mover_robo_forca(Robo,W, _, _)).\n";
+		texto += "add(local(Robo,W), mover_robo_resgate(Robo,W, _, _)).\n";
+		texto += "add(local(Robo,W), mover(Robo,W)).\n";
+		texto += "del(local(Robo,V),mover_robo_forca(Robo,_, _, V)).\n";
+		texto += "del(local(Robo,V),mover_robo_resgate(Robo,_, _, V)).\n";
+		texto += "del(local(Robo,V),mover(Robo,V)).\n";
+	} else {
+		texto += "add(local(RO, Rua), mover_robo_resgate(RO, Rua)).\n";
+		texto += "add(local(RO, Rua), mover_robo_forca(RO, Rua)).\n";
+	}
 
 
 	texto += "del(local(alagamento, RU), remover_escombro_alagamento(_, RU)).\n";
@@ -1041,8 +1151,13 @@ function montarProlog() {
 	texto += "del(vitima_ferida(VIT), salvar_vitima_ferida(VIT, _, _)).\n";
 	texto += "del(local(VIT, RU),  salvar_vitima_saudavel(VIT, _, RU)).\n";
 	texto += "del(vitima_saudavel(VIT), salvar_vitima_saudavel(VIT, _, _)).\n";
-	texto += "del(local(RO,_), mover_robo_forca(RO,_)).\n";
-	texto += "del(local(RO,_), mover_robo_resgate(RO,_)).\n";
+
+	if (cidadeAtual == "P" || cidadeAtual == "M") {
+	
+	} else {
+		texto += "del(local(RO,_), mover_robo_forca(RO,_)).\n";
+		texto += "del(local(RO,_), mover_robo_resgate(RO,_)).\n";
+	}
 
 
 	var testeFinal = "";
@@ -1238,27 +1353,39 @@ function solucao(indice) {
 				str = str.replace(");", "");
 				str = str.replace(").", "");
 				var parametros = str.split(",");
-				var nroRobo = parametros[0].replace("robo", "");
-				var nroRua = parametros[1].replace("rua", "");
 
-				$(".highlight").removeClass("highlight");
-				$(".rua_" + nroRua).addClass("highlight");
-				
+				if (parametros.length == 4) {
+					
+					var nroRobo = parametros[0].replace("robo", "");
+					var nroRua = parametros[1].replace("rua", "");
+					var nroRuaMeio = parametros[2].replace("rua", "");
+					var nroRuaInicio = parametros[3].replace("rua", "");
+					moverRoboForca(nroRobo, nroRua, nroRuaMeio, nroRuaInicio, (indice + 1));
+					continua = false;
+				} else {
+					var nroRobo = parametros[0].replace("robo", "");
+					var nroRua = parametros[1].replace("rua", "");
 
-				//$(".robo_" + nroRobo + " > .img_robo").hide();
-				//$(".robo_" + nroRobo + " .robo_forca").remove();
-				//$(".robo_" + nroRobo).removeClass("robo_" + nroRobo);
-				removerRoboForca(nroRobo);
 
-				var primeiro = true;
-				for (i = 0; i < nroLinhas; i++) {
-					for (j = 0; j < nroColunas; j++) {
-						if (ruas[i][j] == nroRua) {
-							var t = "td_espaco_" + i + "_" + j;
-							if (primeiro) {
-								$("#" + t).html($("#" + t).html() + getHtmlRoboForca());
-								$("#" + t).addClass("robo_" + nroRobo);
-								primeiro = false;
+					$(".highlight").removeClass("highlight");
+					$(".rua_" + nroRua).addClass("highlight");
+					
+
+					//$(".robo_" + nroRobo + " > .img_robo").hide();
+					//$(".robo_" + nroRobo + " .robo_forca").remove();
+					//$(".robo_" + nroRobo).removeClass("robo_" + nroRobo);
+					removerRoboForca(nroRobo);
+
+					var primeiro = true;
+					for (i = 0; i < nroLinhas; i++) {
+						for (j = 0; j < nroColunas; j++) {
+							if (ruas[i][j] == nroRua) {
+								var t = "td_espaco_" + i + "_" + j;
+								if (primeiro) {
+									$("#" + t).html($("#" + t).html() + getHtmlRoboForca());
+									$("#" + t).addClass("robo_" + nroRobo);
+									primeiro = false;
+								}
 							}
 						}
 					}
@@ -1271,25 +1398,36 @@ function solucao(indice) {
 				var nroRobo = parametros[0].replace("robo", "");
 				var nroRua = parametros[1].replace("rua", "");
 
-				$(".highlight").removeClass("highlight");
-				$(".rua_" + nroRua).addClass("highlight");
-				
-//				$(".robo_" + nroRobo + " > .img_robo").hide();
-//				$(".robo_" + nroRobo + " .robo_resgate").remove();
-//				$(".robo_" + nroRobo).removeClass("robo_" + nroRobo);
-				
-				console.log(nroRua);
-				console.log(nroRobo);
-				removerRoboResgate(nroRobo);
-				var primeiro = true;
-				for (i = 0; i < nroLinhas; i++) {
-					for (j = 0; j < nroColunas; j++) {
-						if (ruas[i][j] == nroRua) {
-							var t = "td_espaco_" + i + "_" + j;
-							if (primeiro) {
-								$("#" + t).html($("#" + t).html() + getHtmlRoboResgate());
-								$("#" + t).addClass("robo_" + nroRobo);
-								primeiro = false;
+				if (parametros.length == 4) {
+					
+					var nroRobo = parametros[0].replace("robo", "");
+					var nroRua = parametros[1].replace("rua", "");
+					var nroRuaMeio = parametros[2].replace("rua", "");
+					var nroRuaInicio = parametros[3].replace("rua", "");
+					moverRoboResgate(nroRobo, nroRua, nroRuaMeio, nroRuaInicio, (indice + 1));
+					continua = false;
+				} else {
+
+					$(".highlight").removeClass("highlight");
+					$(".rua_" + nroRua).addClass("highlight");
+					
+	//				$(".robo_" + nroRobo + " > .img_robo").hide();
+	//				$(".robo_" + nroRobo + " .robo_resgate").remove();
+	//				$(".robo_" + nroRobo).removeClass("robo_" + nroRobo);
+					
+					console.log(nroRua);
+					console.log(nroRobo);
+					removerRoboResgate(nroRobo);
+					var primeiro = true;
+					for (i = 0; i < nroLinhas; i++) {
+						for (j = 0; j < nroColunas; j++) {
+							if (ruas[i][j] == nroRua) {
+								var t = "td_espaco_" + i + "_" + j;
+								if (primeiro) {
+									$("#" + t).html($("#" + t).html() + getHtmlRoboResgate());
+									$("#" + t).addClass("robo_" + nroRobo);
+									primeiro = false;
+								}
 							}
 						}
 					}
@@ -1306,13 +1444,14 @@ function solucao(indice) {
 				$(".highlight").removeClass("highlight");
 				$(".rua_" + nroRua).addClass("highlight");
 				
-				removerRoboResgate(nroRobo);
+				/*removerRoboResgate(nroRobo);
 				var t = "td_espaco_" + pessoas[nroPessoa].Y + "_" + pessoas[nroPessoa].X;
 				$("#" + t).html($("#" + t).html() + getHtmlRoboResgate());
-				$("#" + t).addClass("robo_" + nroRobo);
+				$("#" + t).addClass("robo_" + nroRobo);*/
 				continua = false;
 				var indice3 = indice + 1;
-				setTimeout(function(){ removerPessoa(nroPessoa); solucao(indice3); },2000);
+				//setTimeout(function(){ removerPessoa(nroPessoa); solucao(indice3); },2000);
+				moverRoboParaRemoverPessoa(nroRobo, nroPessoa, nroRua, indice3);
 			} else if (value.indexOf("salvar_vitima_morta(") != -1) {
 				var str = value.replace("salvar_vitima_morta(", "");
 				str = str.replace(");", "");
@@ -1324,13 +1463,14 @@ function solucao(indice) {
 				$(".highlight").removeClass("highlight");
 				$(".rua_" + nroRua).addClass("highlight");
 				
-				removerRoboResgate(nroRobo);
+				/*removerRoboResgate(nroRobo);
 				var t = "td_espaco_" + pessoas[nroPessoa].Y + "_" + pessoas[nroPessoa].X;
 				$("#" + t).html($("#" + t).html() + getHtmlRoboResgate());
-				$("#" + t).addClass("robo_" + nroRobo);
+				$("#" + t).addClass("robo_" + nroRobo);*/
 				continua = false;
 				var indice3 = indice + 1;
-				setTimeout(function(){ removerPessoa(nroPessoa); solucao(indice3); },2000);
+				//setTimeout(function(){ removerPessoa(nroPessoa); solucao(indice3); },2000);
+				moverRoboParaRemoverPessoa(nroRobo, nroPessoa, nroRua, indice3);
 			} else if (value.indexOf("salvar_vitima_ferida(") != -1) {
 				var str = value.replace("salvar_vitima_ferida(", "");
 				str = str.replace(");", "");
@@ -1342,16 +1482,18 @@ function solucao(indice) {
 				$(".highlight").removeClass("highlight");
 				$(".rua_" + nroRua).addClass("highlight");
 				
-				removerRoboResgate(nroRobo);
+				/*removerRoboResgate(nroRobo);
 				var t = "td_espaco_" + pessoas[nroPessoa].Y + "_" + pessoas[nroPessoa].X;
 				$("#" + t).html($("#" + t).html() + getHtmlRoboResgate());
-				$("#" + t).addClass("robo_" + nroRobo);
+				$("#" + t).addClass("robo_" + nroRobo);*/
 				continua = false;
 				var indice3 = indice + 1;
-				setTimeout(function(){ removerPessoa(nroPessoa); solucao(indice3); },2000);
+				//setTimeout(function(){ removerPessoa(nroPessoa); solucao(indice3); },2000);
+				moverRoboParaRemoverPessoa(nroRobo, nroPessoa, nroRua, indice3);
 			}
 		}
 	});
+	ultimoKey = indice;
 	if (continua) {
 		indice += 1;
 		setTimeout(function(){ solucao(indice); },2000);
@@ -1471,4 +1613,478 @@ function voltarParaTelaInicial() {
 	solucaoProlog = new Array();
 	$("#telaInicial").show();
 	$("#jogo").hide();
+}
+
+function moverRoboForca(nroRobo, nroRua, nroRuaMeio, nroRuaInicio, indice) {
+	$(".highlight").removeClass("highlight");
+	
+	var caminhoRobo = [];
+	
+	var i;
+	moverRobo(nroRuaInicio, nroRuaMeio, nroRua, nroRobo, "F");
+}
+
+function moverRoboResgate(nroRobo, nroRua, nroRuaMeio, nroRuaInicio, indice) {
+	$(".highlight").removeClass("highlight");
+	moverRobo(nroRuaInicio, nroRuaMeio, nroRua, nroRobo, "R");
+}
+
+
+function moverRobo(ini, meio, fim, nroRobo, tipoRobo)  {
+	var posicaoAtual = $(".robo_" + nroRobo).attr("id");
+	posicaoAtual = posicaoAtual.replace("td_espaco_", "");
+
+	var posicaoAtual = posicaoAtual.split("_");
+	var linhaAtual = parseInt(posicaoAtual[0]);
+	var colunaAtual = parseInt(posicaoAtual[1]);
+
+
+	var caminho = [];
+	var i, j;
+
+	var ultimaLinha = linhaAtual;
+	var ultimaColuna = colunaAtual;
+
+
+	if (ini != meio) {
+
+		if (ini == 1 && meio == 2) {
+			var linhaIntersecao = 1;
+			var colunaIntersecao = 2;
+			var linhaRua = 2;
+			var linhaColuna = 2;
+		} else if (ini == 1 && meio == 5) {
+			var linhaIntersecao = 1;
+			var colunaIntersecao = 6;
+			var linhaRua = 2;
+			var linhaColuna = 6;
+		} else if (ini == 2 && meio == 1) {
+			var linhaIntersecao = 2;
+			var colunaIntersecao = 2;
+			var linhaRua = 1;
+			var linhaColuna = 2;
+		} else if (ini == 2 && meio == 3) {
+			var linhaIntersecao = 4;
+			var colunaIntersecao = 2;
+			var linhaRua = 4;
+			var linhaColuna = 3;
+		} else if (ini == 2 && meio == 4) {
+			var linhaIntersecao = 6;
+			var colunaIntersecao = 2;
+			var linhaRua = 7;
+			var linhaColuna = 2;
+		} else if (ini == 3 && meio == 2) {
+			var linhaIntersecao = 4;
+			var colunaIntersecao = 3;
+			var linhaRua = 4;
+			var linhaColuna = 2;
+		} else if (ini == 3 && meio == 5) {
+			var linhaIntersecao = 4;
+			var colunaIntersecao = 5;
+			var linhaRua = 4;
+			var linhaColuna = 6;
+		} else if (ini == 4 && meio == 2) {
+			var linhaIntersecao = 7;
+			var colunaIntersecao = 3;
+			var linhaRua = 7;
+			var linhaColuna = 2;
+		} else if (ini == 4 && meio == 5) {
+			var linhaIntersecao = 7;
+			var colunaIntersecao = 6;
+			var linhaRua = 6;
+			var linhaColuna = 6;
+		} else if (ini == 5 && meio == 1) {
+			var linhaIntersecao = 2;
+			var colunaIntersecao = 6;
+			var linhaRua = 1;
+			var linhaColuna = 6;
+		} else if (ini == 5 && meio == 3) {
+			var linhaIntersecao = 4;
+			var colunaIntersecao = 6;
+			var linhaRua = 4;
+			var linhaColuna = 5;
+		} else if (ini == 5 && meio == 4) {
+			var linhaIntersecao = 6;
+			var colunaIntersecao = 6;
+			var linhaRua = 7;
+			var linhaColuna = 6;
+		}
+
+		if (linhaAtual < linhaIntersecao) {
+			var continua = true;
+			while (continua) {
+				continua = false;
+				ultimaLinha = ultimaLinha + 1;
+				if (ultimaLinha < 20) {
+					if (ruas[ultimaLinha][ultimaColuna] == ini) {
+						caminho.push(ultimaLinha + "_" + ultimaColuna);
+						continua = true;
+						if (ultimaLinha == linhaIntersecao && ultimaColuna == colunaIntersecao) {
+							break;
+						}
+					}			
+				}
+				if (!continua) {
+					ultimaLinha = ultimaLinha - 1;
+				}
+			}
+		} else if (linhaAtual > linhaIntersecao) {
+			var continua = true;
+			while (continua) {
+				continua = false;
+				ultimaLinha = ultimaLinha - 1;
+				if (ultimaLinha > 0) {
+					if (ruas[ultimaLinha][ultimaColuna] == ini) {
+						caminho.push(ultimaLinha + "_" + ultimaColuna);
+						continua = true;
+						if (ultimaLinha == linhaIntersecao && ultimaColuna == colunaIntersecao) {
+							break;
+						}
+					}			
+				}
+				if (!continua) {
+					ultimaLinha = ultimaLinha - 1;
+				}
+			}
+		}
+
+		if (colunaAtual < colunaIntersecao) {
+			var continua = true;
+			while (continua) {
+				continua = false;
+				ultimaColuna = ultimaColuna + 1;
+				if (ultimaColuna < 20) {
+					if (ruas[ultimaLinha][ultimaColuna] == ini) {
+						caminho.push(ultimaLinha + "_" + ultimaColuna);
+						continua = true;
+						if (ultimaLinha == linhaIntersecao && ultimaColuna == colunaIntersecao) {
+							break;
+						}
+					}			
+				}
+				if (!continua) {
+					ultimaColuna = ultimaColuna - 1;
+				}
+			}
+		} else if (colunaAtual > colunaIntersecao) {
+			var continua = true;
+			while (continua) {
+				continua = false;
+				ultimaColuna = ultimaColuna - 1;
+				if (ultimaColuna > 0) {
+					if (ruas[ultimaLinha][ultimaColuna] == ini) {
+						caminho.push(ultimaLinha + "_" + ultimaColuna);
+						continua = true;
+						if (ultimaLinha == linhaIntersecao && ultimaColuna == colunaIntersecao) {
+							break;
+						}
+					}			
+				}
+				if (!continua) {
+					ultimaColuna = ultimaColuna - 1;
+				}
+			}
+		}
+		caminho.push(linhaRua + "_" + linhaColuna);
+		ultimaLinha  = linhaRua;
+		ultimaColuna = linhaColuna;
+	
+
+		ini = meio;
+		console.log(caminho);
+	}
+
+	if (ini == 1 && fim == 2) {
+		var linhaIntersecao = 1;
+		var colunaIntersecao = 2;
+		var linhaRua = 2;
+		var linhaColuna = 2;
+	} else if (ini == 1 && fim == 5) {
+		var linhaIntersecao = 1;
+		var colunaIntersecao = 6;
+		var linhaRua = 2;
+		var linhaColuna = 6;
+	} else if (ini == 2 && fim == 1) {
+		var linhaIntersecao = 2;
+		var colunaIntersecao = 2;
+		var linhaRua = 1;
+		var linhaColuna = 2;
+	} else if (ini == 2 && fim == 3) {
+		var linhaIntersecao = 4;
+		var colunaIntersecao = 2;
+		var linhaRua = 4;
+		var linhaColuna = 3;
+	} else if (ini == 2 && fim == 4) {
+		var linhaIntersecao = 6;
+		var colunaIntersecao = 2;
+		var linhaRua = 7;
+		var linhaColuna = 2;
+	} else if (ini == 3 && fim == 2) {
+		var linhaIntersecao = 4;
+		var colunaIntersecao = 3;
+		var linhaRua = 4;
+		var linhaColuna = 2;
+	} else if (ini == 3 && fim == 5) {
+		var linhaIntersecao = 4;
+		var colunaIntersecao = 5;
+		var linhaRua = 4;
+		var linhaColuna = 6;
+	} else if (ini == 4 && fim == 2) {
+		var linhaIntersecao = 7;
+		var colunaIntersecao = 3;
+		var linhaRua = 7;
+		var linhaColuna = 2;
+	} else if (ini == 4 && fim == 5) {
+		var linhaIntersecao = 7;
+		var colunaIntersecao = 6;
+		var linhaRua = 6;
+		var linhaColuna = 6;
+	} else if (ini == 5 && fim == 1) {
+		var linhaIntersecao = 2;
+		var colunaIntersecao = 6;
+		var linhaRua = 1;
+		var linhaColuna = 6;
+	} else if (ini == 5 && fim == 3) {
+		var linhaIntersecao = 4;
+		var colunaIntersecao = 6;
+		var linhaRua = 4;
+		var linhaColuna = 5;
+	} else if (ini == 5 && fim == 4) {
+		var linhaIntersecao = 6;
+		var colunaIntersecao = 6;
+		var linhaRua = 7;
+		var linhaColuna = 6;
+	}
+
+	linhaAtual = ultimaLinha;
+	colunaAtual = ultimaColuna;
+	
+	console.info("INI " + ini + " FIM" + fim);
+	console.log("LINHA ATU " + linhaAtual + "  COL ATU  " + colunaAtual);	
+	if (linhaAtual < linhaIntersecao) {
+		var continua = true;
+		while (continua) {
+			continua = false;
+			ultimaLinha = ultimaLinha + 1;
+			if (ultimaLinha < 20) {
+				if (ruas[ultimaLinha][ultimaColuna] == ini) {
+					caminho.push(ultimaLinha + "_" + ultimaColuna);
+					continua = true;
+					if (ultimaLinha == linhaIntersecao && ultimaColuna == colunaIntersecao) {
+						break;
+					}
+				}			
+			}
+			if (!continua) {
+				ultimaLinha = ultimaLinha - 1;
+			}
+		}
+	} else if (linhaAtual > linhaIntersecao) {
+		var continua = true;
+		while (continua) {
+			continua = false;
+			ultimaLinha = ultimaLinha - 1;
+			if (ultimaLinha > 0) {
+				if (ruas[ultimaLinha][ultimaColuna] == ini) {
+					caminho.push(ultimaLinha + "_" + ultimaColuna);
+					continua = true;
+					if (ultimaLinha == linhaIntersecao && ultimaColuna == colunaIntersecao) {
+						break;
+					}
+				}			
+			}
+			if (!continua) {
+				ultimaLinha = ultimaLinha - 1;
+			}
+		}
+	}
+
+	if (colunaAtual < colunaIntersecao) {
+		var continua = true;
+		while (continua) {
+			continua = false;
+			ultimaColuna = ultimaColuna + 1;
+			if (ultimaColuna < 20) {
+				if (ruas[ultimaLinha][ultimaColuna] == ini) {
+					caminho.push(ultimaLinha + "_" + ultimaColuna);
+					continua = true;
+					if (ultimaLinha == linhaIntersecao && ultimaColuna == colunaIntersecao) {
+						break;
+					}
+				}			
+			}
+			if (!continua) {
+				ultimaColuna = ultimaColuna - 1;
+			}
+		}
+	} else if (colunaAtual > colunaIntersecao) {
+		var continua = true;
+		while (continua) {
+			continua = false;
+			ultimaColuna = ultimaColuna - 1;
+			if (ultimaColuna > 0) {
+				if (ruas[ultimaLinha][ultimaColuna] == ini) {
+					caminho.push(ultimaLinha + "_" + ultimaColuna);
+					continua = true;
+					if (ultimaLinha == linhaIntersecao && ultimaColuna == colunaIntersecao) {
+						break;
+					}
+				}			
+			}
+			if (!continua) {
+				ultimaColuna = ultimaColuna - 1;
+			}
+		}
+	}
+
+	$(".rua_" + fim).addClass("highlight");
+	caminho.push(linhaRua + "_" + linhaColuna);
+	console.dir(caminho);
+	camihoRoboTeste = caminho;
+	vaiRobo(0, nroRobo, tipoRobo);
+}
+
+function vaiRobo(keyRoboTeste, nroRobo, tipoRobo, podeRemoverPessoa) {
+	if (!podeRemoverPessoa) {
+		podeRemoverPessoa = "N";
+	}
+	var exec = false;
+	$.each(camihoRoboTeste, function(key, value) {
+		if(keyRoboTeste == key) {
+			exec = true;
+			if (tipoRobo == "F") {
+				removerRoboForca(nroRobo);
+				$("#td_espaco_" + value).html($("#td_espaco_" + value).html() + getHtmlRoboForca());
+			} else {
+				removerRoboResgate(nroRobo);
+				$("#td_espaco_" + value).html($("#td_espaco_" + value).html() + getHtmlRoboResgate());
+			}
+			$("#td_espaco_" + value).addClass("robo_" + nroRobo);
+			setTimeout(function(){ vaiRobo((keyRoboTeste + 1), nroRobo, tipoRobo, podeRemoverPessoa)}, 300);
+		}
+	});
+
+	if (!exec) {
+		console.log(podeRemoverPessoa + " -a-a "  + pessoaRemover);
+		if (podeRemoverPessoa == "S") {
+			setTimeout(removerPessoa(pessoaRemover),500);
+			
+		}
+		setTimeout(function(){ solucao((ultimoKey + 1)); },2000);
+	}
+}
+
+function moverRoboParaRemoverPessoa(nroRobo, nroPessoa, nroRua, indice) {
+	nroRua = parseInt(nroRua);
+	var posicaoAtual = $(".robo_" + nroRobo).attr("id");
+	posicaoAtual = posicaoAtual.replace("td_espaco_", "");
+
+	var posicaoAtual = posicaoAtual.split("_");
+	var linhaAtualRobo = parseInt(posicaoAtual[0]);
+	var colunaAtualRobo = parseInt(posicaoAtual[1]);
+
+	posicaoAtual = $(".pessoa_" + nroPessoa).attr("id");
+	posicaoAtual = posicaoAtual.replace("td_espaco_", "");
+
+	posicaoAtual = posicaoAtual.split("_");
+	var linhaAtualPessoa = parseInt(posicaoAtual[0]);
+	var colunaAtualPessoa = parseInt(posicaoAtual[1]);
+
+	console.info(linhaAtualRobo + " -- " + colunaAtualRobo);
+	console.info(linhaAtualPessoa + " -- " + colunaAtualPessoa);
+	console.info(nroRua);
+
+	var ultimaLinha = linhaAtualRobo;
+	var ultimaColuna = colunaAtualRobo;
+
+	var caminho = [];
+	
+	if (linhaAtualRobo < linhaAtualPessoa) {
+		var continua = true;
+		while (continua) {
+			continua = false;
+			ultimaLinha = ultimaLinha + 1;
+			if (ultimaLinha < 20) {
+				if (ruas[ultimaLinha][ultimaColuna] == nroRua) {
+					caminho.push(ultimaLinha + "_" + ultimaColuna);
+					continua = true;
+					if (ultimaLinha == linhaAtualPessoa && ultimaColuna == colunaAtualPessoa) {
+						break;
+					}
+				}			
+			}
+			if (!continua) {
+				ultimaLinha = ultimaLinha - 1;
+			}
+		}
+	} else if (linhaAtualRobo > linhaAtualPessoa) {
+		var continua = true;
+		while (continua) {
+			continua = false;
+			ultimaLinha = ultimaLinha - 1;
+			if (ultimaLinha > 0) {
+				if (ruas[ultimaLinha][ultimaColuna] == nroRua) {
+					caminho.push(ultimaLinha + "_" + ultimaColuna);
+					continua = true;
+					if (ultimaLinha == linhaAtualPessoa && ultimaColuna == colunaAtualPessoa) {
+						break;
+					}
+				}			
+			}
+			if (!continua) {
+				ultimaLinha = ultimaLinha - 1;
+			}
+		}
+	}
+
+	if (colunaAtualRobo < colunaAtualPessoa) {
+		var continua = true;
+		while (continua) {
+			continua = false;
+			ultimaColuna = ultimaColuna + 1;
+			console.log(ultimaColuna);
+			if (ultimaColuna < 20) {
+				console.log("AAA " + ruas[ultimaLinha][ultimaColuna] + " --- " + nroRua);
+				if (ruas[ultimaLinha][ultimaColuna] == nroRua) {
+					caminho.push(ultimaLinha + "_" + ultimaColuna);
+					continua = true;
+					if (ultimaLinha == linhaAtualPessoa && ultimaColuna == colunaAtualPessoa) {
+						break;
+					}
+				}			
+			}
+			if (!continua) {
+				ultimaColuna = ultimaColuna - 1;
+			}
+		}
+	} else if (colunaAtualRobo > colunaAtualPessoa) {
+		var continua = true;
+		while (continua) {
+			continua = false;
+			console.log(ultimaColuna);
+			ultimaColuna = ultimaColuna - 1;
+			if (ultimaColuna > 0) {
+				console.log("BBB " + ruas[ultimaLinha][ultimaColuna] + " --- " + nroRua);
+				if (ruas[ultimaLinha][ultimaColuna] == nroRua) {
+					caminho.push(ultimaLinha + "_" + ultimaColuna);
+					continua = true;
+					if (ultimaLinha == linhaAtualPessoa && ultimaColuna == colunaAtualPessoa) {
+						break;
+					}
+				}			
+			}
+			if (!continua) {
+				ultimaColuna = ultimaColuna - 1;
+			}
+		}
+	}
+
+	caminho.push(linhaAtualPessoa + "_" + colunaAtualPessoa);
+	$(".rua_" + nroRua).addClass("highlight");
+	
+	pessoaRemover = nroPessoa;
+	//caminho.push(linhaRua + "_" + linhaColuna);
+	console.dir(caminho);
+	camihoRoboTeste = caminho;
+	vaiRobo(0, nroRobo, "R", "S");
 }
