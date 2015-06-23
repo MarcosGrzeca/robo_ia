@@ -1,0 +1,7 @@
+Instruções
+- Download do wampserver (site http://www.wampserver.com/en/#download-wrapper)
+- Iniciar "wampserver"
+- Copiar o código fonte e colar na pasta"C:\wamp\www"
+- Abrir navegador, de preferência o Firefox, e acessar "http://localhost/robo_ia/"
+
+Caso ocorra algum problema, nos avise.
