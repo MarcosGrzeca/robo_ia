@@ -5,3 +5,7 @@ Instruções
 - Abrir navegador, de preferência o Firefox, e acessar "http://localhost/robo_ia/"
 
 Caso ocorra algum problema, nos avise.
+
+
+$(".highlight").removeClass("highlight");
+$(".rua_7").addClass("highlight");

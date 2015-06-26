@@ -2,6 +2,7 @@
 
 //echo json_encode(print_r($_REQUEST, true));
 
+set_time_limit(0);
 
 $nome = "scripts/script_" . date("h") . date("i") . date("s") . ".pl";
 
